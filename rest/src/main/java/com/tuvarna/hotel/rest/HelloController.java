@@ -1,4 +1,4 @@
-package com.tuvarna.hotel;
+package com.tuvarna.hotel.rest;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

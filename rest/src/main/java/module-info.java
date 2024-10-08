@@ -7,6 +7,6 @@ module com.tuvarna.hotel {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
 
-    opens com.tuvarna.hotel to javafx.fxml;
-    exports com.tuvarna.hotel;
+    opens com.tuvarna.hotel.rest to javafx.fxml;
+    exports com.tuvarna.hotel.rest;
 }

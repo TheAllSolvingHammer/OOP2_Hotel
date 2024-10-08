@@ -1,4 +1,4 @@
-package com.tuvarna.hotel;
+package com.tuvarna.hotel.rest;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
