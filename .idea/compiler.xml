@@ -2,24 +2,17 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rest" />
         <module name="core" />
         <module name="persistence" />
+        <module name="rest" />
         <module name="api" />
         <module name="domain" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="api" target="21" />
-      <module name="core" target="21" />
-      <module name="domain" target="21" />
-      <module name="hotel" target="21" />
-      <module name="persistence" target="21" />
-      <module name="rest" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>
