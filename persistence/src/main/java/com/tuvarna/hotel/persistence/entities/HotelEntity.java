@@ -39,6 +39,6 @@ public class HotelEntity implements EntityMarker {
     )
     private List<ServiceEntity> serviceList;
 
-    @OneToMany(mappedBy = "room")
-    private RoomEntity room;
+//    @OneToMany(mappedBy = "hotel")
+//    private RoomEntity room;
 }

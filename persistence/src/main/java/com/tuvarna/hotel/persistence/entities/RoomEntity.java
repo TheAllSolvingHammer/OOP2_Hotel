@@ -36,5 +36,5 @@ public class RoomEntity implements EntityMarker {
     private RoomType type;
 
     @ManyToOne
-    private RoomEntity room;
+    private HotelEntity hotel;
 }

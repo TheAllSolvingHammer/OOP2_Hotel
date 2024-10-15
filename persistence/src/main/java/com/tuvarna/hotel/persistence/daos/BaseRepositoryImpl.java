@@ -2,6 +2,7 @@ package com.tuvarna.hotel.persistence.daos;
 
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
 import com.tuvarna.hotel.persistence.repositories.BaseRepository;
+
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
@@ -11,10 +12,11 @@ import org.hibernate.Transaction;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class BaseRepositoryImpl<T extends EntityMarker,E extends UUID> implements BaseRepository<T,E> {
-    private final SessionFactory sessionFactory;
-    private final Class<T> entityClass;
+    private SessionFactory sessionFactory;
+    private Class<T> entityClass;
 
 
     @Override
@@ -39,6 +41,7 @@ public class BaseRepositoryImpl<T extends EntityMarker,E extends UUID> implement
             if(!getAll().contains(t) || getAll().isEmpty()){
                 session.persist(t);
             }
+            //todo is==null?
             else session.merge(t);
             transaction.commit();
             session.close();
