@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.persistence.entities;
 
+import com.tuvarna.hotel.persistence.contracts.EntityMarker;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @EqualsAndHashCode()
 @Entity
 @Table(name="users")
-public class UserEntity {
+public class UserEntity implements EntityMarker {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
    @Column(name = "user_id",updatable = false,nullable = false)

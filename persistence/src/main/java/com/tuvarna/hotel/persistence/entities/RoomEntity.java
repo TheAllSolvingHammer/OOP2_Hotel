@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.persistence.entities;
 
+import com.tuvarna.hotel.persistence.contracts.EntityMarker;
 import com.tuvarna.hotel.persistence.enums.RoomType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @EqualsAndHashCode()
 @Table(name = "rooms")
 @Entity
-public class RoomEntity {
+public class RoomEntity implements EntityMarker {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "room_id", updatable = false,nullable = false)
@@ -35,5 +36,5 @@ public class RoomEntity {
     private RoomType type;
 
     @ManyToOne
-    private RoomEntity room;
+    private HotelEntity hotel;
 }
