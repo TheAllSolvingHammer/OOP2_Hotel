@@ -1,6 +1,7 @@
 package com.tuvarna.hotel.persistence.entities;
 
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
+import com.tuvarna.hotel.persistence.enums.ReservationType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,10 @@ public class ReservationEntity implements EntityMarker {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "reservation_id", updatable = false, nullable = false)
     private UUID id;
+
+    @Column(name = "type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ReservationType type;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
