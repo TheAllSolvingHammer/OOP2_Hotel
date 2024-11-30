@@ -17,11 +17,10 @@ import java.util.UUID;
 @AllArgsConstructor()
 @Builder
 public class CreateClientInput implements OperationInput {
-    private UUID id;
     private String firstName;
     private String lastName;
     private String phone;
-    private String ucn;
+    private String ucn;//unified citizen number=>egn
     private String address;
     private String email;
     private LocalDate birthDate;
