@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.core.aspect;
+package com.tuvarna.hotel.domain.singleton;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,6 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface LogExecution {
+@Target(ElementType.TYPE)
+public @interface Singleton {
 }

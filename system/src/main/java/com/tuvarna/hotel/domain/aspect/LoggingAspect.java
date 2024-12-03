@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.core.aspect;
+package com.tuvarna.hotel.domain.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
