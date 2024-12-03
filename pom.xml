@@ -18,7 +18,7 @@
     <modules>
         <module>rest</module>
         <module>persistence</module>
-        <module>domain</module>
+        <module>system</module>
         <module>core</module>
         <module>api</module>
     </modules>

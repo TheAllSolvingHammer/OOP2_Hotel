@@ -8,7 +8,7 @@
         <artifactId>hotel</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>domain</artifactId>
+    <artifactId>system</artifactId>
     <name>hotel-domain</name>
 
 

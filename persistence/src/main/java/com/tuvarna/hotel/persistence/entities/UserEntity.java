@@ -44,6 +44,6 @@ public class UserEntity implements EntityMarker {
    @Column(name="password",nullable = false)
    private String hashedPassword;
 
-   //todo users_to_hotel bidirectional relationship
+
 
 }
