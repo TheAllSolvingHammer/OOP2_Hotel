@@ -1,5 +1,5 @@
 package com.tuvarna.hotel.persistence.enums;
 
 public enum RoleEntity {
-    ADMINISTRATOR,MANAGER,EMPLOYEE
+    ADMINISTRATOR,MANAGER,EMPLOYEE,OWNER
 }
