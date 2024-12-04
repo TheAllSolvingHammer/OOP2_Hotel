@@ -10,7 +10,7 @@ target/
 *.ipr
 
 ## Hibernate ###
-src/main/resources/hibernate.cfg.xml
+rest/src/main/resources/hibernate.cfg.xml
 
 ### Eclipse ###
 .apt_generated
