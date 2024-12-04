@@ -8,15 +8,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="494.0" prefWidth="405.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.HelloController">
+<VBox alignment="CENTER" prefHeight="601.0" prefWidth="405.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.HelloController">
 
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-   <Label fx:id="welcomeText" />
    <Button onAction="#onHelloButtonClick" text="Hello!" />
+   <Button mnemonicParsing="false" onAction="#switchToAdmin" text="Admin" />
+   <Button onAction="#switchToOwner" text="Owner" />
+   <Button onAction="#switchToReservation" text="Reservation" />
+   <Button onAction="#switchToUser" text="User" />
    <Button fx:id="myButton" onAction="#onImageButtonClick" text="Image!" />
    <Button onAction="#TextBoxButtonClick" text="TextBox!" />
+   <Label fx:id="welcomeText" />
    <TextField fx:id="textField" visible="false" />
    <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
