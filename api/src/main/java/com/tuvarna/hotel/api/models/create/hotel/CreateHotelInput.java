@@ -5,6 +5,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor()
 @Builder
 public class CreateHotelInput implements OperationInput {
+    private UUID uuid;
     private String name;
     private String location;
     private Integer rating;

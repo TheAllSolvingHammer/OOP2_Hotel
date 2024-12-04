@@ -17,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor()
 @Builder
 public class CreateClientInput implements OperationInput {
+    private UUID uuid;
     private String firstName;
     private String lastName;
     private String phone;

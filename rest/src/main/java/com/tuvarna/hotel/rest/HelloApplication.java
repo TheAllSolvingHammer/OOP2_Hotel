@@ -1,6 +1,5 @@
 package com.tuvarna.hotel.rest;
 
-import com.tuvarna.hotel.core.aspect.LogExecution;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

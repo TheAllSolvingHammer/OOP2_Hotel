@@ -1,6 +1,6 @@
 package com.tuvarna.hotel.rest;
 
-import com.tuvarna.hotel.core.aspect.LogExecution;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.InputStream;
-@LogExecution
+
 public class HelloController {
     @FXML
     private Label welcomeText;
