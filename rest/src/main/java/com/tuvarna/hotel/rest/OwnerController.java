@@ -6,25 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+
 import java.io.IOException;
 
-public class AdminController {
-    @FXML
-    private Button button;
-    @FXML
-    private Label label;
-    @FXML
-    private TextField textField;
+public class OwnerController {
 
     private Stage stage;
     private Parent root;
     private Scene scene;
+
 
     @FXML
     protected void createOwner(){
