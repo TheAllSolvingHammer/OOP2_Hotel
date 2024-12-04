@@ -1,6 +1,7 @@
 package com.tuvarna.hotel.rest;
 
 import javafx.event.ActionEvent;
+import com.tuvarna.hotel.core.aspect.LogExecution;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
-
+@LogExecution
 public class HelloController {
     @FXML
     private Label welcomeText;

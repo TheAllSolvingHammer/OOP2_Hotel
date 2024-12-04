@@ -31,13 +31,21 @@ public class HotelEntity implements EntityMarker {
     @Column(name="rating",nullable = false)
     private Integer rating;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name="hotels_services",
             joinColumns = @JoinColumn(name="hotel_id"),
             inverseJoinColumns = @JoinColumn(name="service_id")
     )
     private List<ServiceEntity> serviceList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "hotel_users",
+            joinColumns = @JoinColumn(name = "hotel_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> hotelList;
 
 //    @OneToMany(mappedBy = "hotel")
 //    private RoomEntity room;
