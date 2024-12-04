@@ -1,6 +1,6 @@
 package com.tuvarna.hotel.persistence.daos;
 
-import com.tuvarna.hotel.domain.singleton.Singleton;
+
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.repositories.UserRepository;
@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-@Singleton
+
 public class UserRepositoryImpl  implements UserRepository<UserEntity,UUID> {
 
 
