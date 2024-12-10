@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
-public interface ReservationRepository<T extends EntityMarker,E extends UUID> extends BaseRepository<T, E> {
+public interface ReservationRepository<T extends EntityMarker,E extends UUID> {
     List<RoomEntity> getAllFreeRooms(HotelEntity hotel, Timestamp startDate, Timestamp endDate);
     Long getLastReservationNumberOfHotel(HotelEntity hotel);
     ReservationEntity getReservationWithNumber(Long reservationNumber, HotelEntity hotel);
