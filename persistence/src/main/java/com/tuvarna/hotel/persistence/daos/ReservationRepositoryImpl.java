@@ -11,49 +11,13 @@ import org.hibernate.Transaction;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-public class ReservationRepositoryImpl implements ReservationRepository<ReservationEntity,UUID> {
+public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEntity,UUID> implements ReservationRepository<ReservationEntity,UUID> {
 
-    @Override
-    public Optional<ReservationEntity> findById(UUID id) {
-        return Optional.empty();
-    }
 
-    @Override
-    public List<ReservationEntity> getAll() {
-        return List.of();
-    }
-
-    @Override
-    public ReservationEntity save(ReservationEntity reservationEntity) {
-        Session session = HibernateUtil.openSession();
-        try (session) {
-            Transaction transaction = session.beginTransaction();
-            session.persist(reservationEntity);
-            transaction.commit();
-            return reservationEntity;
-        } catch (Exception e) {
-            System.out.println("Error in creation");
-            return null;
-        }
-    }
-
-    @Override
-    public ReservationEntity delete(ReservationEntity reservationEntity) {
-        Session session = HibernateUtil.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.remove(reservationEntity);
-            transaction.commit();
-            return reservationEntity;
-        } catch (Exception e) {
-            System.out.println("Error in creation");
-            return null;
-        } finally {
-            session.close();
-        }
+    public ReservationRepositoryImpl() {
+        super(ReservationEntity.class);
     }
 
     @Override
