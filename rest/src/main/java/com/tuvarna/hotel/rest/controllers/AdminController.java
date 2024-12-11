@@ -1,25 +1,33 @@
-package com.tuvarna.hotel.rest;
+package com.tuvarna.hotel.rest.controllers;
 
+import com.tuvarna.hotel.rest.contracts.ControllerMarker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
-public class ReservationController {
+public class AdminController implements ControllerMarker {
+    @FXML
+    private Button button;
+    @FXML
+    private Label label;
+    @FXML
+    private TextField textField;
 
     private Stage stage;
-
     private Parent root;
     private Scene scene;
 
     @FXML
-    protected void createReservation(){
+    protected void createOwner(){
 
     }
 

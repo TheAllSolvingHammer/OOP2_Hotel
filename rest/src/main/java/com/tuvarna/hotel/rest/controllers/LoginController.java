@@ -1,7 +1,10 @@
-package com.tuvarna.hotel.rest;
+package com.tuvarna.hotel.rest.controllers;
 
+import com.tuvarna.hotel.domain.encoder.PasswordEncoder;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
+import com.tuvarna.hotel.rest.contracts.BaseController;
+import com.tuvarna.hotel.rest.factory.AbstractLoginControllerFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +18,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
-public class LoginController implements BaseController{
+public class LoginController implements BaseController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -24,17 +27,10 @@ public class LoginController implements BaseController{
     @FXML
     private TextField field_password;
 
-    @Override
-    public void switchToScene1(ActionEvent event) throws IOException {
-//       Parent root= FXMLLoader.load(getClass().getResource("login-scene.fxml"));
-//       stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-//       scene=new Scene(root);
-//       stage.setScene(scene);
-//       stage.show();
-    }
 
     @Override
-    public void switchToScene2(ActionEvent event) throws IOException{
+    public void switchToScene2(ActionEvent event) throws IOException {
+        PasswordEncoder passwordEncoder=PasswordEncoder.defaultEncoder();
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
         System.out.println(field_username.getText());
         Optional<UserEntity> userEntityOptional = userRepository.findByUsername(field_username.getText());
@@ -46,12 +42,20 @@ public class LoginController implements BaseController{
             throw new RuntimeException("Error");
         }
         System.out.println(userEntity);
-        if(field_password.getText().equals(userEntity.getHashedPassword())){
-            Parent root= FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
-            stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-            scene=new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
+        if(passwordEncoder.matches(field_password.getText().trim(),userEntity.getHashedPassword())){
+            AbstractLoginControllerFactory abstractLoginControllerFactory=new AbstractLoginControllerFactory();
+            Parent root= null;
+            try {
+                root = abstractLoginControllerFactory.getController(userEntity.getRole().name());
+                stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+                scene=new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+
         }
         else throw new RuntimeException("Incorrect user information");
 

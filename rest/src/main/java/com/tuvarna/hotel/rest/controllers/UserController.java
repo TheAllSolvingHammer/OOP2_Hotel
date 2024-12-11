@@ -1,5 +1,6 @@
-package com.tuvarna.hotel.rest;
+package com.tuvarna.hotel.rest.controllers;
 
+import com.tuvarna.hotel.rest.contracts.ControllerMarker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
-public class UserController {
+public class UserController implements ControllerMarker {
     private Stage stage;
     private Parent root;
     private Scene scene;
