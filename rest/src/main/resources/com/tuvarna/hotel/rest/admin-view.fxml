@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.AdminController">
    <children>
       <Button layoutX="370.0" layoutY="333.0" mnemonicParsing="false" onAction="#createOwner" prefHeight="42.0" prefWidth="96.0" text="Create" />
       <Label fx:id="owner" layoutX="38.0" layoutY="69.0" text="Owner:" />

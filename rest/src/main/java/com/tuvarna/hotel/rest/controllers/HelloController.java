@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest;
+package com.tuvarna.hotel.rest.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,7 +85,7 @@ public class HelloController {
 
     @FXML
     protected void switchToReservation(ActionEvent event) throws IOException {
-        root= FXMLLoader.load(getClass().getResource("reservation-view.fxml"));
+        root= FXMLLoader.load(getClass().getResource("receptionist-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
