@@ -1,9 +1,5 @@
 package com.tuvarna.hotel.rest.factory;
 
-import com.tuvarna.hotel.rest.controllers.AdminController;
-import com.tuvarna.hotel.rest.controllers.OwnerController;
-import com.tuvarna.hotel.rest.controllers.ReceptionistController;
-import com.tuvarna.hotel.rest.contracts.ControllerMarker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -19,9 +15,13 @@ public class AbstractLoginControllerFactory {
 
     public AbstractLoginControllerFactory(){
         controllerMap = new HashMap<>();
-        controllerMap.put("ADMINISTRATOR", "../admin-view.fxml");
-        controllerMap.put("OWNER", "../owner-view.fxml");
-        controllerMap.put("RECEPTIONIST","../receptionist_view.fxml");
+        controllerMap.put("ADMINISTRATOR", "../admin/admin-view.fxml");
+        controllerMap.put("OWNER", "../owner/owner-view.fxml");
+        controllerMap.put("RECEPTIONIST","../reception/receptionist-view.fxml");
+        controllerMap.put("USER","../manager/manager-view.fxml");
+        //tuka dobavqme razlichnite sceni
+        // ako iskash da dostupish nqkoq scena veche mojesh , prosto v logina ima prenasochvane
+        // ot men tolkoz
 
     }
     public Parent getController(String roleType) throws IllegalAccessException, IOException {
