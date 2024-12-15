@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers;
+package com.tuvarna.hotel.rest.controllers.login;
 
 import com.tuvarna.hotel.domain.encoder.PasswordEncoder;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
@@ -7,7 +7,6 @@ import com.tuvarna.hotel.rest.contracts.BaseController;
 import com.tuvarna.hotel.rest.factory.AbstractLoginControllerFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Optional;
 
 public class LoginController implements BaseController {

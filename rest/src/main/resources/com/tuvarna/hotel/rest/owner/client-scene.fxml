@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<?import javafx.scene.control.Button?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.client.ClientView">
+    <children>
+        <TableView prefHeight="316.0" prefWidth="600.0">
+            <columns>
+                <TableColumn id="name" prefWidth="135.99997556209564" text="Име" />
+                <TableColumn id="surname" prefWidth="142.00006103515625" text="Фамилия" />
+                <TableColumn id="number" prefWidth="220.0" text="Номер" />
+                <TableColumn id="stars" prefWidth="100.80001831054688" text="Звезди" />
+            </columns>
+        </TableView>
+        <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Назад" />
+    </children>
+</AnchorPane>

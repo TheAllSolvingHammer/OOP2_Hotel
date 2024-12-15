@@ -6,66 +6,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private TextField textField;
-    @FXML
-    private Button myButton;
 
     private Stage stage;
     private Parent root;
     private Scene scene;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
-    @FXML
-    protected void onImageButtonClick() {
-        if (!imageView.isVisible()) {
-
-            if (imageView.getImage() == null) {
-                InputStream imageStream = getClass().getResourceAsStream("/shrek.jpg");
-                if (imageStream == null) {
-                    System.out.println("Error: Image file not found.");
-                } else {
-                    Image myImage = new Image(imageStream);
-                    imageView.setImage(myImage);
-                }
-            }
-            imageView.setVisible(true);
-        }
-
-    }
-
-    @FXML
-   protected void TextBoxButtonClick() {
-
-        textField.setVisible(true);
-
-        textField.setText("mnogo si qk be!");
-
-
-    }
 
     @FXML
     protected void switchToAdmin(ActionEvent event) throws IOException {
-        root= FXMLLoader.load(getClass().getResource("admin-view.fxml"));
+        root= FXMLLoader.load(getClass().getResource("../admin/admin-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
@@ -74,8 +29,8 @@ public class HelloController {
     }
 
     @FXML
-    protected void switchToUser(ActionEvent event) throws IOException {
-        root= FXMLLoader.load(getClass().getResource("user-view.fxml"));
+    protected void switchToManager(ActionEvent event) throws IOException {
+        root= FXMLLoader.load(getClass().getResource("../manager/manager-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
@@ -85,7 +40,7 @@ public class HelloController {
 
     @FXML
     protected void switchToReservation(ActionEvent event) throws IOException {
-        root= FXMLLoader.load(getClass().getResource("receptionist-view.fxml"));
+        root= FXMLLoader.load(getClass().getResource("../reception/receptionist-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
@@ -95,11 +50,21 @@ public class HelloController {
 
     @FXML
     protected void switchToOwner(ActionEvent event) throws IOException {
-        root= FXMLLoader.load(getClass().getResource("owner-view.fxml"));
+        root= FXMLLoader.load(getClass().getResource("../owner/owner-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Owner Data");
+        stage.show();
+    }
+
+    @FXML
+    protected void switchToLogin(ActionEvent event) throws IOException {
+        root= FXMLLoader.load(getClass().getResource("../login/login-scene.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Login");
         stage.show();
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@reception.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.ReceptionistController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@reception.css">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Нов Клиент" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервация" />
+            <Button onAction="#switchToReservations" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервации" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
+            <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" text="Назад" />
+         </children></VBox>
+   </children>
+</AnchorPane>
