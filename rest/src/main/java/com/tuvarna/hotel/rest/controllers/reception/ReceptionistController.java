@@ -32,4 +32,14 @@ public class ReceptionistController implements ControllerMarker {
         stage.setTitle("Navigation");
         stage.show();
     }
+
+    @FXML
+    protected void switchToReservations(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/reservations-scene.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservations View");
+        stage.show();
+    }
 }

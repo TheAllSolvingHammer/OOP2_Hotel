@@ -9,9 +9,9 @@
       <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@manager.css">
          <children>
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Рецепционист" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Рецепционисти" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Клиенти" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Регистрации" />
+            <Button onAction="#switchToReceptionists" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Рецепционисти" />
+            <Button onAction="#switchToClients" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Клиенти" />
+            <Button onAction="#switchToRegistration" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Регистрации" />
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
             <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" text="Назад" />
          </children></VBox>

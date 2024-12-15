@@ -9,10 +9,10 @@
       <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@admin.css">
          <children>
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Собственик" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Собственици" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Хотели" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Мениджъри" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Рецепционисти" />
+            <Button onAction="#switchToOwners" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Собственици" />
+            <Button onAction="#switchToHotelView" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Хотели" />
+            <Button onAction="#switchToManagers" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Мениджъри" />
+            <Button onAction="#switchToReceptionists" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Рецепционисти" />
             <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="138.0" text="Назад" />
          </children>
       </VBox>

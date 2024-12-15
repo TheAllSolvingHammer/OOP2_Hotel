@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
+   <children>
+      <TableView prefHeight="355.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0">
+        <columns>
+          <TableColumn id="id" prefWidth="105.59994351863861" text="Уникален ключ" />
+          <TableColumn id="address" prefWidth="182.40003204345703" text="Адрес" />
+            <TableColumn id="hotel_name" prefWidth="132.79998779296875" text="Дата на създаване" />
+            <TableColumn id="stars" prefWidth="67.5999755859375" text="Звезди" />
+        </columns>
+      </TableView>
+       <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Назад" />
+   </children>
+</AnchorPane>

@@ -10,7 +10,7 @@
          <children>
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Нов Клиент" />
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервация" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервации" />
+            <Button onAction="#switchToReservations" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервации" />
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
             <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
             <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" text="Назад" />
