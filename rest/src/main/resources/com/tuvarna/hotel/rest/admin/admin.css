@@ -6,6 +6,10 @@
 .button{
     -fx-background-color: "white";
     -fx-text-fill: "#1739aa";
+}
+.sideButtons{
+    -fx-background-color: "white";
+    -fx-text-fill: "#1739aa";
     -fx-background-radius: 30 0 0 30;
 }
 
