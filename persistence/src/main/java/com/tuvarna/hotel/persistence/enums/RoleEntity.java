@@ -7,22 +7,13 @@ import java.util.Map;
 
 public enum RoleEntity {
 
-    ADMINISTRATOR("admin"),MANAGER("manager"),EMPLOYEE("employee"),OWNER("owner"),UNKNOWN(null);
-    private final String val;
+    ADMINISTRATOR,MANAGER,EMPLOYEE,OWNER,UNKNOWN;
     private static final Map<String, RoleEntity> map= new HashMap<>();
     static {
         Arrays.stream(RoleEntity.values())
                 .filter(r->r!=UNKNOWN)
-                .forEach(rt -> map.put(rt.toString(), rt));
+                .forEach(rt -> map.put(rt.name(), rt));
     }
-    RoleEntity(String s) {
-        this.val =s;
-    }
-
-    public String toString(){
-        return val;
-    }
-
     public static RoleEntity getByCode(String code){
         if(map.containsKey(code)) {
             return map.get(code);

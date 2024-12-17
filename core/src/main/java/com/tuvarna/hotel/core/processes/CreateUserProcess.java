@@ -13,37 +13,41 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.UUID;
-
-
+@Slf4j
 public class CreateUserProcess extends BaseProcessor implements CreateUserOperation {
 
-    private final UserRepositoryImpl userRepository;
+    private final UserRepositoryImpl userRepository=new UserRepositoryImpl();;
 
     public CreateUserProcess() {
-        userRepository=new UserRepositoryImpl();
+
     }
 
     @Override
     public Either<ErrorProcessor, CreateUserOutput> process(CreateUserInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    System.out.println(input);
+                    //
                     PasswordEncoder passwordEncoder=PasswordEncoder.defaultEncoder();
                     checkPasswordIntegrity(input.getPassword(),input.getPasswordSecond());
                 checkRole(input.getRole());
                     UserEntity user= UserEntity.builder()
-                            .id(UUID.randomUUID())
                             .firstName(input.getFirstName())
                             .lastName(input.getLastName())
-                            .role(RoleEntity.getByCode(input.getRole().toString()))
+                            .role(RoleEntity.getByCode(input.getRole().name()))
                             .hashedPassword(passwordEncoder.encode(input.getPassword()))
                             .username(input.getUsername())
                             .email(input.getEmail())
+                            .phone(input.getPhone())
                             .build();
+                    //
+                    System.out.println(user);
+                    //
                     userRepository.save(user);
-                return CreateUserOutput.builder().build();
+                return CreateUserOutput.builder()
+                        .message("Successfully added user")
+                        .build();
 
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));

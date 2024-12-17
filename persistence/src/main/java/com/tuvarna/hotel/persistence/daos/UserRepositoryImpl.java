@@ -19,9 +19,9 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserEntity,UUID>  imp
 
     @Override
     public Optional<UserEntity> findByUsername(String username) {
+        Session session = HibernateUtil.openSession();
         try
         {
-            Session session = HibernateUtil.openSession();
             String hql = "FROM " + getEntityClass().getName() + " u WHERE u.username = :username";
             Query<UserEntity> query = session.createQuery(hql, getEntityClass());
             query.setParameter("username", username);
@@ -30,6 +30,9 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserEntity,UUID>  imp
         }
          catch (Exception e) {
             throw new RuntimeException("Failed to retrieve user with username: " + username, e);
+        }
+        finally {
+            session.close();
         }
     }
 }

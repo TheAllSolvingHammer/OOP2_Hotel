@@ -14,19 +14,24 @@ import static io.vavr.Predicates.instanceOf;
 @Slf4j
 public class InputQueryExceptionCase {
     public static ErrorProcessor handleThrowable(Throwable throwable) {
+        //todo add logger
         return API.Match(throwable).of(
                 Case($(instanceOf(QueryException.class)), e -> {
-                    log.error("Invalid query: {}", e.getMessage());
                     return ErrorProcessor.builder()
                             .message(e.getMessage())
                             .build();
                 }),
                 Case($(instanceOf(InputException.class)), e -> {
-                    log.error("Invalid input: {}", e.getMessage());
+                    return ErrorProcessor.builder()
+                            .message(e.getMessage())
+                            .build();
+                }),
+                Case($(instanceOf(RuntimeException.class)), e -> {
                     return ErrorProcessor.builder()
                             .message(e.getMessage())
                             .build();
                 })
+
 
                 );
     }

@@ -12,19 +12,20 @@ import lombok.*;
 @AllArgsConstructor()
 @Builder
 public class CreateUserInput implements OperationInput {
-    @NotNull(message = "First name can not be null")
+    @NotEmpty(message = "First name can not be null")
     private String firstName;
-    @NotNull(message = "Last name can not be null")
+    @NotEmpty(message = "Last name can not be null")
     private String lastName;
-    @NotNull(message = "Phone number is not correct")
-    @Min(value=10,message = "Phone must be higher than 10 ")
-    @Max(value=14,message = "Phone can not be higher than 14")
+    @Size(min = 10, max = 14, message = "Phone number must be between 10 and 14 characters")
     private String phone;
-    @NotNull(message = "Username can not be null")
+    @NotEmpty(message = "Username can not be null")
     private String username;
     private RoleType role;
+    @NotEmpty(message="Email can not be empty")
     @Email(message = "Incorrect email")
     private String email;
+    @NotEmpty(message = "Password can not be empty")
     private String password;
+    @NotEmpty(message = "Password can not be empty")
     private String passwordSecond;
 }

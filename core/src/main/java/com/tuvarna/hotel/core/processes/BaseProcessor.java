@@ -7,7 +7,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +23,7 @@ public abstract class BaseProcessor {
     public Either<ErrorProcessor, OperationInput> validateInput(OperationInput input) {
         //todo
         Set<ConstraintViolation<OperationInput>> violations = validator.validate(input);
+
         if (!violations.isEmpty()) {
             List<String> errorMessages = violations.stream()
                     .map(ConstraintViolation::getMessage)

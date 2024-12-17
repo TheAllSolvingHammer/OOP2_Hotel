@@ -1,17 +1,20 @@
 package com.tuvarna.hotel.rest.controllers.admin;
 
 import com.tuvarna.hotel.api.enums.RoleType;
+import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.create.user.CreateUserInput;
+import com.tuvarna.hotel.api.models.create.user.CreateUserOutput;
 import com.tuvarna.hotel.core.processes.CreateUserProcess;
 import com.tuvarna.hotel.domain.encoder.PasswordEncoder;
 import com.tuvarna.hotel.rest.contracts.ControllerMarker;
+import io.vavr.control.Either;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -56,8 +59,17 @@ public class AdminController implements ControllerMarker {
                 .email(ownerEmail.getText())
                 .role(RoleType.OWNER)
                 .build();
-        createUserProcess.process(input);
 
+        Either<ErrorProcessor, CreateUserOutput> result= createUserProcess.process(input);
+        System.out.println(result);
+
+    }
+    private void showErrorAlert(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Operation Failed");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     @FXML
