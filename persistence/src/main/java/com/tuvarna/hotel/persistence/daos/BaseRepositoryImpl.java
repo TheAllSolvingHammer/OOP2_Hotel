@@ -17,33 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BaseRepositoryImpl<T extends EntityMarker,E extends UUID> implements BaseRepository<T,E> {
     private final Class<T> entityClass;
-//    @Override
-//    public void save(T t) {
-//        Session session = HibernateUtil.openSession();
-//        Transaction transaction = null;
-//        try {
-//            transaction = session.beginTransaction();
-//            UUID id = t.getId();
-//            if (id != null && existsById(id)) {
-//                session.merge(t);
-//            } else {
-//                session.persist(t);
-//            }
-//
-//            transaction.commit();
-//
-////            return t;
-//        } catch (Exception e) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//            throw new RuntimeException("Failed to save entity", e);
-//        }
-//        finally {
-//            session.close();
-//        }
-//
-//    }
+
     @Override
     public void save(T t) {
         Session session = HibernateUtil.openSession();
@@ -80,7 +54,7 @@ public class BaseRepositoryImpl<T extends EntityMarker,E extends UUID> implement
             return t;
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            throw e;
+            throw new RuntimeException("Failed to delete entity");
         }
         finally {
             session.close();

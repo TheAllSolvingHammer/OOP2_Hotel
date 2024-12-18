@@ -1,14 +1,16 @@
 package com.tuvarna.hotel.persistence.initializer;
 
+import com.tuvarna.hotel.domain.encoder.MyPasswordEncoder;
 import com.tuvarna.hotel.domain.encoder.PasswordEncoder;
+import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 
 public class InitializeAdmin {
-    private static UserRepositoryImpl userRepository = new UserRepositoryImpl();
+    private static final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
     public static void addAdmin(){
-        PasswordEncoder passwordEncoder = PasswordEncoder.defaultEncoder();
+        PasswordEncoder passwordEncoder = SingletonManager.getInstance(MyPasswordEncoder.class);
         UserEntity userEntity = UserEntity.builder()
                 .email("example@gmail.com")
                 .phone("2378382")
