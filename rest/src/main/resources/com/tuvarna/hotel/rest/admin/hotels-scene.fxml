@@ -5,16 +5,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
-   <children>
-      <TableView prefHeight="355.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0">
-        <columns>
-          <TableColumn id="id" prefWidth="105.59994351863861" text="UUID" />
-          <TableColumn id="address" prefWidth="182.40003204345703" text="Address" />
-          <TableColumn id="hotel_name" prefWidth="132.79998779296875" text="Location" />
-          <TableColumn id="stars" prefWidth="67.5999755859375" text="Rating" />
-        </columns>
-      </TableView>
-       <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Назад" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
+    <TableView fx:id="table" prefHeight="355.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0">
+      <columns>
+          <TableColumn fx:id="id" prefWidth="105.59994351863861" text="UUID"/>
+          <TableColumn fx:id="name" prefWidth="132.79998779296875" text="Hotel Name"/>
+          <TableColumn fx:id="location" prefWidth="182.40003204345703" text="Location"/>
+          <TableColumn fx:id="stars" prefWidth="67.5999755859375" text="Rating"/>
+          <TableColumn fx:id="serviceList" prefWidth="67.5999755859375" text="Services"/>
+      </columns>
+    </TableView>
+    <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0"
+            prefWidth="107.0" text="Back"/>
 </AnchorPane>

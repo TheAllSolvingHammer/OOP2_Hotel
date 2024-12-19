@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -45,6 +47,8 @@ public class OwnerView implements Initializable{
     private TableColumn<Owner, String> email;
     @FXML
     private TableColumn<Owner, String> phoneNumber;
+    @FXML
+    private TableColumn<Owner, List<String>> hotelList;
 
     public OwnerView() {
         displayOwnersProcess=SingletonManager.getInstance(DisplayOwnersProcess.class);
@@ -70,7 +74,10 @@ public class OwnerView implements Initializable{
         lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        //todo do think of combobox feature
+//        ComboBox<String> comboBox = new ComboBox<>();
 
+        hotelList.setCellValueFactory(new PropertyValueFactory<>("hotelList"));
         DisplayOwnersInput input = DisplayOwnersInput.builder().build();
         Either<ErrorProcessor, DisplayOwnersOutput> result= displayOwnersProcess.process(input);
         System.out.println(result);

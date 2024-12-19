@@ -9,5 +9,7 @@ import java.util.UUID;
 
 public interface UserRepository<T extends EntityMarker,E extends UUID> {
     Optional<T> findByUsername(String username);
-    List<UserEntity> findAllOwners();
+    List<T> findAllOwners();
+    List<T> findAllManagers();
+    List<T> findAllReceptionist();
 }

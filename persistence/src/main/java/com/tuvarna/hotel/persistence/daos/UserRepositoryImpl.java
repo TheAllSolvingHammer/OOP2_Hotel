@@ -56,4 +56,38 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserEntity,UUID>  imp
             session.close();
         }
     }
+
+    @Override
+    public List<UserEntity> findAllManagers() {
+        Session session = HibernateUtil.openSession();
+        try {
+            String hql = "FROM UserEntity u WHERE u.role = :role";
+            Query<UserEntity> query = session.createQuery(hql, UserEntity.class);
+            query.setParameter("role", RoleEntity.MANAGER);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get managers.", e);
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<UserEntity> findAllReceptionist() {
+        Session session = HibernateUtil.openSession();
+        try {
+            String hql = "FROM UserEntity u WHERE u.role = :role";
+            Query<UserEntity> query = session.createQuery(hql, UserEntity.class);
+            query.setParameter("role", RoleEntity.EMPLOYEE);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get receptionists.", e);
+        }
+        finally {
+            session.close();
+        }
+    }
 }

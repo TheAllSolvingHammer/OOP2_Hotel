@@ -2,6 +2,7 @@ package com.tuvarna.hotel.api.models.display.owner;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -16,4 +17,5 @@ public class Owner {
     private String lastName;
     private String email;
     private String phoneNumber;
+    private List<String> hotelList;
 }

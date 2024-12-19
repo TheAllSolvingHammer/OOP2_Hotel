@@ -21,7 +21,6 @@ public abstract class BaseProcessor {
     }
 
     public Either<ErrorProcessor, OperationInput> validateInput(OperationInput input) {
-        //todo
         Set<ConstraintViolation<OperationInput>> violations = validator.validate(input);
 
         if (!violations.isEmpty()) {
