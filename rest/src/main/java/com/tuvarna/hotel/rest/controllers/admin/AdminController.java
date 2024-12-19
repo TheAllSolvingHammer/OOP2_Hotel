@@ -5,7 +5,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.create.user.CreateUserInput;
 import com.tuvarna.hotel.api.models.create.user.CreateUserOutput;
 import com.tuvarna.hotel.core.processes.CreateUserProcess;
-import com.tuvarna.hotel.domain.encoder.PasswordEncoder;
+import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.contracts.ControllerMarker;
 import io.vavr.control.Either;
 import javafx.event.ActionEvent;
@@ -23,11 +23,11 @@ import java.io.IOException;
 
 public class AdminController implements ControllerMarker {
 
+
+    private final CreateUserProcess createUserProcess;
     private Stage stage;
     private Parent root;
     private Scene scene;
-    @FXML
-    private AnchorPane anchorPane;
     @FXML
     private TextField ownerFirstName;
     @FXML
@@ -42,13 +42,13 @@ public class AdminController implements ControllerMarker {
     private TextField ownerEmail;
     @FXML
     private TextField ownerPhoneNumber;
-
+    public AdminController() {
+        createUserProcess= SingletonManager.getInstance(CreateUserProcess.class);
+    }
 
     @FXML
     protected void createOwner(ActionEvent event){
-        PasswordEncoder passwordEncoder=PasswordEncoder.defaultEncoder();
 
-        CreateUserProcess createUserProcess = new CreateUserProcess();
         CreateUserInput input = CreateUserInput.builder()
                 .firstName(ownerFirstName.getText())
                 .lastName(ownerLastName.getText())

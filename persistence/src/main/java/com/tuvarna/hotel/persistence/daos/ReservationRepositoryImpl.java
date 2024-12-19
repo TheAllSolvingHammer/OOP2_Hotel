@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.persistence.daos;
 
+import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
 import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import com.tuvarna.hotel.persistence.entities.ReservationEntity;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-
+@Singleton
 public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEntity,UUID> implements ReservationRepository<ReservationEntity,UUID> {
 
 

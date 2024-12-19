@@ -1,9 +1,11 @@
 package com.tuvarna.hotel.domain.encoder;
 
+import com.tuvarna.hotel.domain.singleton.Singleton;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-
+@Singleton
 public class MyPasswordEncoder implements PasswordEncoder{
     @Override
     public String encode(CharSequence rawPassword) {

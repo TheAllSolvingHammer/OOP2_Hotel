@@ -31,7 +31,7 @@ public class HotelEntity implements EntityMarker {
     @Column(name="rating",nullable = false)
     private Integer rating;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="hotels_services",
             joinColumns = @JoinColumn(name="hotel_id"),
@@ -45,8 +45,7 @@ public class HotelEntity implements EntityMarker {
             joinColumns = @JoinColumn(name = "hotel_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<UserEntity> hotelList;
+    private List<UserEntity> userList;
 
-//    @OneToMany(mappedBy = "hotel")
-//    private RoomEntity room;
+
 }

@@ -1,10 +1,10 @@
 package com.tuvarna.hotel.domain.singleton;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SingletonManager {
-    private static final Map<Class<?>, Object> singletons = new HashMap<>();
+    private static final Map<Class<?>, Object> singletons = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
     public static <T> T getInstance(Class<T> clazz) {
