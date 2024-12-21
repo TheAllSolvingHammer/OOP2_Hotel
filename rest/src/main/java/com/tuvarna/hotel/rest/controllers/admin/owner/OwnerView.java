@@ -74,9 +74,6 @@ public class OwnerView implements Initializable{
         lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        //todo do think of combobox feature
-//        ComboBox<String> comboBox = new ComboBox<>();
-
         hotelList.setCellValueFactory(new PropertyValueFactory<>("hotelList"));
         DisplayOwnersInput input = DisplayOwnersInput.builder().build();
         Either<ErrorProcessor, DisplayOwnersOutput> result= displayOwnersProcess.process(input);
