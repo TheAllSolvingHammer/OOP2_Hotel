@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@admin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.AdminController">
    <children>
       <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@admin.css">
@@ -21,8 +22,8 @@
       <TextField fx:id="ownerFirstName" layoutX="296.0" layoutY="42.0" />
       <TextField fx:id="ownerLastName" layoutX="296.0" layoutY="78.0" />
       <TextField fx:id="ownerUsername" layoutX="296.0" layoutY="113.0" />
-      <TextField fx:id="ownerPassword" layoutX="296.0" layoutY="148.0" />
-      <TextField fx:id="ownerRepeatPassword" layoutX="296.0" layoutY="182.0" />
+      <PasswordField fx:id="ownerPassword" layoutX="296.0" layoutY="148.0" />
+      <PasswordField fx:id="ownerRepeatPassword" layoutX="296.0" layoutY="182.0" />
       <TextField fx:id="ownerEmail" layoutX="296.0" layoutY="217.0" />
       <TextField fx:id="ownerPhoneNumber" layoutX="296.0" layoutY="250.0" />
       <Label layoutX="230.0" layoutY="46.0" text="First Name" textFill="#dad1d1" />

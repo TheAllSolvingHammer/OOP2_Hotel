@@ -5,18 +5,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
-    <TableView fx:id="table" prefHeight="355.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0">
+<AnchorPane prefHeight="400.0" prefWidth="778.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
+    <TableView fx:id="table" layoutX="11.0" layoutY="8.0" onMouseClicked="#handleRowSelect" prefHeight="347.0" prefWidth="550.0" AnchorPane.leftAnchor="11.0">
       <columns>
-          <TableColumn fx:id="id" prefWidth="105.59994351863861" text="UUID"/>
-          <TableColumn fx:id="name" prefWidth="132.79998779296875" text="Hotel Name"/>
-          <TableColumn fx:id="location" prefWidth="182.40003204345703" text="Location"/>
-          <TableColumn fx:id="stars" prefWidth="67.5999755859375" text="Rating"/>
-          <TableColumn fx:id="serviceList" prefWidth="67.5999755859375" text="Services"/>
+          <TableColumn fx:id="id" prefWidth="109.0" text="UUID" />
+          <TableColumn fx:id="name" prefWidth="122.0" text="Hotel Name" />
+          <TableColumn fx:id="location" prefWidth="148.0" text="Location" />
+          <TableColumn fx:id="stars" prefWidth="86.0" text="Rating" />
+          <TableColumn fx:id="serviceList" prefWidth="93.0" text="Services" />
       </columns>
     </TableView>
-    <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0"
-            prefWidth="107.0" text="Back"/>
+    <Button layoutX="457.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+   <AnchorPane cacheShape="false" layoutX="569.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
 </AnchorPane>
