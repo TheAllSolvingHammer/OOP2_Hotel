@@ -14,12 +14,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginController implements BaseController {
+public class LoginController  {
     private final LoginUserProcess loginUserProcess = new LoginUserProcess();
 
     private Stage stage;
@@ -28,10 +29,10 @@ public class LoginController implements BaseController {
     @FXML
     private TextField field_username;
     @FXML
-    private TextField field_password;
+    private PasswordField field_password;
 
 
-    @Override
+    @FXML
     public void switchToScene2(ActionEvent event)  {
         LoginUserInput input = LoginUserInput.builder()
                 .username(field_username.getText())
