@@ -1,7 +1,6 @@
 package com.tuvarna.hotel.persistence.repositories;
 
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
-import jakarta.persistence.Entity;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,9 @@ public interface BaseRepository<T extends EntityMarker,E extends UUID> {
 
     List<T> getAll();
 
-    T save(T t);
+    void save(T t);
 
     T delete(T t);
+
+    boolean existsById(E id);
 }

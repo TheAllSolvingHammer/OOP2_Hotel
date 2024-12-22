@@ -5,6 +5,7 @@ import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter
@@ -43,6 +44,7 @@ public class UserEntity implements EntityMarker {
    @Column(name="password",nullable = false)
    private String hashedPassword;
 
-
+   @ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER)
+   private List<HotelEntity> hotelList;
 
 }

@@ -1,25 +1,76 @@
 package com.tuvarna.hotel.rest.controllers.admin;
 
+import com.tuvarna.hotel.api.enums.RoleType;
+import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
+import com.tuvarna.hotel.api.models.create.user.CreateUserInput;
+import com.tuvarna.hotel.api.models.create.user.CreateUserOutput;
+import com.tuvarna.hotel.core.processes.CreateUserProcess;
+import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.contracts.ControllerMarker;
+import io.vavr.control.Either;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class AdminController implements ControllerMarker {
 
+
+    private final CreateUserProcess createUserProcess;
     private Stage stage;
     private Parent root;
     private Scene scene;
+    @FXML
+    private TextField ownerFirstName;
+    @FXML
+    private TextField ownerLastName;
+    @FXML
+    private TextField ownerUsername;
+    @FXML
+    private PasswordField ownerPassword;
+    @FXML
+    private PasswordField ownerRepeatPassword;
+    @FXML
+    private TextField ownerEmail;
+    @FXML
+    private TextField ownerPhoneNumber;
+    public AdminController() {
+        createUserProcess= SingletonManager.getInstance(CreateUserProcess.class);
+    }
 
     @FXML
-    protected void createOwner(){
+    protected void createOwner(ActionEvent event){
 
+        CreateUserInput input = CreateUserInput.builder()
+                .firstName(ownerFirstName.getText())
+                .lastName(ownerLastName.getText())
+                .username(ownerUsername.getText())
+                .password(ownerPassword.getText())
+                .passwordSecond(ownerRepeatPassword.getText())
+                .phone(ownerPhoneNumber.getText())
+                .email(ownerEmail.getText())
+                .role(RoleType.OWNER)
+                .build();
+
+        Either<ErrorProcessor, CreateUserOutput> result= createUserProcess.process(input);
+        System.out.println(result);
+
+    }
+    private void showErrorAlert(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Operation Failed");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     @FXML
