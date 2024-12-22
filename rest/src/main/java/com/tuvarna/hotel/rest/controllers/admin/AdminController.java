@@ -30,6 +30,8 @@ public class AdminController implements ControllerMarker {
     private Parent root;
     private Scene scene;
     @FXML
+    private AnchorPane anchorPane;
+    @FXML
     private TextField ownerFirstName;
     @FXML
     private TextField ownerLastName;
