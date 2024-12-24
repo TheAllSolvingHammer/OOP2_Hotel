@@ -19,9 +19,6 @@ public class AbstractLoginControllerFactory {
         controllerMap.put("OWNER", "../owner/owner-view.fxml");
         controllerMap.put("RECEPTIONIST","../reception/receptionist-view.fxml");
         controllerMap.put("USER","../manager/manager-view.fxml");
-        //tuka dobavqme razlichnite sceni
-        // ako iskash da dostupish nqkoq scena veche mojesh , prosto v logina ima prenasochvane
-        // ot men tolkoz
 
     }
     public Parent getController(String roleType) throws IllegalAccessException, IOException {

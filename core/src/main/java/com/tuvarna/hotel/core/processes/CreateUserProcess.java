@@ -30,8 +30,6 @@ public class CreateUserProcess extends BaseProcessor implements CreateUserOperat
     @Override
     public Either<ErrorProcessor, CreateUserOutput> process(CreateUserInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-                    System.out.println(input);
-                    //
 
                     checkPasswordIntegrity(input.getPassword(),input.getPasswordSecond());
                 checkRole(input.getRole());
@@ -44,9 +42,6 @@ public class CreateUserProcess extends BaseProcessor implements CreateUserOperat
                             .email(input.getEmail())
                             .phone(input.getPhone())
                             .build();
-                    //
-                    System.out.println(user);
-                    //
                     userRepository.save(user);
                 return CreateUserOutput.builder()
                         .message("Successfully added user")

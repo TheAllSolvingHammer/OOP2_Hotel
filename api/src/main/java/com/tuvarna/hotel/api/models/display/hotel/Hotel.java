@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor()
 @AllArgsConstructor
 @Builder
@@ -16,4 +15,9 @@ public class Hotel {
     private String location;
     private Integer stars;
     private List<String> serviceList;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

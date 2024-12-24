@@ -13,18 +13,15 @@ import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
+@NoArgsConstructor
 @Singleton
 public class DisplayOwnersProcess extends BaseProcessor implements DisplayOwnersOperation {
-    private final UserRepositoryImpl userRepository;
-    private final ConvertUsersToOwner convertUsersToOwner;
-    public DisplayOwnersProcess() {
-        this.userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-        this.convertUsersToOwner=SingletonManager.getInstance(ConvertUsersToOwner.class);
-    }
+    private final UserRepositoryImpl userRepository=SingletonManager.getInstance(UserRepositoryImpl.class);
+    private final ConvertUsersToOwner convertUsersToOwner=SingletonManager.getInstance(ConvertUsersToOwner.class);
 
     @Override
     public Either<ErrorProcessor, DisplayOwnersOutput> process(DisplayOwnersInput input) {
