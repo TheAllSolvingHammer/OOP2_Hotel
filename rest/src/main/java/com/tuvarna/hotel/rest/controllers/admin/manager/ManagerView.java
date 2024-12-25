@@ -36,7 +36,7 @@ public class ManagerView implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private final DisplayManagerOperation displayManagerProcess;
+    private final DisplayManagersProcess displayManagerProcess;
     @FXML
     private TableView<Manager> table;
     @FXML

@@ -1,8 +1,11 @@
 package com.tuvarna.hotel.persistence.repositories;
 
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
+import com.tuvarna.hotel.persistence.entities.HotelEntity;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface HotelRepository<T extends EntityMarker,E extends UUID>  {
+    Optional<HotelEntity> findHotelById(UUID id);
 }

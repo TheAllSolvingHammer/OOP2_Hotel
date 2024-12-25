@@ -25,10 +25,10 @@ public class BaseRepositoryImpl<T extends EntityMarker,E extends UUID> implement
         try
         {
             transaction = session.beginTransaction();
-            if(!getAll().contains(t) || getAll().isEmpty()){
-                session.persist(t);
-            }
-            else session.merge(t);
+//            if(!getAll().contains(t) || getAll().isEmpty()){
+//                session.persist(t);
+//            }
+            session.merge(t);
             transaction.commit();
             session.close();
         } catch (Exception e) {

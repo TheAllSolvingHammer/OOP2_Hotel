@@ -1,9 +1,9 @@
 package com.tuvarna.hotel.core.converters;
 
 import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.display.service.Service;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.entities.HotelEntity;
-import com.tuvarna.hotel.persistence.entities.ServiceEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +19,11 @@ public class ConvertServicesToList implements BaseConverter<List<HotelEntity>,Li
                         hotelEntity.getName(),
                         hotelEntity.getLocation(),
                         hotelEntity.getRating(),
-                        hotelEntity.getServiceList().stream().map(ServiceEntity::getServiceName).toList()
+                        hotelEntity.getServiceList().stream().map(serviceEntity -> Service.builder()
+                                .id(serviceEntity.getId())
+                                .price(serviceEntity.getPrice())
+                                .name(serviceEntity.getServiceName())
+                                .build()).toList()
                 ))
                 .collect(Collectors.toList());
     }

@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.admin.hotel;
+package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
@@ -17,9 +17,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -27,11 +28,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HotelView implements Initializable {
+public class HotelOwnerView implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private final DisplayHotelProcess displayHotelProcess;
+    private final DisplayHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayHotelProcess.class);
     @FXML
     private TableView<Hotel> table;
     @FXML
@@ -40,27 +41,23 @@ public class HotelView implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel, Integer> stars;
-    @FXML
-    private TextField searchBar;
-    @FXML
-    private Button clearSearchBar;
-
-
-    //todo CIRCULAR ( RECURSIVE UPDATE OF CONSTRUCTOR ) MUST BE FIXED AT ALL COST!!!!
-    //potential fix will be moving it out of the constructor and or lazily instantiating it
-    public HotelView() {
-        displayHotelProcess= SingletonManager.getInstance(DisplayHotelProcess.class);
-    }
-
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/admin-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Admin");
+        stage.setTitle("Owner");
         stage.show();
+    }
+
+    @FXML
+    public void displayHotel(MouseEvent mouseEvent) throws IOException {
+        if(mouseEvent.getClickCount()==2) {
+            Hotel hotel = table.getSelectionModel().getSelectedItem();
+            showMoreHotelData(hotel);
+        }
     }
 
     @Override
@@ -83,43 +80,17 @@ public class HotelView implements Initializable {
                     return null;
                 }
         );
-
-    }
-
-    @FXML
-    public void handleRowSelect(MouseEvent mouseEvent) throws IOException {
-        if(mouseEvent.getClickCount()==2) {
-            Hotel hotel = table.getSelectionModel().getSelectedItem();
-            System.out.println(hotel);
-            showMoreHotelData(hotel);
-        }
-    }
-
-    @FXML
-    public void searchSpecification(KeyEvent event){
-        //todo
-
-
     }
 
     public void showMoreHotelData(Hotel hotel) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/admin/more-hotel-info.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/more-hotel-owner-info.fxml"));
         Parent root = loader.load();
-        HotelData controller = loader.getController();
+        HotelOwnerData controller = loader.getController();
         controller.setHotel(hotel);
         controller.display();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Data");
-        stage.show();
-    }
-    @FXML
-    public void addHotelScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/add-hotel.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Add hotel");
         stage.show();
     }
 }
