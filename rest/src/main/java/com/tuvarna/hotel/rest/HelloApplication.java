@@ -1,9 +1,9 @@
 package com.tuvarna.hotel.rest;
 
 import com.tuvarna.hotel.core.instantiator.Instantiation;
-import com.tuvarna.hotel.domain.aspect.LogExecution;
 import com.tuvarna.hotel.domain.aspect.LoggingAspect;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
+import com.tuvarna.hotel.persistence.initializer.InitializeServices;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,6 +29,8 @@ public class HelloApplication extends Application {
 
         HibernateUtil.openSession();
         Instantiation.loadInstances();
+        InitializeServices initializer = new InitializeServices();
+        initializer.initializeData();
         //InitializeAdmin.addAdmin();
         launch();
     }

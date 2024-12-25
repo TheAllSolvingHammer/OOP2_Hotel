@@ -1,14 +1,12 @@
 package com.tuvarna.hotel.rest.controllers.admin.owner;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersInput;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersOutput;
 import com.tuvarna.hotel.api.models.display.owner.Owner;
 import com.tuvarna.hotel.core.processes.DisplayOwnersProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
-import com.tuvarna.hotel.rest.controllers.admin.hotel.HotelData;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,11 +61,10 @@ public class OwnerView implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("an error here");
+
         firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        System.out.println("an error here 2nd time");
         DisplayOwnersInput input = DisplayOwnersInput.builder().build();
         Either<ErrorProcessor, DisplayOwnersOutput> result= displayOwnersProcess.process(input);
         System.out.println(result);

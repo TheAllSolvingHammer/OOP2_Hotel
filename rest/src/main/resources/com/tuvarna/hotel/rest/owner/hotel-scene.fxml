@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.HotelView">
-    <children>
-        <TableView prefHeight="355.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0">
+<AnchorPane prefHeight="443.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.HotelOwnerView">
+
+        <TableView fx:id="table" layoutX="18.0" layoutY="65.0" onMouseClicked="#displayHotel" prefHeight="329.0" prefWidth="623.0" AnchorPane.leftAnchor="18.0">
             <columns>
-                <TableColumn id="id" prefWidth="105.59994351863861" text="Уникален ключ" />
-                <TableColumn id="address" prefWidth="182.40003204345703" text="Адрес" />
-                <TableColumn id="hotel_name" prefWidth="132.79998779296875" text="Дата на създаване" />
-                <TableColumn id="stars" prefWidth="67.5999755859375" text="Звезди" />
+                <TableColumn fx:id="name" prefWidth="227.0" text="Name" />
+                <TableColumn fx:id="location" prefWidth="244.0" text="Location" />
+                <TableColumn fx:id="stars" prefWidth="151.0" text="Rating" />
             </columns>
         </TableView>
-        <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Назад" />
-    </children>
+        <Button layoutX="536.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+      <TextField layoutX="101.0" layoutY="25.0" prefHeight="25.0" prefWidth="435.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="45.0" layoutY="25.0" prefHeight="25.0" prefWidth="50.0" text="Search:" />
+      <Button layoutX="547.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="X" />
 </AnchorPane>

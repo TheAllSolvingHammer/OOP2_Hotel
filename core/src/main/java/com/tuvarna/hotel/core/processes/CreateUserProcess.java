@@ -20,12 +20,8 @@ import io.vavr.control.Try;
 @Singleton
 public class CreateUserProcess extends BaseProcessor implements CreateUserOperation {
 
-    private final UserRepositoryImpl userRepository;
-    private final PasswordEncoder passwordEncoder;
-    public CreateUserProcess() {
-        userRepository= SingletonManager.getInstance(UserRepositoryImpl.class);
-        passwordEncoder=SingletonManager.getInstance(MyPasswordEncoder.class);
-    }
+    private final UserRepositoryImpl userRepository= SingletonManager.getInstance(UserRepositoryImpl.class);
+    private final PasswordEncoder passwordEncoder=SingletonManager.getInstance(MyPasswordEncoder.class);
 
     @Override
     public Either<ErrorProcessor, CreateUserOutput> process(CreateUserInput input) {

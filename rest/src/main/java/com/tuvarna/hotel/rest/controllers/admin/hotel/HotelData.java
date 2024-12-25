@@ -2,6 +2,7 @@ package com.tuvarna.hotel.rest.controllers.admin.hotel;
 
 
 import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.display.service.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,7 @@ public class HotelData {
 
 
     public void display() {
-        myListView.getItems().addAll(hotel.getServiceList());
+        myListView.getItems().addAll(hotel.getServiceList().stream().map(Service::getName).toList());
         name.setText(hotel.getName());
         locationHotel.setText(hotel.getLocation());
         stars.setText(hotel.getStars().toString());

@@ -7,15 +7,12 @@ import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import com.tuvarna.hotel.api.models.display.owner.Owner;
 import com.tuvarna.hotel.core.processes.DisplayHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
+import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,8 +24,7 @@ import lombok.Setter;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.List;
 
 public class OwnerData{
 
@@ -49,7 +45,7 @@ public class OwnerData{
     private VBox hotels;
 
     private final DisplayHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayHotelProcess.class);
-
+    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
     private CheckComboBox<Hotel> checkComboBox;
 
 
@@ -70,6 +66,10 @@ public class OwnerData{
     @FXML
     public void applyOwner(ActionEvent event) {
 
+        List<Hotel> hotelsChecked= checkComboBox.getCheckModel().getCheckedItems();
+        System.out.println(hotelsChecked);
+//        UserEntity user =userRepository.findByID(owner.getId()).orElseThrow(() -> new QueryException("User not found with UUID"));
+
     }
 
     public void display() {
@@ -77,7 +77,6 @@ public class OwnerData{
         lastName.setText(owner.getLastName());
         phone.setText(owner.getPhoneNumber());
         email.setText(owner.getEmail());
-//        CheckComboBox<Hotel> checkComboBox = new CheckComboBox<>();
         DisplayHotelsInput input= DisplayHotelsInput.builder().build();
         Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(input);
         result.fold(
@@ -87,10 +86,16 @@ public class OwnerData{
                 },
                 success -> {
                     checkComboBox.getItems().addAll(success.getHotelList());
+                    if (owner.getHotelList() != null && !owner.getHotelList().isEmpty()) {
+                        owner.getHotelList().forEach(hotel ->
+                            checkComboBox.getCheckModel().check(hotel)
+                        );
+                    }
                     return null;
                 }
         );
         hotels.getChildren().add(checkComboBox);
+
     }
 
 }

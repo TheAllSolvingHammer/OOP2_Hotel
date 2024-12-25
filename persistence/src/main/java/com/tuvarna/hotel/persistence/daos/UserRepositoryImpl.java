@@ -90,4 +90,20 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserEntity,UUID>  imp
             session.close();
         }
     }
+
+    @Override
+    public Optional<UserEntity> findByID(UUID uuid) {
+        Session session = HibernateUtil.openSession();
+        try {
+            String hql = "FROM " + getEntityClass().getName() + " u WHERE u.id = :uuid";
+            Query<UserEntity> query = session.createQuery(hql, getEntityClass());
+            query.setParameter("uuid", uuid);
+            UserEntity user = query.uniqueResult();
+            return Optional.ofNullable(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to retrieve user with UUID: " + uuid, e);
+        } finally {
+            session.close();
+        }
+    }
 }
