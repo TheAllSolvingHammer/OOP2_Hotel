@@ -67,13 +67,7 @@ public class AdminController implements ControllerMarker {
         System.out.println(result);
 
     }
-    private void showErrorAlert(String errorMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Operation Failed");
-        alert.setContentText(errorMessage);
-        alert.showAndWait();
-    }
+
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

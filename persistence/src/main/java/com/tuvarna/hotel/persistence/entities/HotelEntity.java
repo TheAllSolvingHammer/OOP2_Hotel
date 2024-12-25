@@ -31,7 +31,7 @@ public class HotelEntity implements EntityMarker {
     @Column(name="rating",nullable = false)
     private Integer rating;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name="hotels_services",
             joinColumns = @JoinColumn(name="hotel_id"),

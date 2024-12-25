@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<?import javafx.scene.control.Button?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.owner.OwnerView">
+<AnchorPane prefHeight="463.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.owner.OwnerView">
     <children>
-        <TableView fx:id="table" prefHeight="352.0" prefWidth="600.0">
+        <TableView fx:id="table" layoutX="7.0" layoutY="45.0" onMouseClicked="#getOwnerFullInformation" prefHeight="363.0" prefWidth="660.0">
             <columns>
-                <TableColumn fx:id="id" prefWidth="141.59998321533203" text="UUID" />
-                <TableColumn fx:id="firstName" prefWidth="141.59998321533203" text="First Name" />
-                <TableColumn fx:id="lastName" minWidth="8.800048828125" prefWidth="106.39996337890625" text="Last Name" />
-                <TableColumn fx:id="email" prefWidth="135.2000732421875" text="E-mail" />
-                <TableColumn fx:id="phoneNumber" minWidth="0.0" prefWidth="139.99996948242188" text="Phone Number" />
-                <TableColumn fx:id="hotelList" minWidth="12" prefWidth="139.99996948242188" text="Hotels" />
+                <TableColumn fx:id="firstName" prefWidth="230.0" text="First Name" />
+                <TableColumn fx:id="lastName" minWidth="8.800048828125" prefWidth="270.0" text="Last Name" />
+                <TableColumn fx:id="email" prefWidth="159.0" text="E-mail" />
             </columns>
         </TableView>
-        <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+        <Button layoutX="560.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+      <TextField layoutX="63.0" layoutY="14.0" prefHeight="25.0" prefWidth="459.0" />
+      <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" text="X" />
+      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="41.0" text="Search:" />
+      <Button layoutX="570.0" layoutY="14.0" mnemonicParsing="false" onAction="#addOwners" prefHeight="25.0" prefWidth="96.0" text="Add Owner" />
     </children>
 </AnchorPane>
