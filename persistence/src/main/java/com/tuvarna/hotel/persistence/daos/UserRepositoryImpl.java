@@ -106,4 +106,33 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserEntity,UUID>  imp
             session.close();
         }
     }
+
+    public List<UserEntity> findAllUnassignedOwners() {
+        Session session = HibernateUtil.openSession();
+        try {
+            String hql = "SELECT u FROM UserEntity u WHERE u.role = :role AND u NOT IN (SELECT hu FROM HotelEntity h JOIN h.userList hu)";
+            Query<UserEntity> query = session.createQuery(hql, UserEntity.class);
+            query.setParameter("role", RoleEntity.OWNER);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to retrieve unassigned owners.", e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<UserEntity> findAllUnassignedManagers() {
+        Session session = HibernateUtil.openSession();
+        try {
+            String hql = "SELECT u FROM UserEntity u WHERE u.role = :role AND u NOT IN (SELECT hu FROM HotelEntity h JOIN h.userList hu)";
+            Query<UserEntity> query = session.createQuery(hql, UserEntity.class);
+            query.setParameter("role", RoleEntity.MANAGER);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to retrieve unassigned managers.", e);
+        } finally {
+            session.close();
+        }
+    }
 }

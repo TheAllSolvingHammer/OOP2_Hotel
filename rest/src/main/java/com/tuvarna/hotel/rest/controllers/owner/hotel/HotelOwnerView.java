@@ -93,4 +93,13 @@ public class HotelOwnerView implements Initializable {
         stage.setTitle("Hotel Data");
         stage.show();
     }
+
+    public void addNewHotel(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-hotel.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Owner");
+        stage.show();
+    }
 }

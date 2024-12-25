@@ -39,7 +39,7 @@ public class HotelEntity implements EntityMarker {
     )
     private List<ServiceEntity> serviceList;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "hotel_users",
             joinColumns = @JoinColumn(name = "hotel_id"),

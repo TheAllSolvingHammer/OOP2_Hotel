@@ -1,7 +1,7 @@
 package com.tuvarna.hotel.api.models.create.hotel;
 
 import com.tuvarna.hotel.api.base.OperationInput;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.tuvarna.hotel.api.models.display.manager.Manager;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
@@ -20,4 +20,6 @@ public class CreateHotelInput implements OperationInput {
     @NotEmpty(message = "Location can not be empty")
     private String location;
     private Integer rating;
+    private UUID ownerID;
+    private List<Manager> managerList;
 }
