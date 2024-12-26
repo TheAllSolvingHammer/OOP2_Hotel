@@ -71,18 +71,18 @@ public class HotelView implements Initializable {
         DisplayHotelsInput hotelsInput = DisplayHotelsInput.builder()
                 .build();
         Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(hotelsInput);
-        result.fold(
-                error -> {
-                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
-                    return null;
-                },
-                success -> {
-                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
-                    table.setItems(data);
-                    table.refresh();
-                    return null;
-                }
-        );
+//        result.fold(
+//                error -> {
+//                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
+//                    return null;
+//                },
+//                success -> {
+//                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
+//                    table.setItems(data);
+//                    table.refresh();
+//                    return null;
+//                }
+//        );
 
     }
 

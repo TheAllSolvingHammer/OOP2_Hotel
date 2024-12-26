@@ -135,4 +135,21 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserEntity,UUID>  imp
             session.close();
         }
     }
+
+    @Override
+    public List<UserEntity> findAllNonManagers() {
+        Session session = HibernateUtil.openSession();
+        try {
+            Query<UserEntity> query = session.createQuery(
+                    "SELECT u FROM UserEntity u WHERE u.role <> :managerRole", UserEntity.class
+            );
+            query.setParameter("managerRole", RoleEntity.MANAGER);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch users who are not managers", e);
+        }
+        finally {
+            session.close();
+        }
+    }
 }

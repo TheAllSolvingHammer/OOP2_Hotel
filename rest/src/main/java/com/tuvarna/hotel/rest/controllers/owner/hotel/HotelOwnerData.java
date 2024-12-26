@@ -5,19 +5,15 @@ import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import com.tuvarna.hotel.api.models.display.manager.DisplayManagerInput;
 import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOutput;
 import com.tuvarna.hotel.api.models.display.manager.Manager;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesInput;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesOutput;
 import com.tuvarna.hotel.api.models.display.service.Service;
-import com.tuvarna.hotel.api.models.get.manager.GetAllUnassignedManagersInput;
-import com.tuvarna.hotel.api.models.get.manager.GetAllUnassignedManagersOutput;
-import com.tuvarna.hotel.api.models.update.manager.UpdateManagersInput;
-import com.tuvarna.hotel.api.models.update.manager.UpdateManagersOutput;
-import com.tuvarna.hotel.api.models.update.service.UpdateServicesInput;
-import com.tuvarna.hotel.api.models.update.service.UpdateServicesOutput;
+import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersInput;
+import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersOutput;
+import com.tuvarna.hotel.api.models.update.service.UpdateHotelInput;
+import com.tuvarna.hotel.api.models.update.service.UpdateHotelOutput;
 import com.tuvarna.hotel.core.processes.*;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
-import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.event.ActionEvent;
@@ -27,7 +23,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -56,10 +51,9 @@ public class HotelOwnerData {
     private VBox managerVbox;
 
     private final DisplayServicesProcess displayServicesProcess = SingletonManager.getInstance(DisplayServicesProcess.class);
-    private final UpdateServicesProcess updateServicesProcess = SingletonManager.getInstance(UpdateServicesProcess.class);
-    private final GetUnassignedManagersProcess getUnassignedManagersProcess = SingletonManager.getInstance(GetUnassignedManagersProcess.class);
+    private final UpdateHotelProcess updateServicesProcess = SingletonManager.getInstance(UpdateHotelProcess.class);
+    private final GetHotelManagersProcess getHotelManagersProcess = SingletonManager.getInstance(GetHotelManagersProcess.class);
     private final DisplayManagersProcess displayManagersProcess=SingletonManager.getInstance(DisplayManagersProcess.class);
-    private final UpdateManagersProcess updateManagersProcess = SingletonManager.getInstance(UpdateManagersProcess.class);
     private CheckComboBox<Service> checkComboBox;
     private CheckComboBox<Manager> checkComboBoxManager;
 
@@ -82,35 +76,22 @@ public class HotelOwnerData {
 
     public void applyChanges(ActionEvent event) {
         List<Service> serviceList=checkComboBox.getCheckModel().getCheckedItems();
-        applyServices(serviceList);
+        List<Manager> managerList2=checkComboBoxManager.getCheckModel().getCheckedItems();
+        applyAll(serviceList,managerList2);
 
-        UpdateManagersInput input=UpdateManagersInput.builder()
-                .hotelID(hotel.getId())
-                .managerList(managerList)
-                .build();
-        Either<ErrorProcessor, UpdateManagersOutput> result = updateManagersProcess.process(input);
-        result.fold(
-                error -> {
-                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in updating managers ",error.getMessage());
-                    return null;
-                },
-                success -> {
-                    AlertManager.showAlert(Alert.AlertType.CONFIRMATION,"Success",success.getMessage());
-                    return null;
-                }
-        );
 
     }
 
-    private void applyServices(List<Service> serviceList) {
-        UpdateServicesInput input = UpdateServicesInput.builder()
+    private void applyAll(List<Service> serviceList,List<Manager> managers) {
+        UpdateHotelInput input = UpdateHotelInput.builder()
                 .hotelID(hotel.getId())
                 .serviceList(serviceList)
+                .managerList(managers)
                 .build();
-        Either<ErrorProcessor, UpdateServicesOutput> result = updateServicesProcess.process(input);
+        Either<ErrorProcessor, UpdateHotelOutput> result = updateServicesProcess.process(input);
         result.fold(
                 error -> {
-                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in updating services ",error.getMessage());
+                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in updating hotel info ",error.getMessage());
                     return null;
                 },
                 success -> {
@@ -127,27 +108,32 @@ public class HotelOwnerData {
         stars.setText(hotel.getStars().toString());
         displayServices();
         displayAllManagers();
-        checkUnassignedManagers();
+        checkAssignedManagers();
     }
 
-    private void checkUnassignedManagers() {
-        GetAllUnassignedManagersInput input2 = GetAllUnassignedManagersInput.builder().build();
-        Either<ErrorProcessor, GetAllUnassignedManagersOutput> result2= getUnassignedManagersProcess.process(input2);
+    private void checkAssignedManagers() {
+        GetAllHotelManagersInput input2 = GetAllHotelManagersInput.builder().hotel(hotel).build();
+
+        Either<ErrorProcessor, GetAllHotelManagersOutput> result2= getHotelManagersProcess.process(input2);
         result2.fold(
                 error -> {
                     AlertManager.showAlert(Alert.AlertType.ERROR,"Error in checking managers ",error.getMessage());
                     return null;
                 },
                 success -> {
-                    managerList.stream()
-                            .filter(m -> success.getManagerlist()
-                                    .contains(m))
-                            .forEach(m -> checkComboBoxManager.getCheckModel()
-                                    .check(m));
-                return null;
+                    System.out.println(success.getManagerlist());
+                    for (Manager m : managerList) {
+                        if (success.getManagerlist()
+                                .contains(m)) {
+                            checkComboBoxManager.getCheckModel()
+                                    .check(m);
+                        }
+                    }
+                    return null;
                 }
         );
         managerVbox.getChildren().add(checkComboBoxManager);
+
     }
 
     private void displayServices() {

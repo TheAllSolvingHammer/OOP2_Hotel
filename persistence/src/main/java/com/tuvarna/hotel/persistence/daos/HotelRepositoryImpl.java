@@ -4,6 +4,7 @@ import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
 import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
+import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import com.tuvarna.hotel.persistence.repositories.HotelRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -41,6 +42,41 @@ public class HotelRepositoryImpl extends BaseRepositoryImpl<HotelEntity,UUID> im
         } catch (Exception e) {
             throw new RuntimeException("Failed to retrieve hotels for the given owner: " + owner.getId(), e);
         } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<UserEntity> findManagersWithHotels() {
+        Session session = HibernateUtil.openSession();
+        try  {
+            Query<UserEntity> query = session.createQuery(
+                    "SELECT DISTINCT u FROM UserEntity u " +
+                            "JOIN FETCH u.hotelList h " +
+                            "WHERE u.role = :role", UserEntity.class
+            );
+            query.setParameter("role", RoleEntity.MANAGER);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch managers with their hotels", e);
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<HotelEntity> findAllHotelsWithUsers() {
+        Session session = HibernateUtil.openSession();
+        try {
+            Query<HotelEntity> query = session.createQuery(
+                    "SELECT DISTINCT h FROM HotelEntity h " +
+                            "JOIN FETCH h.userList u", HotelEntity.class
+            );
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch hotels with their users", e);
+        }finally {
             session.close();
         }
     }

@@ -32,9 +32,9 @@ public class Instantiation {
         SingletonManager.getInstance(LoginUserProcess.class);
         SingletonManager.getInstance(CreateHotelProcess.class);
         SingletonManager.getInstance(DisplayServicesProcess.class);
-        SingletonManager.getInstance(UpdateServicesProcess.class);
+        SingletonManager.getInstance(UpdateHotelProcess.class);
         SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
-        SingletonManager.getInstance(GetUnassignedManagersProcess.class);
-        SingletonManager.getInstance(UpdateManagersProcess.class);
+        SingletonManager.getInstance(GetHotelManagersProcess.class);
+        SingletonManager.getInstance(UpdateHotelProcess.class);
     }
 }

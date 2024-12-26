@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor()
 @AllArgsConstructor
 @Builder
-public class GetAllUnassignedManagersOutput implements OperationOutput {
+public class GetAllHotelManagersOutput implements OperationOutput {
     List<Manager> managerlist;
 }
