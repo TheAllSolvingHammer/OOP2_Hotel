@@ -39,7 +39,8 @@ public class HotelEntity implements EntityMarker {
     )
     private List<ServiceEntity> serviceList;
 
-    @ManyToMany
+    @ToString.Exclude
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name = "hotel_users",
             joinColumns = @JoinColumn(name = "hotel_id"),

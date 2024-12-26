@@ -6,7 +6,7 @@ import com.tuvarna.hotel.api.models.display.service.DisplayServicesOperation;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesOutput;
 import com.tuvarna.hotel.api.models.display.service.Service;
 import com.tuvarna.hotel.core.converters.ConvertServices;
-import com.tuvarna.hotel.core.exception.InputQueryPasswordExceptionCase;
+import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.ServiceRepositoryImpl;
@@ -29,7 +29,7 @@ public class DisplayServicesProcess extends BaseProcessor implements DisplayServ
                             .build();
 
                 }).toEither()
-                .mapLeft(InputQueryPasswordExceptionCase::handleThrowable));
+                .mapLeft(InputQueryExceptionCase::handleThrowable));
 
     }
 }

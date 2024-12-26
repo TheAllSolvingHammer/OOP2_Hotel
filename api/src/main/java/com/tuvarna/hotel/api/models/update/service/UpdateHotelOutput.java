@@ -9,6 +9,6 @@ import lombok.*;
 @NoArgsConstructor()
 @AllArgsConstructor
 @Builder
-public class UpdateServicesOutput implements OperationOutput {
+public class UpdateHotelOutput implements OperationOutput {
     private String message;
 }

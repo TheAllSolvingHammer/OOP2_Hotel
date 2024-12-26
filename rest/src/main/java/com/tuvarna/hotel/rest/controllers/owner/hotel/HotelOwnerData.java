@@ -2,16 +2,18 @@ package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.Hotel;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.display.manager.DisplayManagerInput;
+import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOutput;
+import com.tuvarna.hotel.api.models.display.manager.Manager;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesInput;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesOutput;
 import com.tuvarna.hotel.api.models.display.service.Service;
-import com.tuvarna.hotel.api.models.update.service.UpdateServicesInput;
-import com.tuvarna.hotel.api.models.update.service.UpdateServicesOutput;
-import com.tuvarna.hotel.core.processes.DisplayServicesProcess;
-import com.tuvarna.hotel.core.processes.UpdateServicesProcess;
+import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersInput;
+import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersOutput;
+import com.tuvarna.hotel.api.models.update.service.UpdateHotelInput;
+import com.tuvarna.hotel.api.models.update.service.UpdateHotelOutput;
+import com.tuvarna.hotel.core.processes.*;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
-import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.event.ActionEvent;
@@ -21,7 +23,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,11 +30,10 @@ import lombok.Setter;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HotelOwnerData {
-    @FXML
-    private ComboBox<Owner> ownerCheckBox;
     @FXML
     private Label locationHotel;
     @FXML
@@ -47,14 +47,22 @@ public class HotelOwnerData {
     private Hotel hotel;
     @FXML
     private VBox serviceVbox;
+    @FXML
+    private VBox managerVbox;
 
     private final DisplayServicesProcess displayServicesProcess = SingletonManager.getInstance(DisplayServicesProcess.class);
-    private final UpdateServicesProcess updateServicesProcess = SingletonManager.getInstance(UpdateServicesProcess.class);
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+    private final UpdateHotelProcess updateServicesProcess = SingletonManager.getInstance(UpdateHotelProcess.class);
+    private final GetHotelManagersProcess getHotelManagersProcess = SingletonManager.getInstance(GetHotelManagersProcess.class);
+    private final DisplayManagersProcess displayManagersProcess=SingletonManager.getInstance(DisplayManagersProcess.class);
     private CheckComboBox<Service> checkComboBox;
+    private CheckComboBox<Manager> checkComboBoxManager;
+
+    private List<Manager> managerList;
 
     public HotelOwnerData() {
         this.checkComboBox = new CheckComboBox<>();
+        this.checkComboBoxManager = new CheckComboBox<>();
+        managerList = new ArrayList<>();
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
@@ -68,15 +76,22 @@ public class HotelOwnerData {
 
     public void applyChanges(ActionEvent event) {
         List<Service> serviceList=checkComboBox.getCheckModel().getCheckedItems();
-        System.out.println(serviceList);
-        UpdateServicesInput input = UpdateServicesInput.builder()
+        List<Manager> managerList2=checkComboBoxManager.getCheckModel().getCheckedItems();
+        applyAll(serviceList,managerList2);
+
+
+    }
+
+    private void applyAll(List<Service> serviceList,List<Manager> managers) {
+        UpdateHotelInput input = UpdateHotelInput.builder()
                 .hotelID(hotel.getId())
                 .serviceList(serviceList)
+                .managerList(managers)
                 .build();
-        Either<ErrorProcessor, UpdateServicesOutput> result = updateServicesProcess.process(input);
+        Either<ErrorProcessor, UpdateHotelOutput> result = updateServicesProcess.process(input);
         result.fold(
                 error -> {
-                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in updating services ",error.getMessage());
+                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in updating hotel info ",error.getMessage());
                     return null;
                 },
                 success -> {
@@ -84,13 +99,44 @@ public class HotelOwnerData {
                     return null;
                 }
         );
-
     }
+
 
     public void display(){
         name.setText(hotel.getName());
         locationHotel.setText(hotel.getLocation());
         stars.setText(hotel.getStars().toString());
+        displayServices();
+        displayAllManagers();
+        checkAssignedManagers();
+    }
+
+    private void checkAssignedManagers() {
+        GetAllHotelManagersInput input2 = GetAllHotelManagersInput.builder().hotel(hotel).build();
+
+        Either<ErrorProcessor, GetAllHotelManagersOutput> result2= getHotelManagersProcess.process(input2);
+        result2.fold(
+                error -> {
+                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in checking managers ",error.getMessage());
+                    return null;
+                },
+                success -> {
+                    System.out.println(success.getManagerlist());
+                    for (Manager m : managerList) {
+                        if (success.getManagerlist()
+                                .contains(m)) {
+                            checkComboBoxManager.getCheckModel()
+                                    .check(m);
+                        }
+                    }
+                    return null;
+                }
+        );
+        managerVbox.getChildren().add(checkComboBoxManager);
+
+    }
+
+    private void displayServices() {
         DisplayServicesInput input= DisplayServicesInput.builder().build();
         Either<ErrorProcessor, DisplayServicesOutput> result= displayServicesProcess.process(input);
         result.fold(
@@ -100,7 +146,6 @@ public class HotelOwnerData {
                 },
                 success -> {
                     checkComboBox.getItems().addAll(success.getServiceList());
-                    System.out.println(hotel.getServiceList());
                     if (hotel.getServiceList() != null && !hotel.getServiceList().isEmpty()) {
                         success.getServiceList().stream()
                                 .filter(c -> hotel.getServiceList()
@@ -112,8 +157,21 @@ public class HotelOwnerData {
                 }
         );
         serviceVbox.getChildren().add(checkComboBox);
-        //todo display the owners also
     }
 
-
+    private void displayAllManagers(){
+        DisplayManagerInput input =DisplayManagerInput.builder().build();
+        Either<ErrorProcessor, DisplayManagerOutput> result=displayManagersProcess.process(input);
+        result.fold(
+                error -> {
+                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying managers ",error.getMessage());
+                    return null;
+                },
+                success -> {
+                    checkComboBoxManager.getItems().addAll(success.getManagerList());
+                    managerList.addAll(success.getManagerList());
+                    return null;
+                }
+        );
+    }
 }

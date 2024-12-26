@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import jakarta.persistence.*;
@@ -13,13 +14,14 @@ import java.util.UUID;
 @NoArgsConstructor()
 @AllArgsConstructor()
 @Builder
-@EqualsAndHashCode()
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name="users")
 public class UserEntity implements EntityMarker {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
    @Column(name = "user_id",updatable = false,nullable = false)
+   @EqualsAndHashCode.Include
    private UUID id;
 
    @Column(name="firstname",nullable = false)
@@ -44,7 +46,8 @@ public class UserEntity implements EntityMarker {
    @Column(name="password",nullable = false)
    private String hashedPassword;
 
-   @ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER)
+   @ToString.Exclude
+   @ManyToMany(mappedBy = "userList",fetch = FetchType.EAGER)
    private List<HotelEntity> hotelList;
 
 }

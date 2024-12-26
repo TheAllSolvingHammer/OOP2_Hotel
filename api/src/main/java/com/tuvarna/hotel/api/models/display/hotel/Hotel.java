@@ -21,6 +21,9 @@ public class Hotel {
     private Integer stars;
     @EqualsAndHashCode.Exclude
     private List<Service> serviceList;
+    @EqualsAndHashCode.Exclude
+    private List<UUID> userList;
+
 
 //    private List<Owner> ownerList;
     @Override
