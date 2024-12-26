@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.core.converters;
 
+import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import com.tuvarna.hotel.api.models.display.manager.Manager;
 import com.tuvarna.hotel.api.models.display.owner.Owner;
 import com.tuvarna.hotel.domain.singleton.Singleton;
@@ -15,14 +16,22 @@ public class ConvertUsersToManager implements BaseConverter<List<UserEntity>, Li
     @Override
     public List<Manager> convert(List<UserEntity> userEntities) {
         return userEntities.stream()
-                .map(userEntity -> new Manager(
-                        userEntity.getId(),
-                        userEntity.getFirstName(),
-                        userEntity.getLastName(),
-                        userEntity.getEmail(),
-                        userEntity.getPhone(),
-                        userEntity.getHotelList().stream().map(HotelEntity::getName).toList()
-                ))
-                .collect(Collectors.toList());
+                .map(userEntity -> Manager.builder()
+                        .id(userEntity.getId())
+                        .firstName(userEntity.getFirstName())
+                        .lastName(userEntity.getLastName())
+                        .email(userEntity.getEmail())
+                        .phoneNumber(userEntity.getPhone())
+                        .hotelList(userEntity.getHotelList()
+                                .stream()
+                                .map(hotelEntity ->Hotel.builder()
+                                        .id(hotelEntity.getId())
+                                        .name(hotelEntity.getName())
+                                        .stars(hotelEntity.getRating())
+                                        .build()).toList())
+                        .build()).toList();
+
+
+
     }
 }

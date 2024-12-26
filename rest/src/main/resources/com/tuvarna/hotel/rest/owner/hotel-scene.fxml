@@ -17,7 +17,8 @@
             </columns>
         </TableView>
         <Button layoutX="536.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
-      <TextField layoutX="101.0" layoutY="25.0" prefHeight="25.0" prefWidth="435.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="45.0" layoutY="25.0" prefHeight="25.0" prefWidth="50.0" text="Search:" />
-      <Button layoutX="547.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="X" />
+      <TextField layoutX="74.0" layoutY="25.0" prefHeight="25.0" prefWidth="435.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="18.0" layoutY="25.0" prefHeight="25.0" prefWidth="50.0" text="Search:" />
+      <Button layoutX="520.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="X" />
+   <Button layoutX="559.0" layoutY="25.0" mnemonicParsing="false" onAction="#addNewHotel" prefHeight="25.0" prefWidth="80.0" text="Add hotel" />
 </AnchorPane>

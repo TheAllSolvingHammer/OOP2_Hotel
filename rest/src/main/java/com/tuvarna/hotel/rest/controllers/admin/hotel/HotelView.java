@@ -71,18 +71,18 @@ public class HotelView implements Initializable {
         DisplayHotelsInput hotelsInput = DisplayHotelsInput.builder()
                 .build();
         Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(hotelsInput);
-        result.fold(
-                error -> {
-                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
-                    return null;
-                },
-                success -> {
-                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
-                    table.setItems(data);
-                    table.refresh();
-                    return null;
-                }
-        );
+//        result.fold(
+//                error -> {
+//                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
+//                    return null;
+//                },
+//                success -> {
+//                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
+//                    table.setItems(data);
+//                    table.refresh();
+//                    return null;
+//                }
+//        );
 
     }
 
@@ -115,7 +115,7 @@ public class HotelView implements Initializable {
     }
     @FXML
     public void addHotelScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/add-hotel.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-hotel.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);

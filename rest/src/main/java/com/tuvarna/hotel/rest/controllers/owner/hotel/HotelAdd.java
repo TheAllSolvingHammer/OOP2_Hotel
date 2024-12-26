@@ -1,8 +1,9 @@
-package com.tuvarna.hotel.rest.controllers.admin.hotel;
+package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.create.hotel.CreateHotelInput;
 import com.tuvarna.hotel.api.models.create.hotel.CreateHotelOutput;
+import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.CreateHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -62,6 +63,7 @@ public class HotelAdd  implements Initializable {
                 .name(name.getText())
                 .location(locationHotel.getText())
                 .rating(comboRating.getSelectionModel().getSelectedItem())
+                .ownerID(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
         Either<ErrorProcessor, CreateHotelOutput> result= createHotelProcess.process(input);
         result.fold(
