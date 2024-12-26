@@ -17,6 +17,7 @@ import io.vavr.control.Either;
 import io.vavr.control.Try;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Singleton
@@ -29,10 +30,13 @@ public class CreateHotelProcess extends BaseProcessor implements CreateHotelOper
         return validateInput(input).flatMap(validInput -> Try.of(()->{
                     UserEntity user = findUser(input.getOwnerID());
                     checkUserRoles(user);
+                    List<UserEntity> users=new ArrayList<>();
+                    users.add(user);
                     HotelEntity hotel = HotelEntity.builder()
                             .name(input.getName())
                             .location(input.getLocation())
                             .rating(input.getRating())
+                            .userList(users)
                             .build();
                     hotelRepository.save(hotel);
                     return CreateHotelOutput.builder()

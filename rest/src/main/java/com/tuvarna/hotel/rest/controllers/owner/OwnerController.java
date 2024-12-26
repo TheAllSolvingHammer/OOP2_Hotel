@@ -40,4 +40,12 @@ public class OwnerController {
     }
 
 
+    public void createManager(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-owner.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Hotel View");
+        stage.show();
+    }
 }

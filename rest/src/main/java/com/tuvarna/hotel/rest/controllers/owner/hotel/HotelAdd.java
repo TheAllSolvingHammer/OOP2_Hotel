@@ -37,11 +37,11 @@ public class HotelAdd  implements Initializable {
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/hotels-scene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/hotel-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Admin");
+        stage.setTitle("Owner");
         stage.show();
     }
 
