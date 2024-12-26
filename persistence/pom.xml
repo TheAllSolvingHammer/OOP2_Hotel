@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.tuvarna.hotel</groupId>
         <artifactId>hotel</artifactId>
-        <version>${revision}</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>persistence</artifactId>
     <name>hotel-persistence</name>
