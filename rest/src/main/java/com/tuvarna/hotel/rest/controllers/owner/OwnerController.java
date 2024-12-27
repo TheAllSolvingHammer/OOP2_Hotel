@@ -24,7 +24,6 @@ public class OwnerController implements Initializable {
     private Parent root;
     private Scene scene;
 
-
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/hello-view.fxml"));

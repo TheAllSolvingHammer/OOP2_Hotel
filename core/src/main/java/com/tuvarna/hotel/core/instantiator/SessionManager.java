@@ -23,7 +23,9 @@ public class SessionManager {
     }
 
 
-    public void clearSession() {
-        this.loggedInUser = null;
+    public static void clearSession() {
+        if (instance != null) {
+            instance.loggedInUser = null;
+        }
     }
 }
