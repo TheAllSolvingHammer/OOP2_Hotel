@@ -1,21 +1,28 @@
 package com.tuvarna.hotel.rest.controllers.owner;
 
 
+import com.tuvarna.hotel.rest.alert.AlertManager;
+import jakarta.ejb.Init;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class OwnerController {
+public class OwnerController implements Initializable {
+    @FXML
+    private ListView<String> notificationList;
     private Stage stage;
     private Parent root;
     private Scene scene;
-
 
 
     @FXML
@@ -47,5 +54,10 @@ public class OwnerController {
         stage.setScene(scene);
         stage.setTitle("Hotel View");
         stage.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        notificationList.setItems(AlertManager.getAlertLog());
     }
 }
