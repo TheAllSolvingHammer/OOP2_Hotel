@@ -3,16 +3,20 @@ package com.tuvarna.hotel.rest.controllers.manager.receptionists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ReceptionistView {
+public class ReceptionistHotelsView implements Initializable {
 
     private Stage stage;
     private Parent root;
@@ -21,19 +25,12 @@ public class ReceptionistView {
     @FXML
     private TableView<Receptionist> table;
     @FXML
-    private TableColumn<Receptionist, Integer> id;
-    @FXML
     private TableColumn<Receptionist, String> name;
     @FXML
-    private TableColumn<Receptionist, String> surname;
+    private TableColumn<Receptionist, String> location;
     @FXML
-    private TableColumn<Receptionist, String> email;
-    @FXML
-    private TableColumn<Receptionist, String> phone;
+    private TableColumn<Receptionist, String> stars;
 
-    public void initialize() {
-        //todo
-    }
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
@@ -45,4 +42,10 @@ public class ReceptionistView {
         stage.show();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        location.setCellValueFactory(new PropertyValueFactory<>("location"));
+        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+    }
 }

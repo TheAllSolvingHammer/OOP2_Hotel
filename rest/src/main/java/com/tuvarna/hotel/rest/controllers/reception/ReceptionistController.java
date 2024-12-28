@@ -53,6 +53,7 @@ public class ReceptionistController implements Initializable {
     public void logOutReceptionist(ActionEvent event) throws IOException {
 
         SessionManager.clearSession();
+        AlertManager.clearNotifications();
         root=FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/login/login-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
