@@ -17,7 +17,7 @@ public class AbstractLoginControllerFactory {
         controllerMap = new HashMap<>();
         controllerMap.put("ADMINISTRATOR", "../admin/admin-view.fxml");
         controllerMap.put("OWNER", "../owner/owner-view.fxml");
-        controllerMap.put("RECEPTIONIST","../reception/receptionist-view.fxml");
+        controllerMap.put("EMPLOYEE","../reception/receptionist-view.fxml");
         controllerMap.put("MANAGER","../manager/manager-view.fxml");
 
     }

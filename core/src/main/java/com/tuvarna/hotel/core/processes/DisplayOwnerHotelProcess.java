@@ -6,7 +6,7 @@ import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOperation;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.display.hotel.Hotel;
-import com.tuvarna.hotel.core.converters.ConvertServicesToList;
+import com.tuvarna.hotel.core.converters.ConvertEntityToHotel;
 import com.tuvarna.hotel.core.exception.QueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
@@ -23,12 +23,12 @@ import java.util.List;
 @Singleton
 public class DisplayOwnerHotelProcess extends BaseProcessor implements DisplayHotelsOperation {
     private final HotelRepositoryImpl hotelRepository;
-    private final ConvertServicesToList converter;
+    private final ConvertEntityToHotel converter;
     private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
 
     public DisplayOwnerHotelProcess() {
         hotelRepository=SingletonManager.getInstance(HotelRepositoryImpl.class);
-        converter=SingletonManager.getInstance(ConvertServicesToList.class);
+        converter=SingletonManager.getInstance(ConvertEntityToHotel.class);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Instantiation {
         SingletonManager.getInstance(ReservationRepositoryImpl.class);
         //todo add rest
         //converters
-        SingletonManager.getInstance(ConvertServicesToList.class);
+        SingletonManager.getInstance(ConvertEntityToHotel.class);
         SingletonManager.getInstance(ConvertUsersToManager.class);
         SingletonManager.getInstance(ConvertUsersToOwner.class);
         SingletonManager.getInstance(ConvertServices.class);
@@ -36,5 +36,6 @@ public class Instantiation {
         SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
         SingletonManager.getInstance(GetHotelManagersProcess.class);
         SingletonManager.getInstance(UpdateHotelProcess.class);
+        SingletonManager.getInstance(DisplayManagerHotelProcess.class);
     }
 }
