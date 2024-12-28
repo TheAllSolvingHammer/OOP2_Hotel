@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="556.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.owner.OwnerData">
+
+    <Button layoutX="22.0" layoutY="351.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+   <Button layoutX="419.0" layoutY="351.0" mnemonicParsing="false" onAction="#applyOwner" prefHeight="26.0" prefWidth="107.0" text="Apply" />
+   <VBox fx:id="hotels" layoutX="305.0" layoutY="53.0" prefHeight="269.0" prefWidth="221.0" />
+   <Label alignment="CENTER_RIGHT" layoutX="42.0" layoutY="64.0" prefHeight="26.0" prefWidth="68.0" text="First name:" />
+   <Label alignment="CENTER_RIGHT" layoutX="42.0" layoutY="102.0" prefHeight="26.0" prefWidth="68.0" text="Last name:" />
+   <Label alignment="CENTER_RIGHT" layoutX="42.0" layoutY="140.0" prefHeight="26.0" prefWidth="68.0" text="phone:" />
+   <Label alignment="CENTER_RIGHT" layoutX="42.0" layoutY="179.0" prefHeight="26.0" prefWidth="68.0" text="e-mail:" />
+   <TextField fx:id="firstName" layoutX="121.0" layoutY="65.0" />
+   <TextField fx:id="lastName" layoutX="121.0" layoutY="103.0" />
+   <TextField fx:id="phone" layoutX="121.0" layoutY="141.0" />
+   <TextField fx:id="email" layoutX="121.0" layoutY="180.0" />
+</AnchorPane>

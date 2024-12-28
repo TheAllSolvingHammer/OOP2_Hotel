@@ -8,6 +8,8 @@ import com.tuvarna.hotel.api.models.login.LoginUserInput;
 import com.tuvarna.hotel.api.models.login.LoginUserOperation;
 import com.tuvarna.hotel.api.models.login.LoginUserOutput;
 import com.tuvarna.hotel.core.exception.InputQueryPasswordExceptionCase;
+import com.tuvarna.hotel.core.instantiator.SessionManager;
+import com.tuvarna.hotel.domain.aspect.LogExecution;
 import com.tuvarna.hotel.domain.encoder.MyPasswordEncoder;
 import com.tuvarna.hotel.domain.encoder.PasswordEncoder;
 import com.tuvarna.hotel.domain.singleton.Singleton;
@@ -18,7 +20,7 @@ import io.vavr.control.Either;
 import io.vavr.control.Try;
 
 import java.util.Optional;
-
+@LogExecution
 @Singleton
 public class LoginUserProcess extends BaseProcessor implements LoginUserOperation {
     private final UserRepositoryImpl userRepository;
@@ -29,11 +31,13 @@ public class LoginUserProcess extends BaseProcessor implements LoginUserOperatio
         passwordEncoder=SingletonManager.getInstance(MyPasswordEncoder.class);
     }
 
+    @LogExecution
     @Override
     public Either<ErrorProcessor, LoginUserOutput> process(LoginUserInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
                 UserEntity user =checkUserExistence(input);
                 checkPasswordMatch(input.getPassword(), user);
+                SessionManager.getInstance().setLoggedInUser(user);
                 return LoginUserOutput.builder()
                         .message("Successfully logged user")
                         .role(RoleType.getByCode(user.getRole().name()))

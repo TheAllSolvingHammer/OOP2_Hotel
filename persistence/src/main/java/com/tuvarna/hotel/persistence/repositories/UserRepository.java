@@ -12,4 +12,8 @@ public interface UserRepository<T extends EntityMarker,E extends UUID> {
     List<T> findAllOwners();
     List<T> findAllManagers();
     List<T> findAllReceptionist();
+    Optional<T> findByID(E id);
+    List<T> findAllUnassignedOwners();
+    List<UserEntity> findAllUnassignedManagers();
+    List<UserEntity> findAllNonManagers();
 }

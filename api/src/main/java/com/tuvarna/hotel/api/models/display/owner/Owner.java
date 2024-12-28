@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.api.models.display.owner;
 
+import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import lombok.*;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public class Owner {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private List<String> hotelList;
+    private List<Hotel> hotelList;
 }
