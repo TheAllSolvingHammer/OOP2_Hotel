@@ -4,6 +4,7 @@ import com.tuvarna.hotel.api.enums.RoleType;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.create.user.CreateUserInput;
 import com.tuvarna.hotel.api.models.create.user.CreateUserOutput;
+import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.CreateUserProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.contracts.ControllerMarker;
@@ -116,6 +117,17 @@ public class AdminController implements ControllerMarker {
         scene=new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Receptionists View");
+        stage.show();
+    }
+
+    @FXML
+    public void logOutAdmin(ActionEvent event) throws IOException {
+
+        SessionManager.clearSession();
+        root=FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/login/login-scene.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
 }

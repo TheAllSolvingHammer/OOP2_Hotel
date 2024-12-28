@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.rest.controllers.reception;
 
+import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.rest.contracts.ControllerMarker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,6 +41,17 @@ public class ReceptionistController implements ControllerMarker {
         scene=new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Reservations View");
+        stage.show();
+    }
+
+    @FXML
+    public void logOutReceptionist(ActionEvent event) throws IOException {
+
+        SessionManager.clearSession();
+        root=FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/login/login-scene.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
 }

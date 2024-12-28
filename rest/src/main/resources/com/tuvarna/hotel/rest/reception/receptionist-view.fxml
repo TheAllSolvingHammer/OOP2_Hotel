@@ -8,12 +8,14 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@reception.css">
          <children>
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Нов Клиент" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервация" />
-            <Button onAction="#switchToReservations" mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="Резервации" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" text="()" />
-            <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" text="Назад" />
-         </children></VBox>
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Нов Клиент" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Резервация" />
+            <Button mnemonicParsing="false" onAction="#switchToReservations" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Резервации" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()" />
+            <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Назад" />
+         </children>
+      </VBox>
+      <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutReceptionist" text="Log Out" />
    </children>
 </AnchorPane>
