@@ -18,7 +18,7 @@ public class AbstractLoginControllerFactory {
         controllerMap.put("ADMINISTRATOR", "../admin/admin-view.fxml");
         controllerMap.put("OWNER", "../owner/owner-view.fxml");
         controllerMap.put("RECEPTIONIST","../reception/receptionist-view.fxml");
-        controllerMap.put("USER","../manager/manager-view.fxml");
+        controllerMap.put("MANAGER","../manager/manager-view.fxml");
 
     }
     public Parent getController(String roleType) throws IllegalAccessException, IOException {
