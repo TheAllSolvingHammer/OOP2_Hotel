@@ -74,6 +74,12 @@ public class HotelOwnerData {
         stage.show();
     }
 
+    @FXML
+    private void handleBackButton(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
     public void applyChanges(ActionEvent event) {
         List<Service> serviceList=checkComboBox.getCheckModel().getCheckedItems();
         List<Manager> managerList2=checkComboBoxManager.getCheckModel().getCheckedItems();

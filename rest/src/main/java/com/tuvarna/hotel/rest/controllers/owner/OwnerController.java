@@ -1,8 +1,8 @@
 package com.tuvarna.hotel.rest.controllers.owner;
 
 
+import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
-import jakarta.ejb.Init;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,5 +58,16 @@ public class OwnerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         notificationList.setItems(AlertManager.getAlertLog());
+    }
+
+    @FXML
+    public void logOutOwner(ActionEvent event) throws IOException {
+
+        SessionManager.clearSession();
+        root=FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/login/login-scene.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

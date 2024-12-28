@@ -67,4 +67,6 @@ public class HotelData {
     public void addService(ActionEvent event) throws IOException {
         myListView.getItems().add(newService.getText());
     }
+
+
 }
