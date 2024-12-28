@@ -47,7 +47,7 @@ public class OwnerController implements Initializable {
 
 
     public void createManager(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-owner.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-manager.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
@@ -64,6 +64,7 @@ public class OwnerController implements Initializable {
     public void logOutOwner(ActionEvent event) throws IOException {
 
         SessionManager.clearSession();
+        AlertManager.clearNotifications();
         root=FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/login/login-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);

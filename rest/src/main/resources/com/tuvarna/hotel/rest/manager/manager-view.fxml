@@ -5,19 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@manager.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.manager.ManagerController">
-   <children>
-      <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@manager.css">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Рецепционист" />
-            <Button mnemonicParsing="false" onAction="#switchToReceptionists" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Рецепционисти" />
-            <Button mnemonicParsing="false" onAction="#switchToClients" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Клиенти" />
-            <Button mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Регистрации" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()" />
-            <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Назад" />
-         </children>
-      </VBox>
-      <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutManager" text="Log Out" />
-      <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@manager.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.manager.ManagerController">
+   <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@manager.css">
+      <Button mnemonicParsing="false" onAction="#createUser" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Add receptionist" />
+      <Button mnemonicParsing="false" onAction="#switchToAllHotels" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Hotels" />
+      <Button mnemonicParsing="false" onAction="#switchToClients" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Клиенти" />
+      <Button mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Регистрации" />
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()" />
+      <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Назад" />
+   </VBox>
+   <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutManager" text="Log Out" />
+   <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0" />
 </AnchorPane>
