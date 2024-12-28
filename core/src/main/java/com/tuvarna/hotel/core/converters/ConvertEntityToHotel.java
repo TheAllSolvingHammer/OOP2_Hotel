@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Singleton
-public class ConvertServicesToList implements BaseConverter<List<HotelEntity>,List<Hotel>>{
+public class ConvertEntityToHotel implements BaseConverter<List<HotelEntity>,List<Hotel>>{
 
     @Override
     public List<Hotel> convert(List<HotelEntity> hotelEntities) {
