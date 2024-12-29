@@ -5,13 +5,14 @@ import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
-import com.tuvarna.hotel.core.processes.DisplayHotelProcess;
 import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -31,6 +33,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HotelOwnerView implements Initializable {
+    public TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -43,6 +46,8 @@ public class HotelOwnerView implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel, Integer> stars;
+
+    ObservableList<Hotel> data;
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
@@ -78,12 +83,42 @@ public class HotelOwnerView implements Initializable {
                     return null;
                 },
                 success -> {
-                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
+                    data = FXCollections.observableArrayList(success.getHotelList());
                     table.setItems(data);
                     table.refresh();
                     return null;
                 }
         );
+
+        table.setItems(data);
+
+        FilteredList<Hotel> filteredData = new FilteredList<>(data,b -> true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(hotel -> {
+                if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
+                    return true;
+                }
+
+                String searchKeyword = newValue.toLowerCase();
+
+                if(hotel.getName().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }
+                else if(hotel.getLocation().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }
+                else if(hotel.getStars().toString().contains(searchKeyword)) {
+                    return true;
+                }
+
+                return false;
+            });
+        });
+        SortedList<Hotel> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedData);
+
     }
 
     public void showMoreHotelData(Hotel hotel) throws IOException {
@@ -105,5 +140,9 @@ public class HotelOwnerView implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Owner");
         stage.show();
+    }
+
+    public void clearTextField(ActionEvent actionEvent) {
+        searchBar.clear();
     }
 }

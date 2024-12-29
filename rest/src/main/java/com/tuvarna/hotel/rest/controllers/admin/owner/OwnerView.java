@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -29,6 +30,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OwnerView implements Initializable{
+    public TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -112,5 +114,9 @@ public class OwnerView implements Initializable{
         stage.setScene(new Scene(root));
         stage.setTitle("Owner data");
         stage.show();
+    }
+
+    public void clearTextField(ActionEvent actionEvent) {
+        searchBar.clear();
     }
 }
