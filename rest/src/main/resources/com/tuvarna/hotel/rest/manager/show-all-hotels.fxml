@@ -17,5 +17,5 @@
         </columns>
     </TableView>
     <Button layoutX="478.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0"
-            prefWidth="107.0" text="Назад"/>
+            prefWidth="107.0" text="Back"/>
 </AnchorPane>

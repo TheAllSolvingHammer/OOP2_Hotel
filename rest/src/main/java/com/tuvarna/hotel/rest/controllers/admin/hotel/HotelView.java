@@ -122,4 +122,8 @@ public class HotelView implements Initializable {
         stage.setTitle("Add hotel");
         stage.show();
     }
+
+    public void clearTextField(ActionEvent actionEvent) {
+        searchBar.clear();
+    }
 }
