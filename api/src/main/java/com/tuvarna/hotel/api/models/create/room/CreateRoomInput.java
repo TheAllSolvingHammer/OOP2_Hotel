@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -18,10 +19,10 @@ import java.util.UUID;
 @AllArgsConstructor()
 @Builder
 public class CreateRoomInput implements OperationInput {
-    private UUID id;
     private Integer floor;
+    @NotEmpty(message = "Room number can not be empty")
     private String roomNumber;
     private BigDecimal price;
     private TypeRoom type;
-    private UUID hotel_id;
+    private UUID hotelID;
 }
