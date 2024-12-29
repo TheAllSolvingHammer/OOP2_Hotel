@@ -63,6 +63,7 @@ public class HotelOwnerView implements Initializable {
     public void displayHotel(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {
             Hotel hotel = table.getSelectionModel().getSelectedItem();
+            if(hotel==null) return;
             showMoreHotelData(hotel);
         }
     }

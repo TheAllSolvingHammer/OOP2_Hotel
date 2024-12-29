@@ -127,7 +127,6 @@ public class HotelOwnerData {
                     return null;
                 },
                 success -> {
-                    System.out.println(success.getManagerlist());
                     for (Manager m : managerList) {
                         if (success.getManagerlist()
                                 .contains(m)) {

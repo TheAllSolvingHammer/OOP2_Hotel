@@ -51,7 +51,7 @@ public class OwnerController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Hotel View");
+        stage.setTitle("Hotel Information");
         stage.show();
     }
 
@@ -69,6 +69,15 @@ public class OwnerController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToDetails(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/hotel-details.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Hotel Details");
         stage.show();
     }
 }
