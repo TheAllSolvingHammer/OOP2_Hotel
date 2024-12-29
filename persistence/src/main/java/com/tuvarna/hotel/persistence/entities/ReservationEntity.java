@@ -37,15 +37,11 @@ public class ReservationEntity implements EntityMarker {
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    //todo check for exception!!!!
     @OneToOne(targetEntity = RoomEntity.class)
     private RoomEntity room;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reservation_clients",
-            joinColumns = @JoinColumn(name = "reservation_id"),
-            inverseJoinColumns = @JoinColumn(name = "client_id")
-    )
-    private List<ClientEntity> clientList;
+    @ManyToOne
+    private ClientEntity client;
 
 }

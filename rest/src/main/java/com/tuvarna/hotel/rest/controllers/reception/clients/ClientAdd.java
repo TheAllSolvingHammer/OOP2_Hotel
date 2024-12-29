@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -36,11 +37,11 @@ public class ClientAdd {
     @FXML
     public TextField email;
     @FXML
-    public TextField birthDate;
+    public DatePicker birthDate;
     @FXML
-    public TextField issueDate;
+    public DatePicker issueDate;
     @FXML
-    public TextField expireDate;
+    public DatePicker expireDate;
     @FXML
     public TextField issuedBy;
 
@@ -61,9 +62,9 @@ public class ClientAdd {
     }
 
     public void addClient(ActionEvent event) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-        try {
+
+
             CreateClientInput input = CreateClientInput.builder()
                     .firstName(firstName.getText())
                     .lastName(lastName.getText())
@@ -71,9 +72,9 @@ public class ClientAdd {
                     .ucn(ucn.getText())
                     .address(address.getText())
                     .email(email.getText())
-                    .birthDate(LocalDate.parse(birthDate.getText(), dateFormatter)) // Using custom formatter
-                    .issueDate(LocalDate.parse(issueDate.getText(), dateFormatter)) // Using custom formatter
-                    .expireDate(LocalDate.parse(expireDate.getText(), dateFormatter)) // Using custom formatter
+                    .birthDate(birthDate.getValue())
+                    .issueDate(issueDate.getValue())
+                    .expireDate(expireDate.getValue())
                     .issuedBy(issuedBy.getText())
                     .build();
 
@@ -89,8 +90,5 @@ public class ClientAdd {
                         return null;
                     }
             );
-        } catch (DateTimeParseException e) {
-            AlertManager.showAlert(Alert.AlertType.ERROR, "Invalid Date Format", "Please enter the date in the format dd.MM.yyyy");
-        }
     }
 }
