@@ -10,7 +10,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.tuvarna.hotel.rest.controllers.reception.ReceptionistController">
    <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@reception.css">
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons"
+      <Button mnemonicParsing="false" onAction="#switchToClients" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons"
               text="Нов Клиент"/>
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons"
               text="Резервация"/>
