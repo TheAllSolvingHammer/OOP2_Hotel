@@ -5,7 +5,6 @@ import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.display.hotel.Hotel;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
-import com.tuvarna.hotel.core.processes.DisplayHotelProcess;
 import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -30,11 +29,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HotelOwnerView implements Initializable {
+public class HotelOwnerDetails implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
     @FXML
     private TableView<Hotel> table;
     @FXML
@@ -43,24 +41,36 @@ public class HotelOwnerView implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel, Integer> stars;
+    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
 
-    @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
+    public void displayHotel(MouseEvent mouseEvent) throws IOException {
+        if(mouseEvent.getClickCount()==2) {
+            Hotel hotel = table.getSelectionModel().getSelectedItem();
+            if(hotel==null ) return;
+            showMoreHotelData(hotel);
+        }
+    }
+
+    private void showMoreHotelData(Hotel hotel) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/more-hotel-owner-rooms.fxml"));
+        Parent root = loader.load();
+        HotelOwnerRoomDetails controller = loader.getController();
+        controller.setHotel(hotel);
+        controller.display();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Hotel Details");
+        stage.show();
+    }
+
+
+    public void switchToBeginning(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Owner");
         stage.show();
-    }
-
-    @FXML
-    public void displayHotel(MouseEvent mouseEvent) throws IOException {
-        if(mouseEvent.getClickCount()==2) {
-            Hotel hotel = table.getSelectionModel().getSelectedItem();
-            if(hotel==null) return;
-            showMoreHotelData(hotel);
-        }
     }
 
     @Override
@@ -84,26 +94,5 @@ public class HotelOwnerView implements Initializable {
                     return null;
                 }
         );
-    }
-
-    public void showMoreHotelData(Hotel hotel) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/more-hotel-owner-info.fxml"));
-        Parent root = loader.load();
-        HotelOwnerData controller = loader.getController();
-        controller.setHotel(hotel);
-        controller.display();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Hotel Data");
-        stage.show();
-    }
-
-    public void addNewHotel(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-hotel.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Owner");
-        stage.show();
     }
 }
