@@ -11,15 +11,15 @@
             fx:controller="com.tuvarna.hotel.rest.controllers.reception.ReceptionistController">
    <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@reception.css">
       <Button mnemonicParsing="false" onAction="#switchToClients" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons"
-              text="Нов Клиент"/>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons"
-              text="Резервация"/>
+              text="Create Client"/>
+      <Button mnemonicParsing="false" onAction="#createReservation" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons"
+              text="Create Reservation"/>
       <Button mnemonicParsing="false" onAction="#switchToReservations" prefHeight="44.0" prefWidth="140.0"
-              styleClass="sideButtons" text="Резервации"/>
+              styleClass="sideButtons" text="Reservations"/>
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()"/>
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()"/>
       <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0"
-              styleClass="sideButtons" text="Назад"/>
+              styleClass="sideButtons" text="Back"/>
    </VBox>
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutReceptionist" text="Log Out"/>
    <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0"/>

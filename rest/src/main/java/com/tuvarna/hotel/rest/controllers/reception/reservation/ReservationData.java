@@ -6,15 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ReservationView {
-
-    @FXML
-    public TextField searchBar;
+public class ReservationData {
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -25,20 +21,18 @@ public class ReservationView {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Receptionist View");
         stage.show();
     }
 
     @FXML
-    protected void goBack(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-more-info.fxml"));
+    private void switchToTable(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/new-reservation.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Navigation");
         stage.show();
-    }
-
-    public void clearTextField(ActionEvent actionEvent) {
-        searchBar.clear();
     }
 
 }
