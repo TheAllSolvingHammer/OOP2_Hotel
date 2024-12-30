@@ -62,7 +62,13 @@ public class ServiceAdd {
                 },
                 success -> {
                     AlertManager.showAlert(Alert.AlertType.CONFIRMATION,"Success",success.getMessage());
+                    clearTextFields();
                     return null;
                 });
+    }
+
+    public void clearTextFields(){
+        name.clear();
+        price.clear();
     }
 }

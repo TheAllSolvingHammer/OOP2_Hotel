@@ -10,6 +10,8 @@ import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -29,6 +32,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ServicesView implements Initializable {
+    public TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -40,6 +44,8 @@ public class ServicesView implements Initializable {
     private TableColumn<Service,String> name;
     @FXML
     private TableColumn<Service, BigDecimal> price;
+
+    ObservableList<Service> data;
 
 
     @FXML
@@ -64,11 +70,36 @@ public class ServicesView implements Initializable {
                     return null;
                 },
                 success -> {
-                    ObservableList<Service> data = FXCollections.observableArrayList(success.getServiceList());
+                    data = FXCollections.observableArrayList(success.getServiceList());
                     table.setItems(data);
                     table.refresh();
                     return null;
                 });
+
+        table.setItems(data);
+
+        FilteredList<Service> filteredData = new FilteredList<>(data, b->true);
+
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(service -> {
+                if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
+                    return true;
+                }
+
+                String searchKeyword = newValue.toLowerCase();
+
+                if(service.getName().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }
+                else return service.getPrice().toString().contains(searchKeyword);
+
+            });
+        });
+
+        SortedList<Service> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedData);
     }
 
     public void createNewService(ActionEvent event) throws IOException {
@@ -78,5 +109,9 @@ public class ServicesView implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Service add");
         stage.show();
+    }
+
+    public void clearTextField(ActionEvent actionEvent) {
+        searchBar.clear();
     }
 }

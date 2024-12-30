@@ -46,7 +46,7 @@ public class OwnerAdd {
 
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/admin-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/owners-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
@@ -76,10 +76,19 @@ public class OwnerAdd {
                 },
                 success -> {
                     AlertManager.showAlert(Alert.AlertType.CONFIRMATION,"Successfully created owner",success.getMessage());
+                    clearTextFields();
                     return null;
                 }
         );
-
     }
 
+    public void clearTextFields(){
+        firstName.clear();
+        lastName.clear();
+        username.clear();
+        password.clear();
+        repeatPassword.clear();
+        email.clear();
+        phoneNumber.clear();
+    }
 }

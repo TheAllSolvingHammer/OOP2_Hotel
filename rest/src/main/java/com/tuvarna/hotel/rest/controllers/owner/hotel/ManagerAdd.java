@@ -71,9 +71,18 @@ public class ManagerAdd {
                 },
                 success -> {
                     AlertManager.showAlert(Alert.AlertType.CONFIRMATION,"Success",success.getMessage());
+                    clearTextFields();
                     return null;
                 }
         );
-
+    }
+    public void clearTextFields(){
+        firstName.clear();
+        lastName.clear();
+        username.clear();
+        password.clear();
+        repeatPassword.clear();
+        email.clear();
+        phoneNumber.clear();
     }
 }
