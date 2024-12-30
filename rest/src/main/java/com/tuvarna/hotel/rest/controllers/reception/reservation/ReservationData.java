@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.rest.controllers.reception.reservation;
 
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 
@@ -14,6 +16,8 @@ public class ReservationData {
     private Stage stage;
     private Parent root;
     private Scene scene;
+    @Setter
+    private Hotel hotel;
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

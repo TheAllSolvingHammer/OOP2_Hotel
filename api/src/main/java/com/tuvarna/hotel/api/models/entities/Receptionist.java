@@ -4,13 +4,14 @@ import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor()
 @AllArgsConstructor()
 @Builder
-public class Manager {
+public class Receptionist {
     @EqualsAndHashCode.Include
     private UUID id;
     private String firstName;
