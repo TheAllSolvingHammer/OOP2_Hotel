@@ -10,6 +10,8 @@ import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +46,7 @@ public class OwnerView implements Initializable{
     private TableColumn<Owner, String> lastName;
     @FXML
     private TableColumn<Owner, String> email;
+    ObservableList<Owner> data;
 
     public OwnerView() {
         displayOwnersProcess=SingletonManager.getInstance(DisplayOwnersProcess.class);
@@ -75,18 +78,44 @@ public class OwnerView implements Initializable{
                     return null;
                 },
                 success -> {
-                    ObservableList<Owner> data = FXCollections.observableArrayList(success.getOwnerList());
+                    data = FXCollections.observableArrayList(success.getOwnerList());
                     table.setItems(data);
                     table.refresh();
                     return null;
+                });
+
+                table.setItems(data);
+
+        FilteredList<Owner> filteredData=new FilteredList<>(data,b->true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(owner -> {
+                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
+                    return true;
                 }
-        );
+
+                String searchKeyword=newValue.toLowerCase();
+
+                if(owner.getFirstName().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }
+                else if(owner.getLastName().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }
+                else return owner.getEmail().toLowerCase().contains(searchKeyword);
+            });
+        });
+
+        SortedList<Owner> sortedList=new SortedList<>(filteredData);
+        sortedList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedList);
+
+
     }
 
 
     @FXML
     public void addOwners(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-hotel.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/new-owner.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);

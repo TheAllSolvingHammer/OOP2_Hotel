@@ -11,6 +11,8 @@ import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -30,6 +33,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HotelOwnerDetails implements Initializable {
+    public TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -42,6 +46,8 @@ public class HotelOwnerDetails implements Initializable {
     @FXML
     private TableColumn<Hotel, Integer> stars;
     private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+
+    ObservableList<Hotel> data;
 
     public void displayHotel(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {
@@ -88,11 +94,39 @@ public class HotelOwnerDetails implements Initializable {
                     return null;
                 },
                 success -> {
-                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
+                    data = FXCollections.observableArrayList(success.getHotelList());
                     table.setItems(data);
                     table.refresh();
                     return null;
+                });
+
+        table.setItems(data);
+
+        FilteredList<Hotel> filteredData=new FilteredList<>(data, b->true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(hotel -> {
+                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
+                    return true;
                 }
-        );
+
+                String searchKeyword=newValue.toLowerCase();
+
+                if(hotel.getName().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }
+                else if(hotel.getLocation().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }
+                else return hotel.getStars().toString().toLowerCase().contains(searchKeyword);
+            });
+        });
+
+        SortedList<Hotel> sortedList=new SortedList<>(filteredData);
+        sortedList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedList);
+    }
+
+    public void clearTextField(ActionEvent event) {
+        searchBar.clear();
     }
 }

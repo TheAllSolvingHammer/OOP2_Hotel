@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.owner.hotel;
+package com.tuvarna.hotel.rest.controllers.admin.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.create.hotel.CreateHotelInput;
@@ -26,25 +26,27 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HotelAdd  implements Initializable {
+public class HotelAdd implements Initializable {
+    @FXML
     public TextField name;
+    @FXML
     public TextField locationHotel;
+    @FXML
     public ComboBox<Integer> comboRating;
     private Stage stage;
     private Parent root;
     private Scene scene;
+
     private final CreateHotelProcess createHotelProcess= SingletonManager.getInstance(CreateHotelProcess.class);
 
-    @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/hotel-scene.fxml"));
+    public void switchToBeginning(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/hotels-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Owner");
+        stage.setTitle("Hotels View");
         stage.show();
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,7 +59,6 @@ public class HotelAdd  implements Initializable {
 
     }
 
-    @FXML
     public void addHotel(ActionEvent event) {
         CreateHotelInput input = CreateHotelInput.builder()
                 .name(name.getText())
@@ -80,8 +81,8 @@ public class HotelAdd  implements Initializable {
     }
 
     public void clearTextFields(){
-      name.clear();
-      locationHotel.clear();
-      comboRating.getSelectionModel().clearSelection();
+        name.clear();
+        locationHotel.clear();
+        comboRating.getSelectionModel().clearSelection();
     }
 }

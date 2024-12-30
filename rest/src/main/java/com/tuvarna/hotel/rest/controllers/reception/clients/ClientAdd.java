@@ -87,8 +87,23 @@ public class ClientAdd {
                     },
                     success -> {
                         AlertManager.showAlert(Alert.AlertType.CONFIRMATION, "Client created", success.getMessage());
+                        clearTextFields();
                         return null;
                     }
             );
+
+    }
+
+    public void clearTextFields(){
+        firstName.clear();
+        lastName.clear();
+        phone.clear();
+        ucn.clear();
+        address.clear();
+        email.clear();
+        birthDate.setValue(null);
+        issueDate.setValue(null);
+        expireDate.setValue(null);
+        issuedBy.clear();
     }
 }

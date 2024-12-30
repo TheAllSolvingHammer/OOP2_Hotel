@@ -4,9 +4,15 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
+import com.tuvarna.hotel.api.models.entities.Owner;
 import com.tuvarna.hotel.core.processes.DisplayHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
+import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,9 +45,7 @@ public class HotelView implements Initializable {
     private TableColumn<Hotel, Integer> stars;
     @FXML
     private TextField searchBar;
-    @FXML
-    private Button clearSearchBar;
-
+    ObservableList<Hotel> data;
 
     //todo CIRCULAR ( RECURSIVE UPDATE OF CONSTRUCTOR ) MUST BE FIXED AT ALL COST!!!!
     //potential fix will be moving it out of the constructor and or lazily instantiating it
@@ -65,22 +69,45 @@ public class HotelView implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         location.setCellValueFactory(new PropertyValueFactory<>("location"));
         stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
-        DisplayHotelsInput hotelsInput = DisplayHotelsInput.builder()
-                .build();
-        Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(hotelsInput);
-//        result.fold(
-//                error -> {
-//                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
-//                    return null;
-//                },
-//                success -> {
-//                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
-//                    table.setItems(data);
-//                    table.refresh();
-//                    return null;
-//                }
-//        );
+        DisplayHotelsInput hotelsInput = DisplayHotelsInput.builder().build();
 
+        Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(hotelsInput);
+        result.fold(
+                error -> {
+                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
+                    return null;
+                },
+                success -> {
+                    data = FXCollections.observableArrayList(success.getHotelList());
+                    table.setItems(data);
+                    table.refresh();
+                    return null;
+                });
+
+        table.setItems(data);
+
+        FilteredList<Hotel> filteredData=new FilteredList<>(data, b->true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(hotel -> {
+                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
+                    return true;
+                }
+
+                String searchKeyword=newValue.toLowerCase();
+
+                if(hotel.getName().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }
+                else if(hotel.getLocation().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }
+                else return hotel.getStars().toString().toLowerCase().contains(searchKeyword);
+            });
+        });
+
+        SortedList<Hotel> sortedList=new SortedList<>(filteredData);
+        sortedList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedList);
     }
 
     @FXML
@@ -112,7 +139,7 @@ public class HotelView implements Initializable {
     }
     @FXML
     public void addHotelScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/add-hotel.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/new-hotel.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
