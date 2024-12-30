@@ -19,5 +19,4 @@
     <TextField fx:id="searchBar" layoutX="63.0" layoutY="14.0" prefHeight="25.0" prefWidth="459.0" />
     <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
     <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="41.0" text="Search:" />
-    <Button layoutX="570.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToAdditionalDetails" prefHeight="25.0" prefWidth="96.0" text="More Info" />
 </AnchorPane>

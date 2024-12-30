@@ -48,7 +48,8 @@ public class Instantiation {
         SingletonManager.getInstance(DisplayAllEmployeeProcessor.class);
         SingletonManager.getInstance(GetAssignedEmployeesProcess.class);
         SingletonManager.getInstance(UpdateReceptionistOfHotelProcess.class);
-        SingletonManager.getInstance(GetClientOutputProcess.class);
+        SingletonManager.getInstance(ClientInformationProcess.class);
+        SingletonManager.getInstance(CreateReservationProcess.class);
 
 
     }

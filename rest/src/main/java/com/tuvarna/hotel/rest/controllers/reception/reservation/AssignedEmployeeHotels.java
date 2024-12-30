@@ -57,14 +57,6 @@ public class AssignedEmployeeHotels implements Initializable {
         stage.show();
     }
 
-    @FXML
-    protected void goToAdditionalDetails(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-more-info.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public void clearTextField(ActionEvent actionEvent) {
         searchBar.clear();
@@ -108,13 +100,11 @@ public class AssignedEmployeeHotels implements Initializable {
     }
 
     private void showMoreHotelData(Hotel hotel) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/manager/display-more-info.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-more-info.fxml"));
         Parent root = loader.load();
         ReservationData controller = loader.getController();
         controller.setHotel(hotel);
-
-        //todo fix
-        //controller.display();
+        controller.display();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Information");

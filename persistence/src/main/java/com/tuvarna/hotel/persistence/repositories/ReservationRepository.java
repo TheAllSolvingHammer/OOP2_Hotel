@@ -6,11 +6,10 @@ import com.tuvarna.hotel.persistence.entities.ReservationEntity;
 import com.tuvarna.hotel.persistence.entities.RoomEntity;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 public interface ReservationRepository<T extends EntityMarker,E extends UUID> {
-    List<RoomEntity> getAllFreeRooms(HotelEntity hotel, Timestamp startDate, Timestamp endDate);
-    Long getLastReservationNumberOfHotel(HotelEntity hotel);
-    ReservationEntity getReservationWithNumber(Long reservationNumber, HotelEntity hotel);
+    Boolean isRoomAvailable(RoomEntity room, LocalDate startDate, LocalDate endDate);
 }
