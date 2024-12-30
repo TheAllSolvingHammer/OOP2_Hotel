@@ -78,8 +78,18 @@ public class ReceptionistController implements Initializable {
     }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         notificationList.setItems(AlertManager.getAlertLog());
+    }
+
+    public void switchToClientList(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-client-info.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservations View");
+        stage.show();
     }
 }
