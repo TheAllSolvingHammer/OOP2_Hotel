@@ -1,7 +1,7 @@
 package com.tuvarna.hotel.core.converters;
 
 import com.tuvarna.hotel.api.enums.TypeRoom;
-import com.tuvarna.hotel.api.models.Room;
+import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.entities.RoomEntity;
 

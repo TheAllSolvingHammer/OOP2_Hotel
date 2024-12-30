@@ -3,7 +3,7 @@ package com.tuvarna.hotel.rest.controllers.owner.hotel;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;

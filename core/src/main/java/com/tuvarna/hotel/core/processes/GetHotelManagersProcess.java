@@ -2,7 +2,7 @@ package com.tuvarna.hotel.core.processes;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.exceptions.QueryException;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
+import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersInput;
 import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersOperation;
 import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersOutput;
@@ -16,11 +16,8 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

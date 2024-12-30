@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="463.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.reservation.ReservationView">
+<AnchorPane prefHeight="463.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.reservation.AssignedEmployeeHotels">
     <TableView fx:id="table" layoutX="7.0" layoutY="45.0" prefHeight="363.0" prefWidth="660.0">
         <columns>
             <TableColumn fx:id="name" prefWidth="230.0" text="Name" />

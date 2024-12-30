@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models.update.service;
+package com.tuvarna.hotel.api.models.update.hotel;
 
 import com.tuvarna.hotel.api.base.OperationOutput;
 import lombok.*;

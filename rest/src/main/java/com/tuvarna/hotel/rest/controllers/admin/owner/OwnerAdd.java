@@ -17,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,8 +28,6 @@ public class OwnerAdd {
     private Parent root;
     private Scene scene;
 
-    @FXML
-    private AnchorPane anchorPane;
     @FXML
     private TextField firstName;
     @FXML
@@ -84,4 +81,5 @@ public class OwnerAdd {
         );
 
     }
+
 }

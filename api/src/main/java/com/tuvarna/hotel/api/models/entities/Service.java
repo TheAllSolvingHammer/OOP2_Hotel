@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models.display.service;
+package com.tuvarna.hotel.api.models.entities;
 
 import lombok.*;
 

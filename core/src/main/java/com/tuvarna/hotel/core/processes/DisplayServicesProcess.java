@@ -4,7 +4,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesInput;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesOperation;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesOutput;
-import com.tuvarna.hotel.api.models.display.service.Service;
+import com.tuvarna.hotel.api.models.entities.Service;
 import com.tuvarna.hotel.core.converters.ConvertServices;
 import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;

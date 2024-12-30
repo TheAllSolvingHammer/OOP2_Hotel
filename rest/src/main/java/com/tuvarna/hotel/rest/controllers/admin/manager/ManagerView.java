@@ -1,12 +1,9 @@
 package com.tuvarna.hotel.rest.controllers.admin.manager;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerInput;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOperation;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOutput;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
-import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersOutput;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerInput;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerOutput;
+import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.core.processes.DisplayManagersProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -28,7 +25,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 

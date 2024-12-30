@@ -2,8 +2,7 @@ package com.tuvarna.hotel.core.processes;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.exceptions.QueryException;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelInput;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelOperation;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelOutput;

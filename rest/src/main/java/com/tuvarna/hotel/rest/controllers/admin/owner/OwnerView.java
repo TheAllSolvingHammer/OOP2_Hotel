@@ -3,7 +3,7 @@ package com.tuvarna.hotel.rest.controllers.admin.owner;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersInput;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersOutput;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.entities.Owner;
 import com.tuvarna.hotel.core.processes.DisplayOwnersProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -69,7 +69,6 @@ public class OwnerView implements Initializable{
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         DisplayOwnersInput input = DisplayOwnersInput.builder().build();
         Either<ErrorProcessor, DisplayOwnersOutput> result= displayOwnersProcess.process(input);
-        System.out.println(result);
         result.fold(
                 error -> {
                     AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying owners",error.getMessage());
@@ -99,7 +98,7 @@ public class OwnerView implements Initializable{
     public void getOwnerFullInformation(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {
             Owner owner = table.getSelectionModel().getSelectedItem();
-            System.out.println(owner);
+            if(owner==null) return;
             showMoreOwnerData(owner);
         }
     }

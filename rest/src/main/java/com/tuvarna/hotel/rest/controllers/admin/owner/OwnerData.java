@@ -3,8 +3,8 @@ package com.tuvarna.hotel.rest.controllers.admin.owner;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.entities.Hotel;
+import com.tuvarna.hotel.api.models.entities.Owner;
 import com.tuvarna.hotel.core.processes.DisplayHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
@@ -12,7 +12,6 @@ import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -55,20 +54,14 @@ public class OwnerData{
 
     @FXML
     public void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/owners-scene.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Admin");
-        stage.show();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     public void applyOwner(ActionEvent event) {
-
         List<Hotel> hotelsChecked= checkComboBox.getCheckModel().getCheckedItems();
-        System.out.println(hotelsChecked);
-//        UserEntity user =userRepository.findByID(owner.getId()).orElseThrow(() -> new QueryException("User not found with UUID"));
+        //todo add
 
     }
 

@@ -5,7 +5,7 @@ import com.tuvarna.hotel.api.exceptions.QueryException;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOperation;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.core.converters.ConvertEntityToHotel;
 import com.tuvarna.hotel.core.exception.QueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;

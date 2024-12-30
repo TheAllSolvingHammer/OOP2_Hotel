@@ -1,15 +1,12 @@
 package com.tuvarna.hotel.core.processes;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerInput;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOperation;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOutput;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
-import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersOutput;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerInput;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerOperation;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerOutput;
+import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.core.converters.ConvertUsersToManager;
 import com.tuvarna.hotel.core.exception.QueryExceptionCase;
-import com.tuvarna.hotel.domain.aspect.LogExecution;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;

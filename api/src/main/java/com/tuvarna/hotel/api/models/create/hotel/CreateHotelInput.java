@@ -1,7 +1,7 @@
 package com.tuvarna.hotel.api.models.create.hotel;
 
 import com.tuvarna.hotel.api.base.OperationInput;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
+import com.tuvarna.hotel.api.models.entities.Manager;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
