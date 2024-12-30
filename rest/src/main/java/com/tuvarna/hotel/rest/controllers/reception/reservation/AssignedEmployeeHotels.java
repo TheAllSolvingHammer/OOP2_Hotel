@@ -1,11 +1,11 @@
-package com.tuvarna.hotel.rest.controllers.manager.receptionists;
+package com.tuvarna.hotel.rest.controllers.reception.reservation;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.entities.Hotel;
-import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelInput;
-import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelOutput;
+import com.tuvarna.hotel.api.models.get.receptionist.GetAllHotelsEmployeeInput;
+import com.tuvarna.hotel.api.models.get.receptionist.GetAllHotelsEmployeeOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
-import com.tuvarna.hotel.core.processes.DisplayManagerHotelProcess;
+import com.tuvarna.hotel.core.processes.GetAllHotelsEmployeeProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -28,31 +29,43 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReceptionistHotelsView implements Initializable {
+public class AssignedEmployeeHotels implements Initializable {
+    private final GetAllHotelsEmployeeProcess getAllHotelsProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
 
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private TableView<Hotel> table;
+    @FXML
+    private TableColumn<Hotel,String> name;
+    @FXML
+    private TableColumn<Hotel, String> location;
+    @FXML
+    private TableColumn<Hotel,Integer> stars;
     private Stage stage;
     private Parent root;
     private Scene scene;
 
     @FXML
-    private TableView<Hotel> table;
-    @FXML
-    private TableColumn<Hotel, String> name;
-    @FXML
-    private TableColumn<Hotel, String> location;
-    @FXML
-    private TableColumn<Hotel,Integer> stars;
-
-    private final DisplayManagerHotelProcess displayManagerHotelProcess = SingletonManager.getInstance(DisplayManagerHotelProcess.class);
-
-    @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/manager-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Manager");
         stage.show();
+    }
+
+    @FXML
+    protected void goBack(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-more-info.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void clearTextField(ActionEvent actionEvent) {
+        searchBar.clear();
     }
 
     @Override
@@ -60,12 +73,10 @@ public class ReceptionistHotelsView implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         location.setCellValueFactory(new PropertyValueFactory<>("location"));
         stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
-
-        DisplayManagerHotelInput input= DisplayManagerHotelInput.builder()
+        GetAllHotelsEmployeeInput input = GetAllHotelsEmployeeInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
-
-        Either<ErrorProcessor, DisplayManagerHotelOutput> result = displayManagerHotelProcess.process(input);
+        Either<ErrorProcessor, GetAllHotelsEmployeeOutput> result = getAllHotelsProcess.process(input);
         result.fold(
                 error -> {
                     AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());

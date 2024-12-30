@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models;
+package com.tuvarna.hotel.api.models.entities;
 
 import com.tuvarna.hotel.api.enums.TypeRoom;
 import lombok.*;

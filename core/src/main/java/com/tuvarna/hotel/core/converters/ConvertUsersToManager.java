@@ -1,14 +1,11 @@
 package com.tuvarna.hotel.core.converters;
 
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.entities.Hotel;
+import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.domain.singleton.Singleton;
-import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Singleton
 public class ConvertUsersToManager implements BaseConverter<List<UserEntity>, List<Manager>> {

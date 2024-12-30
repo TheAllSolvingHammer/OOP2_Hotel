@@ -2,12 +2,11 @@ package com.tuvarna.hotel.core.processes;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.exceptions.QueryException;
-import com.tuvarna.hotel.api.models.Room;
+import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelInput;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelOperation;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelOutput;
 import com.tuvarna.hotel.core.converters.ConvertEntityToRoom;
-import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.core.exception.QueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;

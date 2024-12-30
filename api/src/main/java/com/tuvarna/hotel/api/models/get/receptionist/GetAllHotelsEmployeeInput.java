@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models.display.manager.hotel;
+package com.tuvarna.hotel.api.models.get.receptionist;
 
 import com.tuvarna.hotel.api.base.OperationInput;
 import lombok.*;
@@ -7,10 +7,10 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@ToString
+@NoArgsConstructor()
 @AllArgsConstructor
 @Builder
-@ToString
-public class DisplayManagerHotelInput implements OperationInput {
+public class GetAllHotelsEmployeeInput implements OperationInput {
     private UUID id;
 }

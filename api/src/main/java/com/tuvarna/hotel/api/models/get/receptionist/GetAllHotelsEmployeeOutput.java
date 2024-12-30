@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models.display.manager.hotel;
+package com.tuvarna.hotel.api.models.get.receptionist;
 
 import com.tuvarna.hotel.api.base.OperationOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
@@ -8,10 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@ToString
+@NoArgsConstructor()
 @AllArgsConstructor
 @Builder
-@ToString
-public class DisplayManagerHotelOutput implements OperationOutput {
+public class GetAllHotelsEmployeeOutput implements OperationOutput {
     private List<Hotel> hotelList;
 }

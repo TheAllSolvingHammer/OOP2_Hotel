@@ -1,6 +1,5 @@
-package com.tuvarna.hotel.api.models.display.hotel;
+package com.tuvarna.hotel.api.models.entities;
 
-import com.tuvarna.hotel.api.models.display.service.Service;
 import lombok.*;
 
 import java.util.List;

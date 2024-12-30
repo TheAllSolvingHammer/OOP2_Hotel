@@ -1,8 +1,8 @@
-package com.tuvarna.hotel.api.models.update.service;
+package com.tuvarna.hotel.api.models.update.hotel;
 
 import com.tuvarna.hotel.api.base.OperationInput;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
-import com.tuvarna.hotel.api.models.display.service.Service;
+import com.tuvarna.hotel.api.models.entities.Manager;
+import com.tuvarna.hotel.api.models.entities.Service;
 import lombok.*;
 
 import java.util.List;

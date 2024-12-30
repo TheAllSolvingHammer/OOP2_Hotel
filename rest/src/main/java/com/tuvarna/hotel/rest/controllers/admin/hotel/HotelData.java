@@ -1,8 +1,8 @@
 package com.tuvarna.hotel.rest.controllers.admin.hotel;
 
 
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
-import com.tuvarna.hotel.api.models.display.service.Service;
+import com.tuvarna.hotel.api.models.entities.Hotel;
+import com.tuvarna.hotel.api.models.entities.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

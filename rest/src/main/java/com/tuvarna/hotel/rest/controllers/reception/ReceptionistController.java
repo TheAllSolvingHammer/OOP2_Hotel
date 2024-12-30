@@ -26,7 +26,7 @@ public class ReceptionistController implements Initializable {
 
     @FXML
     protected void createReservation(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/new-reservation.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/hotel-receptionist.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);

@@ -3,7 +3,7 @@ package com.tuvarna.hotel.rest.controllers.owner.hotel;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
@@ -107,11 +107,7 @@ public class HotelOwnerView implements Initializable {
                 else if(hotel.getLocation().toLowerCase().contains(searchKeyword)) {
                     return true;
                 }
-                else if(hotel.getStars().toString().contains(searchKeyword)) {
-                    return true;
-                }
-
-                return false;
+                else return hotel.getStars().toString().contains(searchKeyword);
             });
         });
         SortedList<Hotel> sortedData = new SortedList<>(filteredData);

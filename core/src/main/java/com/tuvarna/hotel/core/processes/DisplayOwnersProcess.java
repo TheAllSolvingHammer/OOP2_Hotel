@@ -4,7 +4,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersInput;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersOperation;
 import com.tuvarna.hotel.api.models.display.owner.DisplayOwnersOutput;
-import com.tuvarna.hotel.api.models.display.owner.Owner;
+import com.tuvarna.hotel.api.models.entities.Owner;
 import com.tuvarna.hotel.core.converters.ConvertUsersToOwner;
 import com.tuvarna.hotel.core.exception.QueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;

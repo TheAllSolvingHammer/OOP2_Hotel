@@ -1,17 +1,17 @@
 package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerInput;
-import com.tuvarna.hotel.api.models.display.manager.DisplayManagerOutput;
-import com.tuvarna.hotel.api.models.display.manager.Manager;
+import com.tuvarna.hotel.api.models.entities.Hotel;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerInput;
+import com.tuvarna.hotel.api.models.display.manager.list.DisplayManagerOutput;
+import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesInput;
 import com.tuvarna.hotel.api.models.display.service.DisplayServicesOutput;
-import com.tuvarna.hotel.api.models.display.service.Service;
+import com.tuvarna.hotel.api.models.entities.Service;
 import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersInput;
 import com.tuvarna.hotel.api.models.get.manager.GetAllHotelManagersOutput;
-import com.tuvarna.hotel.api.models.update.service.UpdateHotelInput;
-import com.tuvarna.hotel.api.models.update.service.UpdateHotelOutput;
+import com.tuvarna.hotel.api.models.update.hotel.UpdateHotelInput;
+import com.tuvarna.hotel.api.models.update.hotel.UpdateHotelOutput;
 import com.tuvarna.hotel.core.processes.*;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;

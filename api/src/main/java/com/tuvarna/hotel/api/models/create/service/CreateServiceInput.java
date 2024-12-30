@@ -1,11 +1,10 @@
 package com.tuvarna.hotel.api.models.create.service;
 
 import com.tuvarna.hotel.api.base.OperationInput;
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor()
 @Builder
 public class CreateServiceInput implements OperationInput {
-    private UUID id;
+    @NotEmpty(message="Service name can not be empty")
     private String serviceName;
     private BigDecimal price;
 }

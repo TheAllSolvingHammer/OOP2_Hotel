@@ -2,7 +2,6 @@ package com.tuvarna.hotel.rest.controllers.admin;
 
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
-import com.tuvarna.hotel.rest.contracts.ControllerMarker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,12 +77,12 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    protected void switchToReceptionists(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/receptionists-scene.fxml"));
+    protected void switchToServices(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/services-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Receptionists View");
+        stage.setTitle("Services view");
         stage.show();
     }
 

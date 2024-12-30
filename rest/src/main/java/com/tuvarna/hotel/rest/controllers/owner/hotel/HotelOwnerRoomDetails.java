@@ -2,10 +2,10 @@ package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.enums.TypeRoom;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.Room;
+import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.create.room.CreateRoomInput;
 import com.tuvarna.hotel.api.models.create.room.CreateRoomOutput;
-import com.tuvarna.hotel.api.models.display.hotel.Hotel;
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelInput;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelOutput;
 import com.tuvarna.hotel.core.processes.CreateRoomProcess;
@@ -17,7 +17,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -26,7 +25,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Setter;
 
@@ -68,7 +66,6 @@ public class HotelOwnerRoomDetails implements Initializable{
         stage.close();
     }
 
-    @SuppressWarnings("unchecked")
     public void addNewRoom(ActionEvent event) {
         Integer i;
         BigDecimal val;
