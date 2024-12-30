@@ -16,7 +16,7 @@
               text="Create Reservation"/>
       <Button mnemonicParsing="false" onAction="#switchToReservations" prefHeight="44.0" prefWidth="140.0"
               styleClass="sideButtons" text="Reservations"/>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()"/>
+      <Button mnemonicParsing="false" onAction="#switchToClientList" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Client List"/>
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()"/>
       <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0"
               styleClass="sideButtons" text="Back"/>
