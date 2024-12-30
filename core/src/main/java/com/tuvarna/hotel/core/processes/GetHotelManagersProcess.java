@@ -10,7 +10,6 @@ import com.tuvarna.hotel.core.converters.ConvertUsersToManager;
 import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
-import com.tuvarna.hotel.persistence.daos.HotelRepositoryImpl;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
@@ -25,12 +24,11 @@ import java.util.stream.Collectors;
 public class GetHotelManagersProcess extends BaseProcessor implements GetAllHotelManagersOperation {
     private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
     private final ConvertUsersToManager converter = SingletonManager.getInstance(ConvertUsersToManager.class);
-    private final HotelRepositoryImpl hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
 
     @Override
     public Either<ErrorProcessor, GetAllHotelManagersOutput> process(GetAllHotelManagersInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-                    List<UserEntity> users=getOwnersOfHotel(input.getHotel().getUserList());
+                    List<UserEntity> users= getManagersOfHotel(input.getHotel().getUserList());
                     List<Manager> managerList = converter.convert(users);
                     return GetAllHotelManagersOutput.builder()
                             .managerlist(managerList)
@@ -38,7 +36,7 @@ public class GetHotelManagersProcess extends BaseProcessor implements GetAllHote
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
     }
-    private List<UserEntity> getOwnersOfHotel(List<UUID> users){
+    private List<UserEntity> getManagersOfHotel(List<UUID> users){
         return users.stream().map(uuid -> userRepository.findByID(uuid)
                 .orElseThrow(() -> new QueryException("Error in obtaining users")))
                 .filter(userEntity -> userEntity.getRole() == RoleEntity.MANAGER)

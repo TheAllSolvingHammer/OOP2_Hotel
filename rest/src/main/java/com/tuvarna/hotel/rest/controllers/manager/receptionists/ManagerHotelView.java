@@ -8,6 +8,7 @@ import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayManagerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
+import com.tuvarna.hotel.rest.controllers.owner.hotel.HotelOwnerData;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,13 +23,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReceptionistHotelsView implements Initializable {
+public class ManagerHotelView implements Initializable {
 
     private Stage stage;
     private Parent root;
@@ -60,7 +62,10 @@ public class ReceptionistHotelsView implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         location.setCellValueFactory(new PropertyValueFactory<>("location"));
         stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+        display();
 
+    }
+    private void display(){
         DisplayManagerHotelInput input= DisplayManagerHotelInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
@@ -80,5 +85,27 @@ public class ReceptionistHotelsView implements Initializable {
 
 
         );
+
+    }
+    public void openSpecificHotel(MouseEvent mouseEvent) throws IOException {
+        if(mouseEvent.getClickCount()==2) {
+            Hotel hotel = table.getSelectionModel().getSelectedItem();
+            if(hotel==null) return;
+            showMoreHotelData(hotel);
+        }
+        display();
+
+    }
+
+    public void showMoreHotelData(Hotel hotel) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/manager/more-hotel-manager-info.fxml"));
+        Parent root = loader.load();
+        ManagerHotelDetails controller = loader.getController();
+        controller.setHotel(hotel);
+        controller.display();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Hotel Information");
+        stage.show();
     }
 }

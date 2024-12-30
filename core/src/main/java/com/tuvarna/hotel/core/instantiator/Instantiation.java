@@ -25,6 +25,7 @@ public class Instantiation {
         SingletonManager.getInstance(ConvertServices.class);
         SingletonManager.getInstance(ConvertServicesToEntity.class);
         SingletonManager.getInstance(ConvertEntityToRoom.class);
+        SingletonManager.getInstance(ConvertUsersToReceptionist.class);
         //services
         SingletonManager.getInstance(CreateUserProcess.class);
         SingletonManager.getInstance(DisplayHotelProcess.class);
@@ -43,5 +44,10 @@ public class Instantiation {
         SingletonManager.getInstance(CreateRoomProcess.class);
         SingletonManager.getInstance(CreateServiceProcess.class);
         SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
+        SingletonManager.getInstance(DisplayAllEmployeeProcessor.class);
+        SingletonManager.getInstance(GetAssignedEmployeesProcess.class);
+        SingletonManager.getInstance(UpdateReceptionistOfHotelProcess.class);
+
+
     }
 }
