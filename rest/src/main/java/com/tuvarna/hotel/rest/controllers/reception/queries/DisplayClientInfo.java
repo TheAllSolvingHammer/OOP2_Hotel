@@ -2,10 +2,9 @@ package com.tuvarna.hotel.rest.controllers.reception.queries;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.entities.Client;
-import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationInput;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationOutput;
-import com.tuvarna.hotel.core.processes.GetClientOutputProcess;
+import com.tuvarna.hotel.core.processes.ClientInformationProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
@@ -55,7 +54,7 @@ public class DisplayClientInfo implements Initializable {
     private TableColumn<Client,String> email;
     ObservableList<Client> data;
 
-    private final GetClientOutputProcess getClientOutputProcess= SingletonManager.getInstance(GetClientOutputProcess.class);
+    private final ClientInformationProcess clientInformationProcess = SingletonManager.getInstance(ClientInformationProcess.class);
 
     public void clearTextField(ActionEvent event) {
         searchBar.clear();
@@ -81,7 +80,7 @@ public class DisplayClientInfo implements Initializable {
 
         ClientInformationInput input=ClientInformationInput.builder().build();
 
-        Either<ErrorProcessor,ClientInformationOutput> result = getClientOutputProcess.process(input);
+        Either<ErrorProcessor,ClientInformationOutput> result = clientInformationProcess.process(input);
 
         result.fold(
                 error -> {

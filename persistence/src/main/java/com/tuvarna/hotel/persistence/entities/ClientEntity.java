@@ -1,6 +1,7 @@
 package com.tuvarna.hotel.persistence.entities;
 
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
+import com.tuvarna.hotel.persistence.enums.ClientRating;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,4 +51,8 @@ public class ClientEntity implements EntityMarker {
 
     @Column(name="issued_by",nullable = false)
     private String issuedBy;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="rating",nullable = false)
+    private ClientRating rating;
 }

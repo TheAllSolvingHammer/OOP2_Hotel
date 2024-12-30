@@ -17,7 +17,7 @@ import io.vavr.control.Try;
 import java.util.List;
 
 @Singleton
-public class GetClientOutputProcess extends BaseProcessor implements ClientInformationOperation {
+public class ClientInformationProcess extends BaseProcessor implements ClientInformationOperation {
     private final ClientRepositoryImpl clientRepository = SingletonManager.getInstance(ClientRepositoryImpl.class);
     private final ConvertEntityToClient converter = SingletonManager.getInstance(ConvertEntityToClient.class);
 
