@@ -40,8 +40,12 @@ public class ReservationEntity implements EntityMarker {
     @ManyToOne(targetEntity = RoomEntity.class)
     private RoomEntity room;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = ClientEntity.class)
     private ClientEntity client;
+
+    @ManyToOne(targetEntity = UserEntity.class)
+    @JoinColumn(name = "created_by", nullable = false)
+    private UserEntity createdBy;
 
     @ManyToMany
     @JoinTable(

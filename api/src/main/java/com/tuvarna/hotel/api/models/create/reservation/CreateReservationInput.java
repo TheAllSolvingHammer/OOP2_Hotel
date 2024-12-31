@@ -12,6 +12,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -32,5 +33,6 @@ public class CreateReservationInput implements OperationInput {
     private Client client;
     @NotNull(message = "Room can not be null")
     private Room room;
+    private UUID id;
     private List<Service> services;
 }

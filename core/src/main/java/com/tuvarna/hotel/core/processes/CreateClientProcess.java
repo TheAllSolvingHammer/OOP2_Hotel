@@ -9,6 +9,7 @@ import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.ClientRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.ClientEntity;
+import com.tuvarna.hotel.persistence.enums.ClientRating;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 
@@ -30,6 +31,7 @@ public class CreateClientProcess extends BaseProcessor implements CreateClientOp
                             .issueDate(input.getIssueDate())
                             .expireDate(input.getExpireDate())
                             .issuedBy(input.getIssuedBy())
+                            .rating(ClientRating.NORMAL)
                             .build();
 
                     clientRepository.save(client);

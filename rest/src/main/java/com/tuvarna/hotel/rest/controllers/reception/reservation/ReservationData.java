@@ -14,6 +14,7 @@ import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelInput;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelOutput;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationInput;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationOutput;
+import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.ClientInformationProcess;
 import com.tuvarna.hotel.core.processes.CreateReservationProcess;
 import com.tuvarna.hotel.core.processes.DisplayServicesProcess;
@@ -140,6 +141,7 @@ public class ReservationData implements Initializable {
                 .type(typeOfReservation.getValue())
                 .startDate(startDate.getValue())
                 .endDate(endDate.getValue())
+                .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
         Either<ErrorProcessor, CreateReservationOutput> result = createReservationProcess.process(input);
         result.fold(

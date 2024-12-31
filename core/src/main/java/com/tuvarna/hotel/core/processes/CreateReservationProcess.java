@@ -18,17 +18,18 @@ import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.ClientRepositoryImpl;
 import com.tuvarna.hotel.persistence.daos.ReservationRepositoryImpl;
 import com.tuvarna.hotel.persistence.daos.RoomRepositoryImpl;
-import com.tuvarna.hotel.persistence.entities.ClientEntity;
-import com.tuvarna.hotel.persistence.entities.ReservationEntity;
-import com.tuvarna.hotel.persistence.entities.RoomEntity;
-import com.tuvarna.hotel.persistence.entities.ServiceEntity;
+import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
+import com.tuvarna.hotel.persistence.entities.*;
+import com.tuvarna.hotel.persistence.enums.ClientRating;
 import com.tuvarna.hotel.persistence.enums.ReservationType;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import javafx.scene.control.Alert;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -38,6 +39,7 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
     private final RoomRepositoryImpl roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
     private final ReservationRepositoryImpl reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
     private final ClientRepositoryImpl clientRepository= SingletonManager.getInstance(ClientRepositoryImpl.class);
+    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
     private final ConvertServicesToEntity converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
     @Override
     public Either<ErrorProcessor, CreateReservationOutput> process(CreateReservationInput input) {
@@ -46,9 +48,11 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                     RoomEntity room = checkRoom(input.getRoom());
                     checkAvailability(room,input.getStartDate(),input.getEndDate());
                     ClientEntity clientEntity= checkClient(input.getClient());
+                    checkClientRating(clientEntity);
                     ReservationType type = getType(input.getType());
                     BigDecimal price = calculatePrice(input.getServices(),input.getStartDate(),input.getEndDate(),room);
                     List<ServiceEntity> serviceEntities=converter.convert(input.getServices());
+                    UserEntity user = getUser(input.getId());
                     ReservationEntity reservation= ReservationEntity.builder()
                             .client(clientEntity)
                             .startDate(input.getStartDate())
@@ -57,6 +61,7 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                             .type(type)
                             .room(room)
                             .services(serviceEntities)
+                            .createdBy(user)
                             .build();
                     reservationRepository.save(reservation);
                 return CreateReservationOutput.builder()
@@ -64,6 +69,16 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                         .build();
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
+    }
+
+    private void checkClientRating(ClientEntity clientEntity) {
+        if(clientEntity.getRating().equals(ClientRating.BAD)) {
+            throw new InputException("Client has bad rating!");
+        }
+    }
+
+    private UserEntity getUser(UUID id) {
+        return userRepository.findByID(id).orElseThrow(()->new QueryException("No user was found"));
     }
 
     private ReservationType getType(TypeReservation type) {
