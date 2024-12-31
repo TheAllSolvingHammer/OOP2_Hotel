@@ -1,9 +1,11 @@
 package com.tuvarna.hotel.core.converters;
 
+import com.tuvarna.hotel.api.enums.RatingClient;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.entities.ClientEntity;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
+import com.tuvarna.hotel.persistence.enums.ClientRating;
 
 import java.util.List;
 @Singleton
@@ -22,6 +24,7 @@ public class ConvertEntityToClient implements BaseConverter<List<ClientEntity>,L
                         .issuedBy(clientEntity.getIssuedBy())
                         .phone(clientEntity.getPhone())
                         .ucn(clientEntity.getUcn())
+                        .rating(RatingClient.getByCode(clientEntity.getRating().name()))
                         .build())
                 .toList();
     }

@@ -89,7 +89,7 @@ public class AssignedEmployeeHotels implements Initializable {
 
         );
     }
-
+        //todo replicate it in displayclientinfo
     public void openHotelReservation(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {
             Hotel hotel = table.getSelectionModel().getSelectedItem();
@@ -100,8 +100,10 @@ public class AssignedEmployeeHotels implements Initializable {
     }
 
     private void showMoreHotelData(Hotel hotel) throws IOException {
+        //todo change location
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-more-info.fxml"));
         Parent root = loader.load();
+        //todo change nov controlelr
         ReservationData controller = loader.getController();
         controller.setHotel(hotel);
         controller.display();

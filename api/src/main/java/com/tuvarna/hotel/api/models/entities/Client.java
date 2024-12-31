@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.api.models.entities;
 
+import com.tuvarna.hotel.api.enums.RatingClient;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class Client {
     private LocalDate issueDate;
     private LocalDate expireDate;
     private String issuedBy;
+    private RatingClient rating;
 
     @Override
     public String toString() {

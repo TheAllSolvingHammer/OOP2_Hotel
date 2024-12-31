@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="383.0" prefWidth="594.0" scaleShape="false" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.queries.DisplayClientData">
+
+   <Button layoutX="26.0" layoutY="332.0" mnemonicParsing="false" onAction="#switchToTable" prefHeight="26.0" prefWidth="107.0" text="Back" />
+   <Button layoutX="472.0" layoutY="332.0" mnemonicParsing="false" onAction="#updateClient" prefHeight="26.0" prefWidth="107.0" text="Apply" />
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="28.0" prefHeight="17.0" prefWidth="200.0" text="Form for creation of Clients" textAlignment="CENTER" />
+   <Label layoutX="23.0" layoutY="59.0" text="First Name" />
+   <Label layoutX="24.0" layoutY="92.0" text="Last Name" />
+   <Label layoutX="23.0" layoutY="127.0" text="phone" />
+   <Label layoutX="30.0" layoutY="162.0" text="ucn" />
+   <Label layoutX="19.0" layoutY="196.0" text="address" />
+   <Label layoutX="23.0" layoutY="229.0" text="e-mail" />
+   <Label layoutX="288.0" layoutY="59.0" text="Birth date" />
+   <Label layoutX="287.0" layoutY="92.0" text="Issue date" />
+   <Label layoutX="285.0" layoutY="127.0" text="Expire date" />
+   <Label layoutX="289.0" layoutY="162.0" text="Issued by" />
+   <Label layoutX="289.0" layoutY="196.0" text="Client Rating" />
+   <Label fx:id="firstName" layoutX="104.0" layoutY="59.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="lastName" layoutX="104.0" layoutY="92.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="phone" layoutX="104.0" layoutY="127.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="ucn" layoutX="104.0" layoutY="162.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="address" layoutX="104.0" layoutY="196.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="email" layoutX="104.0" layoutY="229.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="birthDate" layoutX="378.0" layoutY="59.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="issueDate" layoutX="378.0" layoutY="92.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="expireDate" layoutX="392.0" layoutY="127.0" prefHeight="17.0" prefWidth="133.0" />
+   <Label fx:id="issuedBy" layoutX="392.0" layoutY="162.0" prefHeight="17.0" prefWidth="133.0" />
+   <ComboBox fx:id="ratingClient" layoutX="397.0" layoutY="192.0" prefWidth="150.0" />
+</AnchorPane>
