@@ -47,7 +47,7 @@ public class HotelOwnerDetails implements Initializable {
     private TableColumn<Hotel, Integer> stars;
     private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
 
-    ObservableList<Hotel> data;
+    private ObservableList<Hotel> data;
 
     public void displayHotel(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {

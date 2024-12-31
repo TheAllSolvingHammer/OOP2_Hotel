@@ -25,6 +25,7 @@ import com.tuvarna.hotel.persistence.enums.ReservationType;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import javafx.scene.control.Alert;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -41,9 +42,11 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
     private final ClientRepositoryImpl clientRepository= SingletonManager.getInstance(ClientRepositoryImpl.class);
     private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
     private final ConvertServicesToEntity converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
+    private static final Logger log = Logger.getLogger(CreateReservationProcess.class);
     @Override
     public Either<ErrorProcessor, CreateReservationOutput> process(CreateReservationInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started creating reservation");
                     checkDates(input.getStartDate(),input.getEndDate());
                     RoomEntity room = checkRoom(input.getRoom());
                     checkAvailability(room,input.getStartDate(),input.getEndDate());
