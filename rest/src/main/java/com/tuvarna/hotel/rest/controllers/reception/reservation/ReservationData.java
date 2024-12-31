@@ -4,8 +4,6 @@ import com.tuvarna.hotel.api.enums.TypeReservation;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.create.reservation.CreateReservationInput;
 import com.tuvarna.hotel.api.models.create.reservation.CreateReservationOutput;
-import com.tuvarna.hotel.api.models.display.service.DisplayServicesInput;
-import com.tuvarna.hotel.api.models.display.service.DisplayServicesOutput;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.entities.Room;
@@ -17,17 +15,14 @@ import com.tuvarna.hotel.api.models.query.client.information.ClientInformationOu
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.ClientInformationProcess;
 import com.tuvarna.hotel.core.processes.CreateReservationProcess;
-import com.tuvarna.hotel.core.processes.DisplayServicesProcess;
 import com.tuvarna.hotel.core.processes.GetRoomsPerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -42,7 +37,6 @@ import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReservationData implements Initializable {
@@ -143,6 +137,10 @@ public class ReservationData implements Initializable {
                 .endDate(endDate.getValue())
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
+//        UpdateClient input = UpdateClient.builder()
+//                .id()
+//                .rating()
+
         Either<ErrorProcessor, CreateReservationOutput> result = createReservationProcess.process(input);
         result.fold(
                 error-> {

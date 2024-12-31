@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="452.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.queries.DisplayClientInfo">
-    <TableView fx:id="table" layoutX="12.0" layoutY="63.0" prefHeight="330.0" prefWidth="890.0">
+    <TableView fx:id="table" layoutX="12.0" layoutY="63.0" onMouseClicked="#openClientInformation" prefHeight="330.0" prefWidth="890.0">
         <columns>
             <TableColumn fx:id="firstName" prefWidth="137.99997329711914" text="First Name" />
             <TableColumn fx:id="lastName" prefWidth="149.9999237060547" text="Last Name" />

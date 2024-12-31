@@ -4,6 +4,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationInput;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationOutput;
+import com.tuvarna.hotel.api.models.update.client.UpdateClientInput;
 import com.tuvarna.hotel.core.processes.ClientInformationProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,8 +33,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DisplayClientInfo implements Initializable {
-
-
     @FXML
     private TableView<Client> table;
     @FXML
@@ -52,7 +52,7 @@ public class DisplayClientInfo implements Initializable {
     private TableColumn<Client,String> lastName;
     @FXML
     private TableColumn<Client,String> email;
-    ObservableList<Client> data;
+    private ObservableList<Client> data;
 
     private final ClientInformationProcess clientInformationProcess = SingletonManager.getInstance(ClientInformationProcess.class);
 
@@ -128,5 +128,37 @@ public class DisplayClientInfo implements Initializable {
         sortedData.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedData);
 
+    }
+
+    public void openClientInformation(MouseEvent mouseEvent) throws IOException {
+        if(mouseEvent.getClickCount() == 2){
+            Client client = table.getSelectionModel().getSelectedItem();
+            if(client == null) return;
+            showMoreClientData(client);
+        }
+    }
+
+    private void showMoreClientData(Client client) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/update-client-info.fxml"));
+        Parent root = loader.load();
+        DisplayClientData controller = loader.getController();
+        controller.setClient(client);
+        controller.display();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Hotel Information");
+        stage.show();
+    }
+
+
+
+    @FXML
+    public void switchToSetting(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/update-client-info.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Admin");
+        stage.show();
     }
 }
