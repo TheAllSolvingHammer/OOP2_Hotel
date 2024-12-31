@@ -10,8 +10,8 @@
       <Button mnemonicParsing="false" onAction="#switchToHotels" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Hotel Infomation" />
       <Button mnemonicParsing="false" onAction="#switchToDetails" prefHeight="44.0" prefWidth="138.0" styleClass="sideButtons" text="Hotel Details" />
       <Button mnemonicParsing="false" onAction="#createManager" prefHeight="44.0" prefWidth="138.0" styleClass="sideButtons" text="Add Manager" />
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 1" />
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 2" />
+      <Button mnemonicParsing="false" onAction="#queryReceptionists" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 1" />
+      <Button mnemonicParsing="false" onAction="#queryReservations" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 2" />
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 3" />
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 4" />
       <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="138.0" styleClass="sideButtons" text="Back" />
