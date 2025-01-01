@@ -1,18 +1,16 @@
-package com.tuvarna.hotel.persistence.dtos;
+package com.tuvarna.hotel.api.models.entities;
 
 import lombok.*;
 
 import java.math.BigDecimal;
 
-
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor()
-@AllArgsConstructor()
+@AllArgsConstructor
 @Builder
-@EqualsAndHashCode()
-public class ServiceUsageDTO {
+public class ServicesDTO {
     private String serviceName;
     private Long usageCount;
     private BigDecimal totalRevenue;
