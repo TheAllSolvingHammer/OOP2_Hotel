@@ -62,6 +62,8 @@ public class ReservationData implements Initializable {
     private final GetRoomsPerHotelProcess getRoomsPerHotelProcess = SingletonManager.getInstance(GetRoomsPerHotelProcess.class);
     private final CreateReservationProcess createReservationProcess = SingletonManager.getInstance(CreateReservationProcess.class);
 
+    private ObservableList<Room> data;
+
     public ReservationData() {
         checkComboBox=new CheckComboBox<>();
     }
@@ -106,12 +108,13 @@ public class ReservationData implements Initializable {
                     return null;
                 },
                 success->{
-                    ObservableList<Room> data = FXCollections.observableArrayList(success.getRoomList());
+                    data = FXCollections.observableArrayList(success.getRoomList());
                     rooms.setItems(data);
                     rooms.getSelectionModel().select(0);
                     return null;
                 }
         );
+
     }
 
     private void displayServices() {
@@ -137,9 +140,6 @@ public class ReservationData implements Initializable {
                 .endDate(endDate.getValue())
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
-//        UpdateClient input = UpdateClient.builder()
-//                .id()
-//                .rating()
 
         Either<ErrorProcessor, CreateReservationOutput> result = createReservationProcess.process(input);
         result.fold(
