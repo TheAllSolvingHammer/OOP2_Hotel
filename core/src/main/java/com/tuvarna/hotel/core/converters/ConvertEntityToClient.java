@@ -4,8 +4,6 @@ import com.tuvarna.hotel.api.enums.RatingClient;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.entities.ClientEntity;
-import com.tuvarna.hotel.persistence.entities.UserEntity;
-import com.tuvarna.hotel.persistence.enums.ClientRating;
 
 import java.util.List;
 @Singleton

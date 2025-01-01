@@ -13,4 +13,5 @@ import java.util.UUID;
 @ToString
 public class DisplayManagerHotelInput implements OperationInput {
     private UUID id;
+
 }
