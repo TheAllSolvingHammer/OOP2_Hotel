@@ -67,12 +67,7 @@ public class HotelOwnerView implements Initializable {
             showMoreHotelData(hotel);
         }
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        location.setCellValueFactory(new PropertyValueFactory<>("location"));
-        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+    private void display(){
         DisplayHotelsInput hotelsInput = DisplayHotelsInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
@@ -91,6 +86,14 @@ public class HotelOwnerView implements Initializable {
         );
 
         table.setItems(data);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        location.setCellValueFactory(new PropertyValueFactory<>("location"));
+        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+        display();
 
         FilteredList<Hotel> filteredData = new FilteredList<>(data,b -> true);
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -126,6 +129,8 @@ public class HotelOwnerView implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Data");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
         stage.show();
     }
 

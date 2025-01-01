@@ -8,7 +8,6 @@ import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.GetAllHotelsEmployeeProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
-import com.tuvarna.hotel.rest.controllers.manager.receptionists.ManagerHotelDetails;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -93,23 +92,21 @@ public class AssignedEmployeeHotels implements Initializable {
         table.setItems(data);
 
         FilteredList<Hotel> filteredData=new FilteredList<>(data, b->true);
-        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(hotel -> {
-                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
-                    return true;
-                }
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(hotel -> {
+            if(newValue.isBlank() || newValue.isEmpty()){
+                return true;
+            }
 
-                String searchKeyword=newValue.toLowerCase();
+            String searchKeyword=newValue.toLowerCase();
 
-                if(hotel.getName().toLowerCase().contains(searchKeyword)){
-                    return true;
-                }
-                else if(hotel.getLocation().toLowerCase().contains(searchKeyword)){
-                    return true;
-                }
-                else return hotel.getStars().toString().toLowerCase().contains(searchKeyword);
-            });
-        });
+            if(hotel.getName().toLowerCase().contains(searchKeyword)){
+                return true;
+            }
+            else if(hotel.getLocation().toLowerCase().contains(searchKeyword)){
+                return true;
+            }
+            else return hotel.getStars().toString().toLowerCase().contains(searchKeyword);
+        }));
 
         SortedList<Hotel> sortedList=new SortedList<>(filteredData);
         sortedList.comparatorProperty().bind(table.comparatorProperty());
@@ -123,7 +120,6 @@ public class AssignedEmployeeHotels implements Initializable {
             if(hotel==null) return;
             showMoreHotelData(hotel);
         }
-        display();
     }
 
     private void showMoreHotelData(Hotel hotel) throws IOException {
@@ -135,6 +131,8 @@ public class AssignedEmployeeHotels implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Information");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
         stage.show();
     }
 }

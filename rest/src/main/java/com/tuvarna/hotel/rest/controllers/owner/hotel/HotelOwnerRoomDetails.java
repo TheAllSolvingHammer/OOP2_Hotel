@@ -62,7 +62,8 @@ public class HotelOwnerRoomDetails implements Initializable{
     }
 
     public void handleBackButton(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -102,6 +103,7 @@ public class HotelOwnerRoomDetails implements Initializable{
                     return null;
                 }
         );
+
     }
 
     public void display(){

@@ -10,7 +10,6 @@ import com.tuvarna.hotel.api.models.create.reservation.CreateReservationOutput;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.entities.Service;
-import com.tuvarna.hotel.core.converters.ConvertServices;
 import com.tuvarna.hotel.core.converters.ConvertServicesToEntity;
 import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
@@ -25,6 +24,9 @@ import com.tuvarna.hotel.persistence.enums.ReservationType;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
+import javafx.stage.StageStyle;
 import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
@@ -46,7 +48,7 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
     @Override
     public Either<ErrorProcessor, CreateReservationOutput> process(CreateReservationInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-                    log.info("Started creating reservation");
+                    log.info("Started creating reservation input: "+input);
                     checkDates(input.getStartDate(),input.getEndDate());
                     RoomEntity room = checkRoom(input.getRoom());
                     checkAvailability(room,input.getStartDate(),input.getEndDate());
@@ -67,6 +69,7 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                             .createdBy(user)
                             .build();
                     reservationRepository.save(reservation);
+
                 return CreateReservationOutput.builder()
                         .message("Successfully created reservation")
                         .build();
@@ -77,6 +80,20 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
     private void checkClientRating(ClientEntity clientEntity) {
         if(clientEntity.getRating().equals(ClientRating.BAD)) {
             throw new InputException("Client has bad rating!");
+        }
+        if(clientEntity.getRating().equals(ClientRating.CONCERNING)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Client waring");
+            alert.initStyle(StageStyle.UNDECORATED);
+            alert.setContentText("Client rating is rated as concerning");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.CANCEL)
+                    throw new InputException("Client was marked as concerning");
+            });
+
+
         }
     }
 

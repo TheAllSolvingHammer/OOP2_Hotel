@@ -10,6 +10,8 @@ import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -29,6 +32,8 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class ManagerView implements Initializable {
+    @FXML
+    private TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -46,6 +51,7 @@ public class ManagerView implements Initializable {
     @FXML
     private TableColumn<Manager, String> phoneNumber;
 
+    private ObservableList<Manager> data;
 
     public ManagerView() {
         this.displayManagerProcess= SingletonManager.getInstance(DisplayManagersProcess.class);
@@ -77,12 +83,40 @@ public class ManagerView implements Initializable {
                     return null;
                 },
                 success -> {
-                    ObservableList<Manager> data = FXCollections.observableArrayList(success.getManagerList());
+                    data = FXCollections.observableArrayList(success.getManagerList());
                     table.setItems(data);
                     table.refresh();
                     return null;
                 }
         );
+        System.out.println("test");
+        FilteredList<Manager> filteredData=new FilteredList<>(data, b->true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(manager -> {
+            if(newValue.isBlank() || newValue.isEmpty()){
+                return true;
+            }
 
+            String searchKeyword=newValue.toLowerCase();
+
+            if(manager.getFirstName().toLowerCase().contains(searchKeyword)){
+                return true;
+            }
+            else if(manager.getLastName().toLowerCase().contains(searchKeyword)){
+                return true;
+            }
+            else if(manager.getEmail().toLowerCase().contains(searchKeyword)){
+                return true;
+            }
+            else return manager.getPhoneNumber().toLowerCase().contains(searchKeyword);
+        }));
+
+        SortedList<Manager> sortedList=new SortedList<>(filteredData);
+        sortedList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedList);
+
+    }
+
+    public void clearSearchField(ActionEvent event) {
+        searchBar.clear();
     }
 }
