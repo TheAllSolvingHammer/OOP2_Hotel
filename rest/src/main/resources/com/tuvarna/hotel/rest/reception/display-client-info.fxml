@@ -10,12 +10,13 @@
 <AnchorPane prefHeight="452.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.queries.DisplayClientInfo">
     <TableView fx:id="table" layoutX="12.0" layoutY="63.0" onMouseClicked="#openClientInformation" prefHeight="330.0" prefWidth="890.0">
         <columns>
-            <TableColumn fx:id="firstName" prefWidth="137.99997329711914" text="First Name" />
-            <TableColumn fx:id="lastName" prefWidth="149.9999237060547" text="Last Name" />
-         <TableColumn fx:id="email" prefWidth="172.7999267578125" text="Email" />
-         <TableColumn fx:id="phone" prefWidth="121.20004272460938" text="Phone" />
-         <TableColumn fx:id="address" prefWidth="185.60003662109375" text="Address" />
-         <TableColumn fx:id="ucn" prefWidth="120.4000244140625" text="UCN" />
+            <TableColumn fx:id="firstName" prefWidth="116.79998970031738" text="First Name" />
+            <TableColumn fx:id="lastName" prefWidth="142.00003051757812" text="Last Name" />
+         <TableColumn fx:id="email" prefWidth="137.60003662109375" text="Email" />
+         <TableColumn fx:id="phone" prefWidth="118.00003051757812" text="Phone" />
+         <TableColumn fx:id="address" prefWidth="172.0" text="Address" />
+         <TableColumn fx:id="ucn" prefWidth="102.0" text="UCN" />
+         <TableColumn fx:id="clientRating" prefWidth="99.199951171875" text="Client rating" />
         </columns>
     </TableView>
     <Button layoutX="795.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
