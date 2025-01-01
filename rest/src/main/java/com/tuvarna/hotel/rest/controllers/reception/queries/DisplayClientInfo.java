@@ -69,16 +69,8 @@ public class DisplayClientInfo implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        ucn.setCellValueFactory(new PropertyValueFactory<>("ucn"));
-        address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        clientRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
+    private void display(){
         ClientInformationInput input=ClientInformationInput.builder().build();
 
         Either<ErrorProcessor,ClientInformationOutput> result = clientInformationProcess.process(input);
@@ -94,13 +86,26 @@ public class DisplayClientInfo implements Initializable {
                     table.refresh();
                     return null;
                 }
-                );
+        );
         table.setItems(data);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        ucn.setCellValueFactory(new PropertyValueFactory<>("ucn"));
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        clientRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        display();
+
 
         FilteredList<Client> filteredData = new FilteredList<>(data, b -> true);
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(client -> {
-                if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
+                if (newValue.isEmpty() || newValue.isBlank()) {
                     return true;
                 }
 
@@ -151,6 +156,8 @@ public class DisplayClientInfo implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Information");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
         stage.show();
     }
 }

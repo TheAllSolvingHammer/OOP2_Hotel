@@ -5,64 +5,48 @@ import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.entities.Owner;
-import com.tuvarna.hotel.core.processes.DisplayHotelProcess;
+import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
-import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import lombok.Setter;
-import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
-import java.util.List;
 
 public class OwnerData{
-
     private Stage stage;
     private Parent root;
     private Scene scene;
     @Setter
     private Owner owner;
     @FXML
-    private TextField firstName;
+    private Label firstName;
     @FXML
-    private TextField lastName;
+    private Label lastName;
     @FXML
-    private TextField phone;
+    private Label phone;
     @FXML
-    private TextField email;
+    private Label email;
     @FXML
-    private VBox hotels;
+    private ListView<Hotel> hotels;
 
-    private final DisplayHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayHotelProcess.class);
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-    private CheckComboBox<Hotel> checkComboBox;
-
-
-    public OwnerData() {
-        checkComboBox=new CheckComboBox<>();
-    }
+    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
 
     @FXML
     public void switchToBeginning(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    public void applyOwner(ActionEvent event) {
-        List<Hotel> hotelsChecked= checkComboBox.getCheckModel().getCheckedItems();
-        //todo add
-
     }
 
     public void display() {
@@ -78,17 +62,11 @@ public class OwnerData{
                     return null;
                 },
                 success -> {
-                    checkComboBox.getItems().addAll(success.getHotelList());
-                    if (owner.getHotelList() != null && !owner.getHotelList().isEmpty()) {
-                        owner.getHotelList().forEach(hotel ->
-                            checkComboBox.getCheckModel().check(hotel)
-                        );
-                    }
+                    ObservableList<Hotel> data = FXCollections.observableArrayList(success.getHotelList());
+                    hotels.setItems(data);
+                    hotels.refresh();
                     return null;
                 }
         );
-        hotels.getChildren().add(checkComboBox);
-
     }
-
 }
