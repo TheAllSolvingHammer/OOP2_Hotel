@@ -4,7 +4,6 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationInput;
 import com.tuvarna.hotel.api.models.query.client.information.ClientInformationOutput;
-import com.tuvarna.hotel.api.models.update.client.UpdateClientInput;
 import com.tuvarna.hotel.core.processes.ClientInformationProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -52,6 +51,8 @@ public class DisplayClientInfo implements Initializable {
     private TableColumn<Client,String> lastName;
     @FXML
     private TableColumn<Client,String> email;
+    @FXML
+    private TableColumn<Client,String> clientRating;
     private ObservableList<Client> data;
 
     private final ClientInformationProcess clientInformationProcess = SingletonManager.getInstance(ClientInformationProcess.class);
@@ -66,7 +67,6 @@ public class DisplayClientInfo implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Admin");
         stage.show();
     }
     @Override
@@ -77,6 +77,7 @@ public class DisplayClientInfo implements Initializable {
         phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         ucn.setCellValueFactory(new PropertyValueFactory<>("ucn"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        clientRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
         ClientInformationInput input=ClientInformationInput.builder().build();
 
@@ -120,6 +121,9 @@ public class DisplayClientInfo implements Initializable {
                 else if(client.getAddress().toLowerCase().contains(searchKeyword)){
                     return true;
                 }
+                else if (client.getRating().toString().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }
                 else return client.getUcn().toLowerCase().contains(searchKeyword);
             });
         });
@@ -147,18 +151,6 @@ public class DisplayClientInfo implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Information");
-        stage.show();
-    }
-
-
-
-    @FXML
-    public void switchToSetting(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/update-client-info.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Admin");
         stage.show();
     }
 }
