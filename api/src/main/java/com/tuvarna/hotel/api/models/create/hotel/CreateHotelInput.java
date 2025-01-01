@@ -22,4 +22,5 @@ public class CreateHotelInput implements OperationInput {
     private Integer rating;
     private UUID ownerID;
     private List<Manager> managerList;
+
 }

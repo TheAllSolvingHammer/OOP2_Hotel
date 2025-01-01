@@ -41,4 +41,5 @@ public class CreateClientInput implements OperationInput {
     private LocalDate expireDate;
     @NotEmpty(message = "Issue by can not be empty")
     private String issuedBy;
+
 }
