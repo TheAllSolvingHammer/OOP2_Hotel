@@ -7,13 +7,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="437.0" prefWidth="637.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.">
+<AnchorPane prefHeight="437.0" prefWidth="637.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.QueryHotelAndServiceTable">
 
     <Button layoutX="504.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="26.0" prefWidth="107.0" text="Back" />
    <TableView fx:id="table" layoutX="26.0" layoutY="65.0" prefHeight="307.0" prefWidth="586.0">
      <columns>
-       <TableColumn fx:id="service" prefWidth="266.0" text="Service" />
-       <TableColumn fx:id="amount" prefWidth="319.0" text="Amount" />
+       <TableColumn fx:id="service" prefWidth="248.0" text="Service" />
+       <TableColumn fx:id="amount" prefWidth="115.0" text="Amount" />
+         <TableColumn fx:id="revenue" prefWidth="222.0" text="Revenue" />
      </columns>
    </TableView>
    <Label layoutX="93.0" layoutY="22.0" prefHeight="26.0" prefWidth="50.0" text="Search:" />

@@ -51,22 +51,31 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
     }
 
     @Override
-    public List<ServiceUsageDTO> countServiceUsage(LocalDate startDate, LocalDate endDate) {
+    public List<ServiceUsageDTO> countServiceUsage(UUID hotelId,LocalDate startDate, LocalDate endDate) {
         String hql = """
-        SELECT new com.tuvarna.hotel.persistence.dtos.ServiceUsageDTO(s.serviceName, COUNT(s))
+        SELECT new com.tuvarna.hotel.persistence.dtos.ServiceUsageDTO(
+            s.serviceName,
+            COUNT(s),
+            SUM(s.price)
+        )
         FROM ReservationEntity r
         JOIN r.services s
-        WHERE r.startDate >= :startDate AND r.endDate <= :endDate
+        JOIN r.room rm
+        JOIN rm.hotel h
+        WHERE h.id = :hotelId
+          AND r.startDate >= :startDate
+          AND r.endDate <= :endDate
         GROUP BY s.serviceName
     """;
         Session session = HibernateUtil.openSession();
         try {
             Query<ServiceUsageDTO> query = session.createQuery(hql, ServiceUsageDTO.class);
+            query.setParameter("hotelId", hotelId);
             query.setParameter("startDate", startDate);
             query.setParameter("endDate", endDate);
             return query.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Error getting query", e);
+            throw new RuntimeException("Error getting service usage and revenue by hotel", e);
         } finally {
             session.close();
         }

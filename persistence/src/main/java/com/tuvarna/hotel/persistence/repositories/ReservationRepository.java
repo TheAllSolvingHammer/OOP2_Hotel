@@ -11,6 +11,6 @@ import java.util.UUID;
 
 public interface ReservationRepository<T extends EntityMarker,E extends UUID> {
     Boolean isRoomAvailable(RoomEntity room, LocalDate startDate, LocalDate endDate);
-    List<ServiceUsageDTO> countServiceUsage(LocalDate startDate, LocalDate endDate);
+    List<ServiceUsageDTO> countServiceUsage(UUID hotelId,LocalDate startDate, LocalDate endDate);
     List<ReceptionistReservationDTO> getReservationsByReceptionists(UUID hotelId, LocalDate startDate, LocalDate endDate);
 }
