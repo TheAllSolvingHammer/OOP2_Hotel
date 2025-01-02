@@ -17,6 +17,7 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -24,23 +25,27 @@ import java.util.List;
 public class DisplayOwnerHotelProcess extends BaseProcessor implements DisplayHotelsOperation {
     private final HotelRepositoryImpl hotelRepository;
     private final ConvertEntityToHotel converter;
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-
+    private final UserRepositoryImpl userRepository;
+    private static final Logger log = Logger.getLogger(DisplayOwnerHotelProcess.class);
     public DisplayOwnerHotelProcess() {
         hotelRepository=SingletonManager.getInstance(HotelRepositoryImpl.class);
         converter=SingletonManager.getInstance(ConvertEntityToHotel.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
     }
 
     @Override
     public Either<ErrorProcessor, DisplayHotelsOutput> process(DisplayHotelsInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()-> {
+            log.info("Started displaying owner's hotels, input: "+input);
             UserEntity userEntity= getUser(input);
             checkOwnerShip(userEntity);
             List<HotelEntity> entityList=hotelRepository.findAllByOwner(userEntity);
             List<Hotel> hotels=converter.convert(entityList);
-            return DisplayHotelsOutput.builder()
-                    .hotelList(hotels)
-                    .build();
+                    DisplayHotelsOutput result = DisplayHotelsOutput.builder()
+                            .hotelList(hotels)
+                            .build();
+                    log.info("Ended displaying owner's hotel, output: "+result);
+                    return result;
         }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
     }

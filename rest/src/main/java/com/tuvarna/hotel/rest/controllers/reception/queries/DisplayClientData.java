@@ -20,7 +20,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import lombok.Setter;
-import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.net.URL;

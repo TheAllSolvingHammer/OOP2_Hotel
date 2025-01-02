@@ -47,7 +47,7 @@ public class HotelOwnerView implements Initializable {
     @FXML
     private TableColumn<Hotel, Integer> stars;
 
-    ObservableList<Hotel> data;
+    private ObservableList<Hotel> data;
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

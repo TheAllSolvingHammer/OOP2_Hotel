@@ -1,7 +1,6 @@
 package com.tuvarna.hotel.core.converters;
 
 import com.tuvarna.hotel.api.models.entities.Hotel;
-import com.tuvarna.hotel.api.models.entities.Owner;
 import com.tuvarna.hotel.api.models.entities.Receptionist;
 import com.tuvarna.hotel.api.models.entities.Service;
 import com.tuvarna.hotel.domain.singleton.Singleton;

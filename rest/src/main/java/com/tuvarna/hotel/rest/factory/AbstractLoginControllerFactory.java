@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-//todo singleton
 public class AbstractLoginControllerFactory {
     private final Map<String, String> controllerMap;
 

@@ -1,15 +1,10 @@
 package com.tuvarna.hotel.api.models.create.client;
 
 import com.tuvarna.hotel.api.base.OperationInput;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Getter
 @Setter

@@ -13,24 +13,33 @@ import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.UserEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
-import lombok.NoArgsConstructor;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
-@NoArgsConstructor
+
 @Singleton
 public class DisplayOwnersProcess extends BaseProcessor implements DisplayOwnersOperation {
-    private final UserRepositoryImpl userRepository=SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final ConvertUsersToOwner convertUsersToOwner=SingletonManager.getInstance(ConvertUsersToOwner.class);
+    private final UserRepositoryImpl userRepository;
+    private final ConvertUsersToOwner convertUsersToOwner;
+    private static final Logger log = Logger.getLogger(DisplayOwnersProcess.class);
+
+    public DisplayOwnersProcess() {
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        convertUsersToOwner = SingletonManager.getInstance(ConvertUsersToOwner.class);
+    }
 
     @Override
     public Either<ErrorProcessor, DisplayOwnersOutput> process(DisplayOwnersInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started displaying owners, input: "+input);
                     List<UserEntity> entityList = userRepository.findAllOwners();
                     List<Owner> ownerList=convertUsersToOwner.convert(entityList);
-                    return DisplayOwnersOutput.builder()
+                    DisplayOwnersOutput result = DisplayOwnersOutput.builder()
                             .ownerList(ownerList)
                             .build();
+                    log.info("Ended displaying owners, output: "+result);
+                    return result;
                 }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
     }

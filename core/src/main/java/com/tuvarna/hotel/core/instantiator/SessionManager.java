@@ -7,12 +7,10 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SessionManager {
-
     private static SessionManager instance;
     private UserEntity loggedInUser;
 
     private SessionManager() {
-
     }
 
     public static SessionManager getInstance() {
@@ -21,7 +19,6 @@ public class SessionManager {
         }
         return instance;
     }
-
 
     public static void clearSession() {
         if (instance != null) {

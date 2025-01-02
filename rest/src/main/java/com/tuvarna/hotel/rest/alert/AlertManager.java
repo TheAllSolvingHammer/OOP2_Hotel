@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.Region;
 import javafx.stage.StageStyle;
 import lombok.Getter;
-import lombok.Setter;
 
 public final class AlertManager {
     @Getter

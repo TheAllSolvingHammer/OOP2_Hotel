@@ -12,14 +12,21 @@ import com.tuvarna.hotel.persistence.entities.ClientEntity;
 import com.tuvarna.hotel.persistence.enums.ClientRating;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 @Singleton
 public class CreateClientProcess extends BaseProcessor implements CreateClientOperation {
-    private final ClientRepositoryImpl clientRepository= SingletonManager.getInstance(ClientRepositoryImpl.class);
+    private final ClientRepositoryImpl clientRepository;
+    private static final Logger log = Logger.getLogger(CreateClientProcess.class);
+
+    public CreateClientProcess() {
+        clientRepository = SingletonManager.getInstance(ClientRepositoryImpl.class);
+    }
 
     @Override
     public Either<ErrorProcessor, CreateClientOutput> process(CreateClientInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(() ->{
+                log.info("Started create client process, input: "+input);
                     ClientEntity client =ClientEntity.builder()
                             .firstName(input.getFirstName())
                             .lastName(input.getLastName())
@@ -35,9 +42,11 @@ public class CreateClientProcess extends BaseProcessor implements CreateClientOp
                             .build();
 
                     clientRepository.save(client);
-                    return CreateClientOutput.builder()
+                   CreateClientOutput result= CreateClientOutput.builder()
                             .message("Successfully created client")
                             .build();
+                   log.info("Ended create client process, output: "+result );
+                   return result;
 
         }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
