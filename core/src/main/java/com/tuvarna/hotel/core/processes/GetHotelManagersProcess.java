@@ -15,6 +15,7 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,17 +23,27 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class GetHotelManagersProcess extends BaseProcessor implements GetAllHotelManagersOperation {
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final ConvertUsersToManager converter = SingletonManager.getInstance(ConvertUsersToManager.class);
+    private final UserRepositoryImpl userRepository;
+    private final ConvertUsersToManager converter;
+    private static final Logger log = Logger.getLogger(GetHotelManagersProcess.class);
+
+    public GetHotelManagersProcess() {
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertUsersToManager.class);
+    }
 
     @Override
     public Either<ErrorProcessor, GetAllHotelManagersOutput> process(GetAllHotelManagersInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Stared getting hotel managers, input: "+input);
                     List<UserEntity> users= getManagersOfHotel(input.getHotel().getUserList());
                     List<Manager> managerList = converter.convert(users);
-                    return GetAllHotelManagersOutput.builder()
+                    GetAllHotelManagersOutput result = GetAllHotelManagersOutput.builder()
                             .managerlist(managerList)
                             .build();
+                    log.info("Ended getting hotel managers, output: "+result);
+                    return result;
+
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
     }

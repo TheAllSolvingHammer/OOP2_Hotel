@@ -15,6 +15,7 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,19 @@ import java.util.UUID;
 
 @Singleton
 public class CreateHotelProcess extends BaseProcessor implements CreateHotelOperation {
-    private final HotelRepositoryImpl hotelRepository= SingletonManager.getInstance(HotelRepositoryImpl.class);
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+    private final HotelRepositoryImpl hotelRepository;
+    private final UserRepositoryImpl userRepository;
+    private static final Logger log = Logger.getLogger(CreateHotelProcess.class);
+
+    public CreateHotelProcess() {
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+    }
 
     @Override
     public Either<ErrorProcessor, CreateHotelOutput> process(CreateHotelInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started create hotel process, input: "+input);
                     UserEntity user = findUser(input.getOwnerID());
                     checkUserRoles(user);
                     List<UserEntity> users=new ArrayList<>();
@@ -39,9 +47,11 @@ public class CreateHotelProcess extends BaseProcessor implements CreateHotelOper
                             .userList(users)
                             .build();
                     hotelRepository.save(hotel);
-                    return CreateHotelOutput.builder()
+                    CreateHotelOutput result= CreateHotelOutput.builder()
                             .message("Successfully added hotel")
                             .build();
+                    log.info("Ended create hotel process, output"+result);
+                    return result;
                 }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
     }

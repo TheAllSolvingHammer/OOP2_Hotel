@@ -39,16 +39,25 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 @Singleton
 public class CreateReservationProcess extends BaseProcessor implements CreateReservationOperation {
-    private final RoomRepositoryImpl roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
-    private final ReservationRepositoryImpl reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
-    private final ClientRepositoryImpl clientRepository= SingletonManager.getInstance(ClientRepositoryImpl.class);
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final ConvertServicesToEntity converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
+    private final RoomRepositoryImpl roomRepository;
+    private final ReservationRepositoryImpl reservationRepository;
+    private final ClientRepositoryImpl clientRepository;
+    private final UserRepositoryImpl userRepository;
+    private final ConvertServicesToEntity converter;
     private static final Logger log = Logger.getLogger(CreateReservationProcess.class);
+
+    public CreateReservationProcess() {
+        roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
+        reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
+        clientRepository = SingletonManager.getInstance(ClientRepositoryImpl.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
+    }
+
     @Override
     public Either<ErrorProcessor, CreateReservationOutput> process(CreateReservationInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-                    log.info("Started creating reservation input: "+input);
+                    log.info("Started create reservation input: "+input);
                     checkDates(input.getStartDate(),input.getEndDate());
                     RoomEntity room = checkRoom(input.getRoom());
                     checkAvailability(room,input.getStartDate(),input.getEndDate());
@@ -69,10 +78,11 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                             .createdBy(user)
                             .build();
                     reservationRepository.save(reservation);
-
-                return CreateReservationOutput.builder()
+                CreateReservationOutput result= CreateReservationOutput.builder()
                         .message("Successfully created reservation")
                         .build();
+                log.info("Ended create reservation, output: "+result);
+                return result;
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
     }
@@ -82,6 +92,7 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
             throw new InputException("Client has bad rating!");
         }
         if(clientEntity.getRating().equals(ClientRating.CONCERNING)){
+            log.warn("Client is concerning, client: "+clientEntity);
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Client waring");
             alert.initStyle(StageStyle.UNDECORATED);

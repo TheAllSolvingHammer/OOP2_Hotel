@@ -2,7 +2,6 @@ package com.tuvarna.hotel.core.processes;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.exceptions.QueryException;
-import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.api.models.entities.Receptionist;
 import com.tuvarna.hotel.api.models.update.receptionist.UpdateReceptionistOfHotelInput;
 import com.tuvarna.hotel.api.models.update.receptionist.UpdateReceptionistOfHotelOperation;
@@ -17,6 +16,7 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,11 +24,19 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class UpdateReceptionistOfHotelProcess extends BaseProcessor implements UpdateReceptionistOfHotelOperation {
-    private final HotelRepositoryImpl hotelRepository= SingletonManager.getInstance(HotelRepositoryImpl.class);
-    private final UserRepositoryImpl userRepository=SingletonManager.getInstance(UserRepositoryImpl.class);
+    private final HotelRepositoryImpl hotelRepository;
+    private final UserRepositoryImpl userRepository;
+    private static final Logger log = Logger.getLogger(UpdateReceptionistOfHotelProcess.class);
+
+    public UpdateReceptionistOfHotelProcess() {
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+    }
+
     @Override
     public Either<ErrorProcessor, UpdateReceptionistOfHotelOutput> process(UpdateReceptionistOfHotelInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started updating receptionists of hotel, input: "+input);
                     HotelEntity hotel=findHotel(input.getHotelID());
                     List<UserEntity> receptionistList = getUsers(input.getReceptionistList());
                     List<UserEntity> allUsers=hotel.getUserList();
@@ -36,9 +44,11 @@ public class UpdateReceptionistOfHotelProcess extends BaseProcessor implements U
                     allUsers.addAll(receptionistList);
                     hotel.setUserList(allUsers);
                     hotelRepository.save(hotel);
-                    return UpdateReceptionistOfHotelOutput.builder()
+                    UpdateReceptionistOfHotelOutput result = UpdateReceptionistOfHotelOutput.builder()
                             .message("Successfully updated hotel")
                             .build();
+                    log.info("Ended updating receptionists of hotel, output: "+result);
+                    return result;
                 }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
 

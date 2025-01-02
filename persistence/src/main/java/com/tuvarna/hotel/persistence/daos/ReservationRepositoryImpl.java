@@ -4,18 +4,13 @@ import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
 import com.tuvarna.hotel.persistence.dtos.ReceptionistReservationDTO;
 import com.tuvarna.hotel.persistence.dtos.ServiceUsageDTO;
-import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import com.tuvarna.hotel.persistence.entities.ReservationEntity;
 import com.tuvarna.hotel.persistence.entities.RoomEntity;
-import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import com.tuvarna.hotel.persistence.repositories.ReservationRepository;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 @Singleton

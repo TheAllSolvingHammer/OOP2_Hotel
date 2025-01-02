@@ -8,7 +8,7 @@ import com.tuvarna.hotel.api.models.update.hotel.UpdateHotelInput;
 import com.tuvarna.hotel.api.models.update.hotel.UpdateHotelOperation;
 import com.tuvarna.hotel.api.models.update.hotel.UpdateHotelOutput;
 import com.tuvarna.hotel.core.converters.ConvertServicesToEntity;
-import com.tuvarna.hotel.core.exception.InputQueryPasswordExceptionCase;
+import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.HotelRepositoryImpl;
@@ -19,6 +19,7 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,14 +27,22 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class UpdateHotelProcess extends BaseProcessor implements UpdateHotelOperation {
-    private final HotelRepositoryImpl hotelRepository= SingletonManager.getInstance(HotelRepositoryImpl.class);
-    private final ConvertServicesToEntity converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
-    private final UserRepositoryImpl userRepository=SingletonManager.getInstance(UserRepositoryImpl.class);
+    private final HotelRepositoryImpl hotelRepository;
+    private final ConvertServicesToEntity converter;
+    private final UserRepositoryImpl userRepository;
+    private static final Logger log = Logger.getLogger(UpdateHotelProcess.class);
+
+    public UpdateHotelProcess() {
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+    }
+
     @Override
     public Either<ErrorProcessor, UpdateHotelOutput> process(UpdateHotelInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started updating hotel, input: "+input);
                     checkInput(input);
-
                     HotelEntity hotel=findHotel(input.getHotelID());
                     List<ServiceEntity> serviceEntities = converter.convert(input.getServiceList());
                     hotel.setServiceList(serviceEntities);
@@ -43,11 +52,13 @@ public class UpdateHotelProcess extends BaseProcessor implements UpdateHotelOper
                     allUsers.addAll(managerEntities);
                     hotel.setUserList(allUsers);
                     hotelRepository.save(hotel);
-                    return UpdateHotelOutput.builder()
+                    UpdateHotelOutput result = UpdateHotelOutput.builder()
                             .message("Successfully updated the hotel")
                             .build();
+                    log.info("Ended updating hotel, output: "+result);
+                    return result;
                 }).toEither()
-                .mapLeft(InputQueryPasswordExceptionCase::handleThrowable));
+                .mapLeft(InputQueryExceptionCase::handleThrowable));
     }
     private HotelEntity findHotel(UUID id){
         return hotelRepository.findHotelById(id).orElseThrow(()-> new QueryException("Hotel not found"));

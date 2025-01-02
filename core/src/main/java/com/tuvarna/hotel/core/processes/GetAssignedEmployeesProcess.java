@@ -6,7 +6,6 @@ import com.tuvarna.hotel.api.models.entities.Receptionist;
 import com.tuvarna.hotel.api.models.get.receptionist.assigned.GetAssignedEmployeeInput;
 import com.tuvarna.hotel.api.models.get.receptionist.assigned.GetAssignedEmployeeOperation;
 import com.tuvarna.hotel.api.models.get.receptionist.assigned.GetAssignedEmployeeOutput;
-import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelOutput;
 import com.tuvarna.hotel.core.converters.ConvertUsersToReceptionist;
 import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
@@ -16,6 +15,7 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,18 +23,26 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class GetAssignedEmployeesProcess extends BaseProcessor implements GetAssignedEmployeeOperation {
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final ConvertUsersToReceptionist converter =SingletonManager.getInstance(ConvertUsersToReceptionist.class);
+    private final UserRepositoryImpl userRepository;
+    private final ConvertUsersToReceptionist converter;
+    private static final Logger log = Logger.getLogger(GetAssignedEmployeesProcess.class);
+
+    public GetAssignedEmployeesProcess() {
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertUsersToReceptionist.class);
+    }
+
     @Override
     public Either<ErrorProcessor, GetAssignedEmployeeOutput> process(GetAssignedEmployeeInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-                    System.out.println("My users before convertion are"+input.getHotel().getUserList());
+                    log.info("Started getting all assigned employees, input: "+input);
                     List<UserEntity> users= getEmployeesOfHotel(input.getHotel().getUserList());
-                    System.out.println("My users are: "+users);
                     List<Receptionist> receptionistList = converter.convert(users);
-                    return GetAssignedEmployeeOutput.builder()
+                    GetAssignedEmployeeOutput result = GetAssignedEmployeeOutput.builder()
                             .receptionistList(receptionistList)
                             .build();
+                    log.info("Ended getting all assigned employees, output: "+result);
+                    return result;
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
         }

@@ -5,7 +5,6 @@ import com.tuvarna.hotel.api.models.login.LoginUserInput;
 import com.tuvarna.hotel.api.models.login.LoginUserOutput;
 import com.tuvarna.hotel.core.processes.LoginUserProcess;
 import com.tuvarna.hotel.rest.alert.AlertManager;
-import com.tuvarna.hotel.rest.contracts.BaseController;
 import com.tuvarna.hotel.rest.factory.AbstractLoginControllerFactory;
 import io.vavr.control.Either;
 import javafx.event.ActionEvent;

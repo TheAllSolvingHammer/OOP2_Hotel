@@ -1,6 +1,5 @@
 package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
-import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.entities.ServicesDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
