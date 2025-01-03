@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models.query.receptionist.information;
+package com.tuvarna.hotel.api.models.query.room;
 
 import com.tuvarna.hotel.api.base.OperationInput;
 import jakarta.validation.constraints.NotNull;
@@ -13,12 +13,11 @@ import java.util.UUID;
 @NoArgsConstructor()
 @AllArgsConstructor
 @Builder
-public class QueryReceptionistInput implements OperationInput {
-    @NotNull(message = "Hotel id can not be null")
+public class QueryRoomUsageInput implements OperationInput {
+    @NotNull(message = "Hotel ID can not be null")
     private UUID hotelId;
     @NotNull(message = "Start date can not be null")
     private LocalDate startDate;
     @NotNull(message = "End date can not be null")
     private LocalDate endDate;
-
 }

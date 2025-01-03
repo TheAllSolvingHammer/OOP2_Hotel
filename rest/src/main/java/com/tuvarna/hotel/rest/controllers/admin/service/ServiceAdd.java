@@ -30,7 +30,11 @@ public class ServiceAdd {
     @FXML
     private TextField price;
 
-    private final CreateServiceProcess createServiceProcess = SingletonManager.getInstance(CreateServiceProcess.class);
+    private final CreateServiceProcess createServiceProcess;
+
+    public ServiceAdd() {
+        createServiceProcess = SingletonManager.getInstance(CreateServiceProcess.class);
+    }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/services-scene.fxml"));

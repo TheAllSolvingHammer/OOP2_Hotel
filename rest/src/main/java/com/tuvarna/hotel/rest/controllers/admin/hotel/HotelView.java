@@ -111,16 +111,6 @@ public class HotelView implements Initializable {
         table.setItems(sortedList);
     }
 
-    @FXML
-    public void addHotelScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/new-hotel.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Add hotel");
-        stage.show();
-    }
-
     public void clearTextField(ActionEvent actionEvent) {
         searchBar.clear();
     }

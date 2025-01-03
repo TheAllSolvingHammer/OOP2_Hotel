@@ -51,10 +51,14 @@ public class DisplayClientData implements Initializable {
     @Setter
     private Client client;
 
-    private final UpdateClientProcess updateClientProcess = SingletonManager.getInstance(UpdateClientProcess.class);
+    private final UpdateClientProcess updateClientProcess;
+
+    public DisplayClientData() {
+        updateClientProcess = SingletonManager.getInstance(UpdateClientProcess.class);
+    }
 
     @FXML
-    private void switchToTable(ActionEvent event) throws IOException {
+    private void switchToTable(ActionEvent event)  {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -80,7 +84,7 @@ public void initialize(URL url, ResourceBundle resourceBundle) {
         ratingClient.setItems(data);
     }
 
-    public void updateClient(ActionEvent event) throws IOException {
+    public void updateClient(ActionEvent event)  {
         UpdateClientInput input= UpdateClientInput.builder()
                 .client(client.getId())
                 .ratingClient(ratingClient.getValue())

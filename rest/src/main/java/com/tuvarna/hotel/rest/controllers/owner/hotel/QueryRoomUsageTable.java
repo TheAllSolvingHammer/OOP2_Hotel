@@ -1,6 +1,7 @@
 package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
-import com.tuvarna.hotel.api.models.entities.ReceptionistDTO;
+import com.tuvarna.hotel.api.enums.TypeRoom;
+import com.tuvarna.hotel.api.models.entities.RoomQueryDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,48 +16,54 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
-public class QueryReceptionistTable  {
+public class QueryRoomUsageTable {
     @FXML
     private TextField searchBar;
     @FXML
-    private TableView<ReceptionistDTO> table;
+    private TableView<RoomQueryDTO> table;
     @FXML
-    private TableColumn<ReceptionistDTO, UUID> reservation;
+    private TableColumn<RoomQueryDTO,String> roomNumber;
     @FXML
-    private TableColumn<ReceptionistDTO,String> receptionist;
+    private TableColumn<RoomQueryDTO, BigDecimal> price;
+    @FXML
+    private TableColumn<RoomQueryDTO, TypeRoom> type;
+    @FXML
+    private TableColumn<RoomQueryDTO,Long> usage;
     @Setter
-    private List<ReceptionistDTO> receptionistDTOList;
-    private ObservableList<ReceptionistDTO> data;
+    private List<RoomQueryDTO> roomQueryDTOS;
+
     public void handleBackButton(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
     public void display(){
-        reservation.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
-        receptionist.setCellValueFactory(new PropertyValueFactory<>("receptionistName"));
-        data =FXCollections.observableArrayList(receptionistDTOList);
+        roomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        type.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        usage.setCellValueFactory(new PropertyValueFactory<>("usageCount"));
+        ObservableList<RoomQueryDTO> data = FXCollections.observableArrayList(roomQueryDTOS);
         table.setItems(data);
         table.refresh();
 
-        FilteredList<ReceptionistDTO> filteredData=new FilteredList<>(data, b->true);
+        FilteredList<RoomQueryDTO> filteredData=new FilteredList<>(data, b->true);
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(receptionistDTO -> {
-                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
+                if(newValue.isBlank() || newValue.isEmpty()){
                     return true;
                 }
 
                 String searchKeyword=newValue.toLowerCase();
 
-                return receptionistDTO.getReceptionistName().toLowerCase().contains(searchKeyword);
+                return receptionistDTO.getRoomNumber().toLowerCase().contains(searchKeyword);
 
             });
         });
 
-        SortedList<ReceptionistDTO> sortedList=new SortedList<>(filteredData);
+        SortedList<RoomQueryDTO> sortedList=new SortedList<>(filteredData);
         sortedList.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedList);
     }

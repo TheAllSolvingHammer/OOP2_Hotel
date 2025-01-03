@@ -12,7 +12,7 @@
       <Button mnemonicParsing="false" onAction="#createManager" prefHeight="44.0" prefWidth="138.0" styleClass="sideButtons" text="Add Manager" />
       <Button mnemonicParsing="false" onAction="#queryReceptionists" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Reservation Query" />
       <Button mnemonicParsing="false" onAction="#queryReservations" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Service Usage Query" />
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 3" />
+      <Button mnemonicParsing="false" onAction="#queryRoomsUsage" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Room usage" />
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Query 4" />
    </VBox>
    <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0" />

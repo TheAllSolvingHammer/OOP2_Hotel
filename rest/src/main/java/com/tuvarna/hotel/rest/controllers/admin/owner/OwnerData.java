@@ -41,7 +41,11 @@ public class OwnerData{
     @FXML
     private ListView<Hotel> hotels;
 
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    private final DisplayOwnerHotelProcess displayHotelProcess;
+
+    public OwnerData() {
+        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    }
 
     @FXML
     public void switchToBeginning(ActionEvent event) throws IOException {
@@ -54,7 +58,7 @@ public class OwnerData{
         lastName.setText(owner.getLastName());
         phone.setText(owner.getPhoneNumber());
         email.setText(owner.getEmail());
-        DisplayHotelsInput input= DisplayHotelsInput.builder().build();
+        DisplayHotelsInput input= DisplayHotelsInput.builder().id(owner.getId()).build();
         Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(input);
         result.fold(
                 error -> {

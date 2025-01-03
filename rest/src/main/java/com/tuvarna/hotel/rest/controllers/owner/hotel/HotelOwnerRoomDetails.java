@@ -19,8 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -37,8 +35,6 @@ import java.util.ResourceBundle;
 
 public class HotelOwnerRoomDetails implements Initializable{
     private Stage stage;
-    private Parent root;
-    private Scene scene;
     @FXML
     private ListView<Room> listView;
     @FXML
@@ -54,11 +50,13 @@ public class HotelOwnerRoomDetails implements Initializable{
 
     private List<Room> roomList;
 
-    private final GetRoomsPerHotelProcess getAllRoomsProcess = SingletonManager.getInstance(GetRoomsPerHotelProcess.class);
-    private final CreateRoomProcess createRoomProcess = SingletonManager.getInstance(CreateRoomProcess.class);
+    private final GetRoomsPerHotelProcess getAllRoomsProcess;
+    private final CreateRoomProcess createRoomProcess;
 
     public HotelOwnerRoomDetails() {
         roomList=new ArrayList<>();
+        getAllRoomsProcess = SingletonManager.getInstance(GetRoomsPerHotelProcess.class);
+        createRoomProcess = SingletonManager.getInstance(CreateRoomProcess.class);
     }
 
     public void handleBackButton(ActionEvent event) throws IOException {

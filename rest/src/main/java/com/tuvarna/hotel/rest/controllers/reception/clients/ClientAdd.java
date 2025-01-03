@@ -46,7 +46,11 @@ public class ClientAdd {
     private Parent root;
     private Scene scene;
 
-    private final CreateClientProcess createClientProcess = SingletonManager.getInstance(CreateClientProcess.class);
+    private final CreateClientProcess createClientProcess;
+
+    public ClientAdd() {
+        createClientProcess = SingletonManager.getInstance(CreateClientProcess.class);
+    }
 
     @FXML
     public void switchToBeginning(ActionEvent event) throws IOException {

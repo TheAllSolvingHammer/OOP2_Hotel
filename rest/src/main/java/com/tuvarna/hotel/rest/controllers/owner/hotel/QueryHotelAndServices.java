@@ -43,14 +43,24 @@ public class QueryHotelAndServices implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
-    private final QueryServicesProcess queryServicesProcess = SingletonManager.getInstance(QueryServicesProcess.class);
+    private Boolean flag;
+    private final DisplayOwnerHotelProcess displayHotelProcess;
+    private final QueryServicesProcess queryServicesProcess;
     private ObservableList<Hotel> data;
 
     private List<ServicesDTO> serviceUsageDTOS= new ArrayList<>();
+
+    public QueryHotelAndServices() {
+        flag = false;
+        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+        queryServicesProcess = SingletonManager.getInstance(QueryServicesProcess.class);
+    }
+
     public void getQuery(ActionEvent event) throws IOException {
         getQueryResult();
+        if(!flag){
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-reservation-service.fxml"));
         Parent root = loader.load();
         QueryHotelAndServiceTable controller = loader.getController();
@@ -73,6 +83,7 @@ public class QueryHotelAndServices implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        flag=false;
         DisplayHotelsInput input = DisplayHotelsInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
@@ -104,6 +115,7 @@ public class QueryHotelAndServices implements Initializable {
                 },
                 success->{
                     serviceUsageDTOS=success.getServicesDTOList();
+                    flag=true;
                     return null;
                 }
         );

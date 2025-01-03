@@ -33,8 +33,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AssignedEmployeeHotels implements Initializable {
-    private final GetAllHotelsEmployeeProcess getAllHotelsProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
-
+    private final GetAllHotelsEmployeeProcess getAllHotelsProcess;
     @FXML
     private TextField searchBar;
     @FXML
@@ -50,6 +49,10 @@ public class AssignedEmployeeHotels implements Initializable {
     private Scene scene;
 
     private ObservableList<Hotel> data;
+
+    public AssignedEmployeeHotels() {
+        getAllHotelsProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
+    }
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

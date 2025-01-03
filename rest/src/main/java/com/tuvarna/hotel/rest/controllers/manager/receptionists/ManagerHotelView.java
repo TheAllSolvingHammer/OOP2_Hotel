@@ -33,12 +33,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagerHotelView implements Initializable {
-
     public TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
-
     @FXML
     private TableView<Hotel> table;
     @FXML
@@ -47,9 +45,13 @@ public class ManagerHotelView implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel,Integer> stars;
-    ObservableList<Hotel> data;
+    private ObservableList<Hotel> data;
 
-    private final DisplayManagerHotelProcess displayManagerHotelProcess = SingletonManager.getInstance(DisplayManagerHotelProcess.class);
+    private final DisplayManagerHotelProcess displayManagerHotelProcess;
+
+    public ManagerHotelView() {
+        displayManagerHotelProcess = SingletonManager.getInstance(DisplayManagerHotelProcess.class);
+    }
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

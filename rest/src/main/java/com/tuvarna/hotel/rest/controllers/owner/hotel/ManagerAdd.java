@@ -40,7 +40,11 @@ public class ManagerAdd {
     @FXML
     private TextField phoneNumber;
 
-    private final CreateUserProcess createUserProcess = SingletonManager.getInstance(CreateUserProcess.class);
+    private final CreateUserProcess createUserProcess;
+
+    public ManagerAdd() {
+        createUserProcess = SingletonManager.getInstance(CreateUserProcess.class);
+    }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
