@@ -55,7 +55,11 @@ public class DisplayClientInfo implements Initializable {
     private TableColumn<Client,String> clientRating;
     private ObservableList<Client> data;
 
-    private final ClientInformationProcess clientInformationProcess = SingletonManager.getInstance(ClientInformationProcess.class);
+    private final ClientInformationProcess clientInformationProcess;
+
+    public DisplayClientInfo() {
+        clientInformationProcess = SingletonManager.getInstance(ClientInformationProcess.class);
+    }
 
     public void clearTextField(ActionEvent event) {
         searchBar.clear();

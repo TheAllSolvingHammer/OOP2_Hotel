@@ -53,10 +53,10 @@ public class HotelOwnerData {
     @FXML
     private VBox managerVbox;
 
-    private final DisplayServicesProcess displayServicesProcess = SingletonManager.getInstance(DisplayServicesProcess.class);
-    private final UpdateHotelProcess updateServicesProcess = SingletonManager.getInstance(UpdateHotelProcess.class);
-    private final GetHotelManagersProcess getHotelManagersProcess = SingletonManager.getInstance(GetHotelManagersProcess.class);
-    private final DisplayManagersProcess displayManagersProcess=SingletonManager.getInstance(DisplayManagersProcess.class);
+    private final DisplayServicesProcess displayServicesProcess;
+    private final UpdateHotelProcess updateServicesProcess;
+    private final GetHotelManagersProcess getHotelManagersProcess;
+    private final DisplayManagersProcess displayManagersProcess;
     private CheckComboBox<Service> checkComboBox;
     private CheckComboBox<Manager> checkComboBoxManager;
 
@@ -66,6 +66,10 @@ public class HotelOwnerData {
         this.checkComboBox = new CheckComboBox<>();
         this.checkComboBoxManager = new CheckComboBox<>();
         managerList = new ArrayList<>();
+        displayServicesProcess = SingletonManager.getInstance(DisplayServicesProcess.class);
+        updateServicesProcess = SingletonManager.getInstance(UpdateHotelProcess.class);
+        getHotelManagersProcess = SingletonManager.getInstance(GetHotelManagersProcess.class);
+        displayManagersProcess = SingletonManager.getInstance(DisplayManagersProcess.class);
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {

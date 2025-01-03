@@ -45,9 +45,13 @@ public class HotelOwnerDetails implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel, Integer> stars;
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    private final DisplayOwnerHotelProcess displayHotelProcess;
 
     private ObservableList<Hotel> data;
+
+    public HotelOwnerDetails() {
+        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    }
 
     public void displayHotel(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {

@@ -4,12 +4,12 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
-import com.tuvarna.hotel.api.models.entities.ReceptionistDTO;
-import com.tuvarna.hotel.api.models.query.receptionist.information.QueryReceptionistInput;
-import com.tuvarna.hotel.api.models.query.receptionist.information.QueryReceptionistOutput;
+import com.tuvarna.hotel.api.models.entities.RoomQueryDTO;
+import com.tuvarna.hotel.api.models.query.room.QueryRoomUsageInput;
+import com.tuvarna.hotel.api.models.query.room.QueryRoomUsageOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
-import com.tuvarna.hotel.core.processes.QueryReceptionistProcess;
+import com.tuvarna.hotel.core.processes.QueryRoomUsageProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
@@ -33,8 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QueryReceptionist implements Initializable {
-
+public class QueryRoomUsage implements Initializable {
     @FXML
     private DatePicker startDate;
     @FXML
@@ -45,16 +44,16 @@ public class QueryReceptionist implements Initializable {
     private Parent root;
     private Scene scene;
     private Boolean flag;
+    private final QueryRoomUsageProcess queryRoomUsageProcess;
     private final DisplayOwnerHotelProcess displayHotelProcess;
-    private final QueryReceptionistProcess queryReceptionistProcess;
     private ObservableList<Hotel> data;
-    private List<ReceptionistDTO> receptionistDTOS;
+    private List<RoomQueryDTO> roomQueryDTOS;
 
-    public QueryReceptionist() {
-        flag = false;
+    public QueryRoomUsage() {
+        this.flag = false;
+        queryRoomUsageProcess = SingletonManager.getInstance(QueryRoomUsageProcess.class);
         displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
-        queryReceptionistProcess = SingletonManager.getInstance(QueryReceptionistProcess.class);
-        receptionistDTOS = new ArrayList<>();
+        roomQueryDTOS = new ArrayList<>();
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
@@ -69,9 +68,9 @@ public class QueryReceptionist implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         flag=false;
-       DisplayHotelsInput input = DisplayHotelsInput.builder()
-               .id(SessionManager.getInstance().getLoggedInUser().getId())
-               .build();
+        DisplayHotelsInput input = DisplayHotelsInput.builder()
+                .id(SessionManager.getInstance().getLoggedInUser().getId())
+                .build();
         Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(input);
         result.fold(
                 error -> {
@@ -84,41 +83,40 @@ public class QueryReceptionist implements Initializable {
                     hotels.getSelectionModel().select(0);
                     return null;
                 });
+
     }
 
+    private void getQueryResult(){
+        QueryRoomUsageInput input = QueryRoomUsageInput.builder()
+                .startDate(startDate.getValue())
+                .endDate(endDate.getValue())
+                .hotelId(hotels.getValue().getId())
+                .build();
+        Either<ErrorProcessor, QueryRoomUsageOutput> result= queryRoomUsageProcess.process(input);
+        result.fold(
+                error -> {
+                    AlertManager.showAlert(Alert.AlertType.ERROR,"Error in getting rooms",error.getMessage());
+                    return null;
+                },
+                success -> {
+                    roomQueryDTOS=success.getRoomsList();
+                    flag=true;
+                    return null;
+                });
+    }
     public void getQuery(ActionEvent event) throws IOException {
         getQueryResult();
         if(!flag){
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-receptionist.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-room-usage.fxml"));
         Parent root = loader.load();
-        QueryReceptionistTable controller = loader.getController();
-        controller.setReceptionistDTOList(receptionistDTOS);
+        QueryRoomUsageTable controller= loader.getController();
+        controller.setRoomQueryDTOS(roomQueryDTOS);
         controller.display();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Details");
         stage.show();
-    }
-
-    private void getQueryResult(){
-        QueryReceptionistInput input = QueryReceptionistInput.builder()
-                .startDate(startDate.getValue())
-                .endDate(endDate.getValue())
-                .hotelId(hotels.getValue().getId())
-                .build();
-        Either<ErrorProcessor, QueryReceptionistOutput> result=queryReceptionistProcess.process(input);
-        result.fold(
-          error->{
-              AlertManager.showAlert(Alert.AlertType.ERROR,"Error in receptionist reservation query", error.getMessage());
-              return null;
-          },
-          success->{
-              receptionistDTOS=success.getReceptionistDTOS();
-              flag=true;
-              return null;
-          }
-        );
     }
 }

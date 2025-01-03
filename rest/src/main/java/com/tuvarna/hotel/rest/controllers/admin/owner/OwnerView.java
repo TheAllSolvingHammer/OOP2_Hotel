@@ -39,14 +39,13 @@ public class OwnerView implements Initializable{
     private final DisplayOwnersProcess displayOwnersProcess;
     @FXML
     private TableView<Owner> table;
-
     @FXML
     private TableColumn<Owner, String> firstName;
     @FXML
     private TableColumn<Owner, String> lastName;
     @FXML
     private TableColumn<Owner, String> email;
-    ObservableList<Owner> data;
+    private ObservableList<Owner> data;
 
     public OwnerView() {
         displayOwnersProcess=SingletonManager.getInstance(DisplayOwnersProcess.class);

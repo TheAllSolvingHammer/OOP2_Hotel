@@ -10,8 +10,10 @@ import java.util.UUID;
 @ToString
 @NoArgsConstructor()
 @AllArgsConstructor()
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 public class Owner {
+    @EqualsAndHashCode.Include
     private UUID id;
     private String firstName;
     private String lastName;

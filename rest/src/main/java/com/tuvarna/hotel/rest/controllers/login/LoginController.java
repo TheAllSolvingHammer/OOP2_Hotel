@@ -4,6 +4,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.login.LoginUserInput;
 import com.tuvarna.hotel.api.models.login.LoginUserOutput;
 import com.tuvarna.hotel.core.processes.LoginUserProcess;
+import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import com.tuvarna.hotel.rest.factory.AbstractLoginControllerFactory;
 import io.vavr.control.Either;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController  {
-    private final LoginUserProcess loginUserProcess = new LoginUserProcess();
+    private final LoginUserProcess loginUserProcess;
 
     private Stage stage;
     private Scene scene;
@@ -29,6 +30,10 @@ public class LoginController  {
     private TextField field_username;
     @FXML
     private PasswordField field_password;
+
+    public LoginController() {
+        loginUserProcess = SingletonManager.getInstance(LoginUserProcess.class);
+    }
 
 
     @FXML

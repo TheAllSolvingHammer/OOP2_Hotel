@@ -37,7 +37,7 @@ public class ServicesView implements Initializable {
     private Parent root;
     private Scene scene;
 
-    private final DisplayServicesProcess displayServicesProcess = SingletonManager.getInstance(DisplayServicesProcess.class);
+    private final DisplayServicesProcess displayServicesProcess;
     @FXML
     private TableView<Service> table;
     @FXML
@@ -45,7 +45,11 @@ public class ServicesView implements Initializable {
     @FXML
     private TableColumn<Service, BigDecimal> price;
 
-    ObservableList<Service> data;
+    private ObservableList<Service> data;
+
+    public ServicesView() {
+        displayServicesProcess = SingletonManager.getInstance(DisplayServicesProcess.class);
+    }
 
 
     @FXML

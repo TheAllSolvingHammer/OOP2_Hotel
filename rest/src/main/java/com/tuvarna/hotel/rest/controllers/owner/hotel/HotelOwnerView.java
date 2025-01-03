@@ -37,7 +37,7 @@ public class HotelOwnerView implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    private final DisplayOwnerHotelProcess displayHotelProcess;
     @FXML
     private TableView<Hotel> table;
     @FXML
@@ -48,6 +48,10 @@ public class HotelOwnerView implements Initializable {
     private TableColumn<Hotel, Integer> stars;
 
     private ObservableList<Hotel> data;
+
+    public HotelOwnerView() {
+        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    }
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

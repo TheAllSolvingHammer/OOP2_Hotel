@@ -22,8 +22,6 @@ public class ManagerController implements Initializable {
     private Parent root;
     private Scene scene;
 
-
-
     @FXML
     protected void createUser(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/add-receptionist.fxml"));
