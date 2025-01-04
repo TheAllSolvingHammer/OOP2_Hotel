@@ -127,4 +127,13 @@ public class ReceptionistController implements Initializable {
         stage.setTitle("Reservations View");
         stage.show();
     }
+
+    public void switchToRoomUsage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/query-room-usage.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Room usage view");
+        stage.show();
+    }
 }

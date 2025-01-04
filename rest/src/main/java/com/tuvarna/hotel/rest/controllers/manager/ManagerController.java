@@ -59,16 +59,6 @@ public class ManagerController implements Initializable {
     }
 
 
-    @FXML
-    protected void switchToRegistration(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/registration-scene.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Registration View");
-        stage.show();
-    }
-
 
     @FXML
     protected void switchToAllHotels(ActionEvent event) throws IOException {
@@ -116,5 +106,31 @@ public class ManagerController implements Initializable {
                         return null;
                 }
         );
+    }
+
+    @FXML
+    public void queryReservation(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/query-hotel-receptionist.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservations of Receptionists");
+        stage.show();
+    }
+
+    @FXML
+    public void queryRoomUsage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/query-room-usage.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Room usage");
+        stage.show();
+    }
+
+
+    @FXML
+    public void queryRegistrations(ActionEvent event) throws IOException {
+
     }
 }

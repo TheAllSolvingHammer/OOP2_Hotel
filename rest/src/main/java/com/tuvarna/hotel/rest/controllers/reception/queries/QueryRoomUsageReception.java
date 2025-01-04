@@ -1,14 +1,14 @@
-package com.tuvarna.hotel.rest.controllers.owner.hotel;
+package com.tuvarna.hotel.rest.controllers.reception.queries;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.entities.RoomQueryDTO;
+import com.tuvarna.hotel.api.models.get.receptionist.hotels.GetAllHotelsEmployeeInput;
+import com.tuvarna.hotel.api.models.get.receptionist.hotels.GetAllHotelsEmployeeOutput;
 import com.tuvarna.hotel.api.models.query.room.QueryRoomUsageInput;
 import com.tuvarna.hotel.api.models.query.room.QueryRoomUsageOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
-import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
+import com.tuvarna.hotel.core.processes.GetAllHotelsEmployeeProcess;
 import com.tuvarna.hotel.core.processes.QueryRoomUsageProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QueryRoomUsage implements Initializable {
+public class QueryRoomUsageReception implements Initializable {
     @FXML
     private DatePicker startDate;
     @FXML
@@ -45,33 +45,33 @@ public class QueryRoomUsage implements Initializable {
     private Scene scene;
     private Boolean flag;
     private final QueryRoomUsageProcess queryRoomUsageProcess;
-    private final DisplayOwnerHotelProcess displayHotelProcess;
+    private final GetAllHotelsEmployeeProcess getAllHotelsProcess;
     private ObservableList<Hotel> data;
     private List<RoomQueryDTO> roomQueryDTOS;
 
-    public QueryRoomUsage() {
+    public QueryRoomUsageReception() {
         this.flag = false;
         queryRoomUsageProcess = SingletonManager.getInstance(QueryRoomUsageProcess.class);
-        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+        getAllHotelsProcess= SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
         roomQueryDTOS = new ArrayList<>();
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Owner");
+        stage.setTitle("Receptionist");
         stage.show();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         flag=false;
-        DisplayHotelsInput input = DisplayHotelsInput.builder()
+        GetAllHotelsEmployeeInput input = GetAllHotelsEmployeeInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
-        Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(input);
+        Either<ErrorProcessor, GetAllHotelsEmployeeOutput> result= getAllHotelsProcess.process(input);
         result.fold(
                 error -> {
                     AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
@@ -112,14 +112,14 @@ public class QueryRoomUsage implements Initializable {
         if(!flag){
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-room-usage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/query-more-room-usage.fxml"));
         Parent root = loader.load();
-        QueryRoomUsageTable controller= loader.getController();
+        QueryRoomUsageReceptionTable controller= loader.getController();
         controller.setRoomQueryDTOS(roomQueryDTOS);
         controller.display();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle("Hotel Details");
+        stage.setTitle("Room usage details");
         stage.show();
     }
 }
