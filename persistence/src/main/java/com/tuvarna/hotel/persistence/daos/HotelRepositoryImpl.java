@@ -97,7 +97,7 @@ public class HotelRepositoryImpl extends BaseRepositoryImpl<HotelEntity,UUID> im
     }
 
     @Override
-    public List<HotelEntity> findAllByEmployee(UserEntity user) {
+    public List<HotelEntity> findAllByUser(UserEntity user) {
         Session session = HibernateUtil.openSession();
         try {
             String hql = "SELECT h FROM HotelEntity h JOIN h.userList u WHERE u = :user";
@@ -105,9 +105,11 @@ public class HotelRepositoryImpl extends BaseRepositoryImpl<HotelEntity,UUID> im
             query.setParameter("user", user);
             return query.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to retrieve hotels for the given receptionist: " +user.getId(), e);
+            throw new RuntimeException("Failed to retrieve hotels for the given user: " +user.getId(), e);
         } finally {
             session.close();
         }
     }
+
+
 }

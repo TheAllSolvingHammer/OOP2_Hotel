@@ -13,12 +13,13 @@ import java.util.UUID;
 @NoArgsConstructor()
 @AllArgsConstructor()
 @Builder
-@EqualsAndHashCode()
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "rooms")
 @Entity
 public class RoomEntity implements EntityMarker {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @EqualsAndHashCode.Include
     @Column(name = "room_id", updatable = false,nullable = false)
     private UUID id;
 

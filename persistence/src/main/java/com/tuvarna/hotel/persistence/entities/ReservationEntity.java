@@ -47,7 +47,7 @@ public class ReservationEntity implements EntityMarker {
     @JoinColumn(name = "created_by", nullable = false)
     private UserEntity createdBy;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "reservation_services",
             joinColumns = @JoinColumn(name = "reservation_id"),
