@@ -13,6 +13,7 @@ import com.tuvarna.hotel.persistence.daos.HotelRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -20,21 +21,25 @@ import java.util.List;
 public class DisplayHotelProcess extends BaseProcessor implements DisplayHotelsOperation {
     private final HotelRepositoryImpl hotelRepository;
     private final ConvertEntityToHotel converter;
+    private static final Logger log = Logger.getLogger(DisplayHotelProcess.class);
 
     public DisplayHotelProcess() {
-        hotelRepository=SingletonManager.getInstance(HotelRepositoryImpl.class);
-        converter=SingletonManager.getInstance(ConvertEntityToHotel.class);
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertEntityToHotel.class);
     }
 
     @Override
     public Either<ErrorProcessor, DisplayHotelsOutput> process(DisplayHotelsInput input) {
-        return validateInput(input).flatMap(validInput -> Try.of(()-> {
-            List<HotelEntity> entityList=hotelRepository.getAll();
-            List<Hotel> hotels=converter.convert(entityList);
-            return DisplayHotelsOutput.builder()
-                    .hotelList(hotels)
-                    .build();
-        }).toEither()
+        return validateInput(input).flatMap(validInput -> Try.of(() -> {
+                    log.info("Started displaying hotels, input: " + input);
+                    List<HotelEntity> entityList = hotelRepository.getAll();
+                    List<Hotel> hotels = converter.convert(entityList);
+                    DisplayHotelsOutput result = DisplayHotelsOutput.builder()
+                            .hotelList(hotels)
+                            .build();
+                    log.info("Ended displaying hotels, output: "+result);
+                    return result;
+                }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
     }
 }

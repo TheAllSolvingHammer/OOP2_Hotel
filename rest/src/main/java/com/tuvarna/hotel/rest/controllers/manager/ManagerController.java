@@ -22,8 +22,6 @@ public class ManagerController implements Initializable {
     private Parent root;
     private Scene scene;
 
-
-
     @FXML
     protected void createUser(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/add-receptionist.fxml"));
@@ -55,15 +53,6 @@ public class ManagerController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    protected void switchToClients(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/client-scene.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Client View");
-        stage.show();
-    }
 
     @FXML
     protected void switchToAllHotels(ActionEvent event) throws IOException {

@@ -13,20 +13,31 @@ import com.tuvarna.hotel.persistence.daos.ServiceRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.ServiceEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 @Singleton
 public class DisplayServicesProcess extends BaseProcessor implements DisplayServicesOperation {
-    private final ServiceRepositoryImpl serviceRepository = SingletonManager.getInstance(ServiceRepositoryImpl.class);
-    private final ConvertServices converter=SingletonManager.getInstance(ConvertServices.class);
+    private final ServiceRepositoryImpl serviceRepository;
+    private final ConvertServices converter;
+    private static final Logger log = Logger.getLogger(DisplayServicesProcess.class);
+
+    public DisplayServicesProcess() {
+        serviceRepository = SingletonManager.getInstance(ServiceRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertServices.class);
+    }
+
     @Override
     public Either<ErrorProcessor, DisplayServicesOutput> process(DisplayServicesInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started displaying services, input: "+input);
                     List<ServiceEntity> serviceEntities = serviceRepository.getAll();
                     List<Service> serviceList=converter.convert(serviceEntities);
-                    return DisplayServicesOutput.builder()
+                    DisplayServicesOutput result = DisplayServicesOutput.builder()
                             .serviceList(serviceList)
                             .build();
+                    log.info("Ended displaying services, output: "+result);
+                    return result;
 
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));

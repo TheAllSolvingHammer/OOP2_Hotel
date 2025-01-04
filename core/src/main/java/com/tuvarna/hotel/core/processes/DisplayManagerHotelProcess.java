@@ -17,24 +17,35 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 @Singleton
 public class DisplayManagerHotelProcess extends BaseProcessor implements DisplayManagerHotelOperation {
-    private final HotelRepositoryImpl hotelRepository= SingletonManager.getInstance(HotelRepositoryImpl.class);
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final ConvertEntityToHotel converter = SingletonManager.getInstance(ConvertEntityToHotel.class);
+    private final HotelRepositoryImpl hotelRepository;
+    private final UserRepositoryImpl userRepository;
+    private final ConvertEntityToHotel converter;
+    private static final Logger log = Logger.getLogger(DisplayManagerHotelProcess.class);
+
+    public DisplayManagerHotelProcess() {
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertEntityToHotel.class);
+    }
+
     @Override
     public Either<ErrorProcessor, DisplayManagerHotelOutput> process(DisplayManagerHotelInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()-> {
+                    log.info("Started displaying hotels of managers, input: "+input);
                     UserEntity user=getUserEntity(input);
                     checkManagerRole(user);
-
                     List<HotelEntity> hotels = hotelRepository.findAllByManager(user);
                     List<Hotel> hotelList=converter.convert(hotels);
-                    return DisplayManagerHotelOutput.builder()
+                    DisplayManagerHotelOutput result = DisplayManagerHotelOutput.builder()
                             .hotelList(hotelList)
                             .build();
+                    log.info("Ended displaying hotels of managers ,output: "+result);
+                    return result;
                 }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
 

@@ -39,14 +39,13 @@ public class OwnerView implements Initializable{
     private final DisplayOwnersProcess displayOwnersProcess;
     @FXML
     private TableView<Owner> table;
-
     @FXML
     private TableColumn<Owner, String> firstName;
     @FXML
     private TableColumn<Owner, String> lastName;
     @FXML
     private TableColumn<Owner, String> email;
-    ObservableList<Owner> data;
+    private ObservableList<Owner> data;
 
     public OwnerView() {
         displayOwnersProcess=SingletonManager.getInstance(DisplayOwnersProcess.class);
@@ -62,14 +61,7 @@ public class OwnerView implements Initializable{
         stage.setTitle("Admin");
         stage.show();
     }
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+    private void display(){
         DisplayOwnersInput input = DisplayOwnersInput.builder().build();
         Either<ErrorProcessor, DisplayOwnersOutput> result= displayOwnersProcess.process(input);
         result.fold(
@@ -84,7 +76,16 @@ public class OwnerView implements Initializable{
                     return null;
                 });
 
-                table.setItems(data);
+        table.setItems(data);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        display();
 
         FilteredList<Owner> filteredData=new FilteredList<>(data,b->true);
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -141,6 +142,8 @@ public class OwnerView implements Initializable{
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Owner data");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
         stage.show();
     }
 

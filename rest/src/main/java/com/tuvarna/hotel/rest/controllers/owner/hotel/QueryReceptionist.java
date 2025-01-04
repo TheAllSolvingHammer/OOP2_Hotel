@@ -15,8 +15,6 @@ import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +22,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,11 +44,18 @@ public class QueryReceptionist implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
-    private final QueryReceptionistProcess queryReceptionistProcess = SingletonManager.getInstance(QueryReceptionistProcess.class);
+    private Boolean flag;
+    private final DisplayOwnerHotelProcess displayHotelProcess;
+    private final QueryReceptionistProcess queryReceptionistProcess;
     private ObservableList<Hotel> data;
-    private List<ReceptionistDTO> receptionistDTOS= new ArrayList<>();
+    private List<ReceptionistDTO> receptionistDTOS;
+
+    public QueryReceptionist() {
+        flag = false;
+        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+        queryReceptionistProcess = SingletonManager.getInstance(QueryReceptionistProcess.class);
+        receptionistDTOS = new ArrayList<>();
+    }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
@@ -63,7 +68,7 @@ public class QueryReceptionist implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        flag=false;
        DisplayHotelsInput input = DisplayHotelsInput.builder()
                .id(SessionManager.getInstance().getLoggedInUser().getId())
                .build();
@@ -83,6 +88,9 @@ public class QueryReceptionist implements Initializable {
 
     public void getQuery(ActionEvent event) throws IOException {
         getQueryResult();
+        if(!flag){
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-receptionist.fxml"));
         Parent root = loader.load();
         QueryReceptionistTable controller = loader.getController();
@@ -108,6 +116,7 @@ public class QueryReceptionist implements Initializable {
           },
           success->{
               receptionistDTOS=success.getReceptionistDTOS();
+              flag=true;
               return null;
           }
         );

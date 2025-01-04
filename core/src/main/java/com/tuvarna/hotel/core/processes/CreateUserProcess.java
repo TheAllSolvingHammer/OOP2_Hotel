@@ -16,18 +16,24 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 @Singleton
 public class CreateUserProcess extends BaseProcessor implements CreateUserOperation {
+    private final UserRepositoryImpl userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private static final Logger log = Logger.getLogger(CreateUserProcess.class);
 
-    private final UserRepositoryImpl userRepository= SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final PasswordEncoder passwordEncoder=SingletonManager.getInstance(MyPasswordEncoder.class);
+    public CreateUserProcess() {
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        passwordEncoder = SingletonManager.getInstance(MyPasswordEncoder.class);
+    }
 
     @Override
     public Either<ErrorProcessor, CreateUserOutput> process(CreateUserInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-
-                    checkPasswordIntegrity(input.getPassword(),input.getPasswordSecond());
+                log.info("Started creating user, input:"+input);
+                checkPasswordIntegrity(input.getPassword(),input.getPasswordSecond());
                 checkRole(input.getRole());
                     UserEntity user= UserEntity.builder()
                             .firstName(input.getFirstName())
@@ -39,10 +45,11 @@ public class CreateUserProcess extends BaseProcessor implements CreateUserOperat
                             .phone(input.getPhone())
                             .build();
                     userRepository.save(user);
-                return CreateUserOutput.builder()
+                CreateUserOutput result= CreateUserOutput.builder()
                         .message("Successfully added user")
                         .build();
-
+                log.info("Ended creating user, output:"+result);
+                return result;
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
         }

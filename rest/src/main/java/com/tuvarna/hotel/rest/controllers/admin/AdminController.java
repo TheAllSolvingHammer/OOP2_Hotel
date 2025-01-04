@@ -17,24 +17,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
-
-
     public ListView<String> notificationList;
     private Stage stage;
     private Parent root;
     private Scene scene;
-
-    @FXML
-    protected void switchToCreateOwner(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/new-owner.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Manager View");
-        stage.show();
-
-    }
-
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

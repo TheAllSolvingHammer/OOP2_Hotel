@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="437.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.QueryRoomUsageTable">
+   <Button layoutX="504.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="26.0" prefWidth="107.0" text="Back" />
+   <TableView fx:id="table" layoutX="26.0" layoutY="65.0" prefHeight="307.0" prefWidth="561.0">
+      <columns>
+         <TableColumn fx:id="roomNumber" prefWidth="153.0" text="RoomNumber" />
+         <TableColumn fx:id="price" prefWidth="124.0" text="Price" />
+         <TableColumn fx:id="type" prefWidth="129.0" text="Type" />
+         <TableColumn fx:id="usage" prefWidth="152.0" text="Usage" />
+      </columns>
+   </TableView>
+   <Label layoutX="93.0" layoutY="22.0" prefHeight="26.0" prefWidth="50.0" text="Search:" />
+   <TextField fx:id="searchBar" layoutX="143.0" layoutY="23.0" prefHeight="25.0" prefWidth="336.0" />
+   <Button layoutX="496.0" layoutY="23.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
+</AnchorPane>

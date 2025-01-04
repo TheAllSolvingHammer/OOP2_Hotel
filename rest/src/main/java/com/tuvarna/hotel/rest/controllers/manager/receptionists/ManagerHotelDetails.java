@@ -4,9 +4,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.receptionist.DisplayAllEmployeeInput;
 import com.tuvarna.hotel.api.models.display.receptionist.DisplayAllEmployeeOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
-import com.tuvarna.hotel.api.models.entities.Manager;
 import com.tuvarna.hotel.api.models.entities.Receptionist;
-import com.tuvarna.hotel.api.models.entities.Service;
 import com.tuvarna.hotel.api.models.get.receptionist.assigned.GetAssignedEmployeeInput;
 import com.tuvarna.hotel.api.models.get.receptionist.assigned.GetAssignedEmployeeOutput;
 import com.tuvarna.hotel.api.models.update.receptionist.UpdateReceptionistOfHotelInput;
@@ -20,8 +18,6 @@ import io.vavr.control.Either;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -41,19 +37,19 @@ public class ManagerHotelDetails {
     private Label stars;
     @FXML
     private Label name;
-    private Stage stage;
-    private Parent root;
-    private Scene scene;
     @Setter
     private Hotel hotel;
     private CheckComboBox<Receptionist> checkComboBox;
     private List<Receptionist> receptionistList;
-    private final GetAssignedEmployeesProcess getEmployeesProcess = SingletonManager.getInstance(GetAssignedEmployeesProcess.class);
-    private final DisplayAllEmployeeProcessor displayAllEmployeeProcessor = SingletonManager.getInstance(DisplayAllEmployeeProcessor.class);
-    private final UpdateReceptionistOfHotelProcess updateHotelProcess = SingletonManager.getInstance(UpdateReceptionistOfHotelProcess.class);
+    private final GetAssignedEmployeesProcess getEmployeesProcess;
+    private final DisplayAllEmployeeProcessor displayAllEmployeeProcessor;
+    private final UpdateReceptionistOfHotelProcess updateHotelProcess;
     public ManagerHotelDetails() {
         checkComboBox=new CheckComboBox<>();
         receptionistList=new ArrayList<>();
+        getEmployeesProcess = SingletonManager.getInstance(GetAssignedEmployeesProcess.class);
+        displayAllEmployeeProcessor = SingletonManager.getInstance(DisplayAllEmployeeProcessor.class);
+        updateHotelProcess = SingletonManager.getInstance(UpdateReceptionistOfHotelProcess.class);
     }
 
     public void applyChanges(ActionEvent event) {

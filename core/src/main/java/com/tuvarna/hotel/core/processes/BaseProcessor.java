@@ -7,6 +7,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 public abstract class BaseProcessor {
     private final Validator validator;
-
+    private static final Logger log = Logger.getLogger(ClientInformationProcess.class);
     {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         this.validator = factory.getValidator();
@@ -30,6 +31,7 @@ public abstract class BaseProcessor {
             ErrorProcessor errorsProcessor = ErrorProcessor.builder()
                     .message(String.join(", ", errorMessages))
                     .build();
+            log.info("Validation failed, cause: "+errorsProcessor);
             return Either.left(errorsProcessor);
         }
 

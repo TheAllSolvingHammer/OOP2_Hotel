@@ -1,10 +1,9 @@
 package com.tuvarna.hotel.rest.controllers.manager.receptionists;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelInput;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelOutput;
-import com.tuvarna.hotel.api.models.entities.Service;
+import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayManagerHotelProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
@@ -34,12 +33,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagerHotelView implements Initializable {
-
     public TextField searchBar;
     private Stage stage;
     private Parent root;
     private Scene scene;
-
     @FXML
     private TableView<Hotel> table;
     @FXML
@@ -48,9 +45,13 @@ public class ManagerHotelView implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel,Integer> stars;
-    ObservableList<Hotel> data;
+    private ObservableList<Hotel> data;
 
-    private final DisplayManagerHotelProcess displayManagerHotelProcess = SingletonManager.getInstance(DisplayManagerHotelProcess.class);
+    private final DisplayManagerHotelProcess displayManagerHotelProcess;
+
+    public ManagerHotelView() {
+        displayManagerHotelProcess = SingletonManager.getInstance(DisplayManagerHotelProcess.class);
+    }
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
@@ -123,7 +124,6 @@ public class ManagerHotelView implements Initializable {
             if(hotel==null) return;
             showMoreHotelData(hotel);
         }
-        display();
 
     }
 
@@ -136,6 +136,8 @@ public class ManagerHotelView implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Information");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
         stage.show();
     }
 

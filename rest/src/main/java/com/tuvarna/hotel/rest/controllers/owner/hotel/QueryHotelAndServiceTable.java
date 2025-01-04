@@ -9,8 +9,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,9 +30,6 @@ public class QueryHotelAndServiceTable {
     private TableColumn<ServicesDTO,Long> amount;
     @FXML
     private TableColumn<ServicesDTO, BigDecimal> revenue;
-    private Stage stage;
-    private Parent root;
-    private Scene scene;
     @Setter
     private List<ServicesDTO> servicesDTOS;
     private ObservableList<ServicesDTO> data;

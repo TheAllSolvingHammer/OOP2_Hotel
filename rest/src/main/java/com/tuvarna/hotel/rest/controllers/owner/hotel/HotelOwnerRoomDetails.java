@@ -2,10 +2,10 @@ package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.enums.TypeRoom;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.create.room.CreateRoomInput;
 import com.tuvarna.hotel.api.models.create.room.CreateRoomOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
+import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelInput;
 import com.tuvarna.hotel.api.models.get.rooms.GetAllRoomsPerHotelOutput;
 import com.tuvarna.hotel.core.processes.CreateRoomProcess;
@@ -19,8 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -37,8 +35,6 @@ import java.util.ResourceBundle;
 
 public class HotelOwnerRoomDetails implements Initializable{
     private Stage stage;
-    private Parent root;
-    private Scene scene;
     @FXML
     private ListView<Room> listView;
     @FXML
@@ -54,15 +50,18 @@ public class HotelOwnerRoomDetails implements Initializable{
 
     private List<Room> roomList;
 
-    private final GetRoomsPerHotelProcess getAllRoomsProcess = SingletonManager.getInstance(GetRoomsPerHotelProcess.class);
-    private final CreateRoomProcess createRoomProcess = SingletonManager.getInstance(CreateRoomProcess.class);
+    private final GetRoomsPerHotelProcess getAllRoomsProcess;
+    private final CreateRoomProcess createRoomProcess;
 
     public HotelOwnerRoomDetails() {
         roomList=new ArrayList<>();
+        getAllRoomsProcess = SingletonManager.getInstance(GetRoomsPerHotelProcess.class);
+        createRoomProcess = SingletonManager.getInstance(CreateRoomProcess.class);
     }
 
     public void handleBackButton(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -102,6 +101,7 @@ public class HotelOwnerRoomDetails implements Initializable{
                     return null;
                 }
         );
+
     }
 
     public void display(){

@@ -3,19 +3,15 @@ package com.tuvarna.hotel.persistence.daos;
 import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
 import com.tuvarna.hotel.persistence.dtos.ReceptionistReservationDTO;
+import com.tuvarna.hotel.persistence.dtos.RoomUsageDTO;
 import com.tuvarna.hotel.persistence.dtos.ServiceUsageDTO;
-import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import com.tuvarna.hotel.persistence.entities.ReservationEntity;
 import com.tuvarna.hotel.persistence.entities.RoomEntity;
-import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import com.tuvarna.hotel.persistence.repositories.ReservationRepository;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 @Singleton
@@ -105,6 +101,36 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
             return query.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Error getting query", e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<RoomUsageDTO> getRoomUsageByHotelAndDate(UUID hotelId, LocalDate startDate, LocalDate endDate) {
+        String hql = """
+        SELECT new com.tuvarna.hotel.persistence.dtos.RoomUsageDTO(
+            rm.roomNumber,
+            rm.price,
+            rm.type,
+            COUNT(r.id)
+        )
+        FROM RoomEntity rm
+        LEFT JOIN ReservationEntity r ON rm.id = r.room.id
+        WHERE rm.hotel.id = :hotelId
+          AND (:startDate IS NULL OR r.startDate >= :startDate)
+          AND (:endDate IS NULL OR r.endDate <= :endDate)
+        GROUP BY rm.roomNumber, rm.floor, rm.price, rm.type
+    """;
+        Session session = HibernateUtil.openSession();
+        try {
+            Query<RoomUsageDTO> query = session.createQuery(hql, RoomUsageDTO.class);
+            query.setParameter("hotelId", hotelId);
+            query.setParameter("startDate", startDate);
+            query.setParameter("endDate", endDate);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving room usage by hotel and date", e);
         } finally {
             session.close();
         }

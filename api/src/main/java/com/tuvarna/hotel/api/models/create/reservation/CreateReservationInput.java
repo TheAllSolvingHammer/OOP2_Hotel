@@ -2,7 +2,6 @@ package com.tuvarna.hotel.api.models.create.reservation;
 
 import com.tuvarna.hotel.api.base.OperationInput;
 import com.tuvarna.hotel.api.enums.TypeReservation;
-import com.tuvarna.hotel.api.enums.TypeRoom;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.entities.Service;

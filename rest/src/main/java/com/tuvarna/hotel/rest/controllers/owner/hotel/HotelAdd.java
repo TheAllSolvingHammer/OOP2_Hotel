@@ -33,7 +33,11 @@ public class HotelAdd  implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private final CreateHotelProcess createHotelProcess= SingletonManager.getInstance(CreateHotelProcess.class);
+    private final CreateHotelProcess createHotelProcess;
+
+    public HotelAdd() {
+        createHotelProcess = SingletonManager.getInstance(CreateHotelProcess.class);
+    }
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {

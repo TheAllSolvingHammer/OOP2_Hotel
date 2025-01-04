@@ -10,7 +10,6 @@ import com.tuvarna.hotel.api.models.create.reservation.CreateReservationOutput;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.api.models.entities.Room;
 import com.tuvarna.hotel.api.models.entities.Service;
-import com.tuvarna.hotel.core.converters.ConvertServices;
 import com.tuvarna.hotel.core.converters.ConvertServicesToEntity;
 import com.tuvarna.hotel.core.exception.InputQueryExceptionCase;
 import com.tuvarna.hotel.domain.singleton.Singleton;
@@ -25,6 +24,9 @@ import com.tuvarna.hotel.persistence.enums.ReservationType;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
+import javafx.stage.StageStyle;
 import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
@@ -37,16 +39,25 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 @Singleton
 public class CreateReservationProcess extends BaseProcessor implements CreateReservationOperation {
-    private final RoomRepositoryImpl roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
-    private final ReservationRepositoryImpl reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
-    private final ClientRepositoryImpl clientRepository= SingletonManager.getInstance(ClientRepositoryImpl.class);
-    private final UserRepositoryImpl userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
-    private final ConvertServicesToEntity converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
+    private final RoomRepositoryImpl roomRepository;
+    private final ReservationRepositoryImpl reservationRepository;
+    private final ClientRepositoryImpl clientRepository;
+    private final UserRepositoryImpl userRepository;
+    private final ConvertServicesToEntity converter;
     private static final Logger log = Logger.getLogger(CreateReservationProcess.class);
+
+    public CreateReservationProcess() {
+        roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
+        reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
+        clientRepository = SingletonManager.getInstance(ClientRepositoryImpl.class);
+        userRepository = SingletonManager.getInstance(UserRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertServicesToEntity.class);
+    }
+
     @Override
     public Either<ErrorProcessor, CreateReservationOutput> process(CreateReservationInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
-                    log.info("Started creating reservation");
+                    log.info("Started create reservation input: "+input);
                     checkDates(input.getStartDate(),input.getEndDate());
                     RoomEntity room = checkRoom(input.getRoom());
                     checkAvailability(room,input.getStartDate(),input.getEndDate());
@@ -67,9 +78,11 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                             .createdBy(user)
                             .build();
                     reservationRepository.save(reservation);
-                return CreateReservationOutput.builder()
+                CreateReservationOutput result= CreateReservationOutput.builder()
                         .message("Successfully created reservation")
                         .build();
+                log.info("Ended create reservation, output: "+result);
+                return result;
                 }).toEither()
                 .mapLeft(InputQueryExceptionCase::handleThrowable));
     }
@@ -77,6 +90,21 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
     private void checkClientRating(ClientEntity clientEntity) {
         if(clientEntity.getRating().equals(ClientRating.BAD)) {
             throw new InputException("Client has bad rating!");
+        }
+        if(clientEntity.getRating().equals(ClientRating.CONCERNING)){
+            log.warn("Client is concerning, client: "+clientEntity);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Client waring");
+            alert.initStyle(StageStyle.UNDECORATED);
+            alert.setContentText("Client rating is rated as concerning");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.CANCEL)
+                    throw new InputException("Client was marked as concerning");
+            });
+
+
         }
     }
 

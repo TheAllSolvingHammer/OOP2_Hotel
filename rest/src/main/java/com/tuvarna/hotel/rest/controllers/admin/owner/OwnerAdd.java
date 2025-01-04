@@ -22,12 +22,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class OwnerAdd {
-    private final CreateUserProcess createUserProcess=SingletonManager.getInstance(CreateUserProcess.class);
-
+    private final CreateUserProcess createUserProcess;
     private Stage stage;
     private Parent root;
     private Scene scene;
-
     @FXML
     private TextField firstName;
     @FXML
@@ -43,10 +41,13 @@ public class OwnerAdd {
     @FXML
     private TextField phoneNumber;
 
+    public OwnerAdd() {
+        createUserProcess = SingletonManager.getInstance(CreateUserProcess.class);
+    }
 
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/admin-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/admin/owners-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);

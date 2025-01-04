@@ -1,6 +1,5 @@
 package com.tuvarna.hotel.persistence.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
 import com.tuvarna.hotel.persistence.enums.RoleEntity;
 import jakarta.persistence.*;

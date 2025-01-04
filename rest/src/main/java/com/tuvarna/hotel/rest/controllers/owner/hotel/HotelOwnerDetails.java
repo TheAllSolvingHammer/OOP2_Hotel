@@ -45,9 +45,13 @@ public class HotelOwnerDetails implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel, Integer> stars;
-    private final DisplayOwnerHotelProcess displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    private final DisplayOwnerHotelProcess displayHotelProcess;
 
     private ObservableList<Hotel> data;
+
+    public HotelOwnerDetails() {
+        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
+    }
 
     public void displayHotel(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount()==2) {
@@ -55,6 +59,7 @@ public class HotelOwnerDetails implements Initializable {
             if(hotel==null ) return;
             showMoreHotelData(hotel);
         }
+
     }
 
     private void showMoreHotelData(Hotel hotel) throws IOException {
@@ -66,7 +71,10 @@ public class HotelOwnerDetails implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Hotel Details");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
         stage.show();
+
     }
 
 
@@ -79,11 +87,8 @@ public class HotelOwnerDetails implements Initializable {
         stage.show();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        location.setCellValueFactory(new PropertyValueFactory<>("location"));
-        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+    private void display(){
+
         DisplayHotelsInput hotelsInput = DisplayHotelsInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
@@ -101,11 +106,18 @@ public class HotelOwnerDetails implements Initializable {
                 });
 
         table.setItems(data);
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        location.setCellValueFactory(new PropertyValueFactory<>("location"));
+        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+        display();
         FilteredList<Hotel> filteredData=new FilteredList<>(data, b->true);
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(hotel -> {
-                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
+                if(newValue.isBlank() || newValue.isEmpty()){
                     return true;
                 }
 

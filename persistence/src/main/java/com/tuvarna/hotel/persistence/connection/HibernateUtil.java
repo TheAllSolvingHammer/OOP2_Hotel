@@ -1,23 +1,20 @@
 package com.tuvarna.hotel.persistence.connection;
 
-
 import lombok.Getter;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-
-
-
+    private static final Logger log = Logger.getLogger(HibernateUtil.class);
     @Getter
     private static SessionFactory sessionFactory;
     static {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();//creates SessionFactory
+            sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable e) {
-            //todo
-            System.out.println(e.getMessage());
+            log.error("Hibernate error encountered: "+e.getMessage());
         }
     }
 
@@ -28,6 +25,5 @@ public class HibernateUtil {
     public static void closeSession(){
         sessionFactory.close();
     }
-    public static void createSessionFactory(){}
 
 }

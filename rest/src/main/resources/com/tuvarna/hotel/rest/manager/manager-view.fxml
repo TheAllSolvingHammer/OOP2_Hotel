@@ -9,10 +9,8 @@
    <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@manager.css">
       <Button mnemonicParsing="false" onAction="#createUser" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Add receptionist" />
       <Button mnemonicParsing="false" onAction="#switchToAllHotels" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Hotels" />
-      <Button mnemonicParsing="false" onAction="#switchToClients" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Clients" />
       <Button mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Registrations" />
       <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="()" />
-      <Button mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Back" />
    </VBox>
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutManager" text="Log Out" />
    <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0" />

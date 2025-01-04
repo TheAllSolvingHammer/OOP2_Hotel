@@ -13,23 +13,31 @@ import com.tuvarna.hotel.persistence.entities.ClientEntity;
 import com.tuvarna.hotel.persistence.enums.ClientRating;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.UUID;
 
 @Singleton
 public class UpdateClientProcess extends BaseProcessor implements UpdateClientOperation {
-    private final ClientRepositoryImpl clientRepository = SingletonManager.getInstance(ClientRepositoryImpl.class);
+    private final ClientRepositoryImpl clientRepository;
+    private static final Logger log = Logger.getLogger(UpdateClientProcess.class);
+
+    public UpdateClientProcess() {
+        clientRepository = SingletonManager.getInstance(ClientRepositoryImpl.class);
+    }
+
     @Override
     public Either<ErrorProcessor, UpdateClientOutput> process(UpdateClientInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started updating client, input: "+input);
                     ClientEntity client = findClient(input.getClient());
                     client.setRating(ClientRating.getByCode(input.getRatingClient().name()));
                     clientRepository.save(client);
-
-                    return UpdateClientOutput.builder()
+                    UpdateClientOutput result = UpdateClientOutput.builder()
                             .message("Successfully updated client")
                             .build();
-
+                    log.info("Ended updating client, output: "+result);
+                    return result;
         }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
     }

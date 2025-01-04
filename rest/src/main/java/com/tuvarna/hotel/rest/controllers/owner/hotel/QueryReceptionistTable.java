@@ -1,6 +1,5 @@
 package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
-import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.entities.ReceptionistDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,8 +8,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,9 +27,6 @@ public class QueryReceptionistTable  {
     private TableColumn<ReceptionistDTO, UUID> reservation;
     @FXML
     private TableColumn<ReceptionistDTO,String> receptionist;
-    private Stage stage;
-    private Parent root;
-    private Scene scene;
     @Setter
     private List<ReceptionistDTO> receptionistDTOList;
     private ObservableList<ReceptionistDTO> data;

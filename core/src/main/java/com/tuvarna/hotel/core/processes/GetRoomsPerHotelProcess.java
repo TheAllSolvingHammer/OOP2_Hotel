@@ -16,25 +16,36 @@ import com.tuvarna.hotel.persistence.entities.HotelEntity;
 import com.tuvarna.hotel.persistence.entities.RoomEntity;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.UUID;
 
 @Singleton
 public class GetRoomsPerHotelProcess extends BaseProcessor implements GetAllRoomsPerHotelOperation {
-    private final RoomRepositoryImpl roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
-    private final HotelRepositoryImpl hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
-    private final ConvertEntityToRoom converter = SingletonManager.getInstance(ConvertEntityToRoom.class);
+    private final RoomRepositoryImpl roomRepository;
+    private final HotelRepositoryImpl hotelRepository;
+    private final ConvertEntityToRoom converter;
+    private static final Logger log = Logger.getLogger(GetRoomsPerHotelProcess.class);
+
+    public GetRoomsPerHotelProcess() {
+        roomRepository = SingletonManager.getInstance(RoomRepositoryImpl.class);
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+        converter = SingletonManager.getInstance(ConvertEntityToRoom.class);
+    }
 
     @Override
     public Either<ErrorProcessor, GetAllRoomsPerHotelOutput> process(GetAllRoomsPerHotelInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(()->{
+                    log.info("Started getting rooms per hotel, input: "+input);
                     HotelEntity hotel = getHotelByID(input.getHotelID());
                     List<RoomEntity> roomEntities = roomRepository.findAllByHotel(hotel);
                     List<Room> rooms = converter.convert(roomEntities);
-                    return GetAllRoomsPerHotelOutput.builder()
+                    GetAllRoomsPerHotelOutput result = GetAllRoomsPerHotelOutput.builder()
                             .roomList(rooms)
                             .build();
+                    log.info("Ended getting rooms per hotel, output: "+result);
+                    return result;
 
          }).toEither()
                 .mapLeft(QueryExceptionCase::handleThrowable));
