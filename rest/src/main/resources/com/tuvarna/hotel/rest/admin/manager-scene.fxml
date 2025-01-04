@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="459.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.manager.ManagerView">
+<AnchorPane prefHeight="459.0" prefWidth="671.0" stylesheets="@style/admin-scene.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.manager.ManagerView">
     <TableView fx:id="table" layoutX="36.0" layoutY="54.0" prefHeight="352.0" prefWidth="600.0">
       <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="UUID" />
@@ -17,8 +17,8 @@
           <TableColumn fx:id="phoneNumber" minWidth="0.0" prefWidth="139.99996948242188" text="Phone Number" />
       </columns>
     </TableView>
-    <Button layoutX="529.0" layoutY="419.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+    <Button layoutX="549.0" layoutY="419.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
    <TextField fx:id="searchBar" layoutX="154.0" layoutY="21.0" prefHeight="25.0" prefWidth="351.0" />
-   <Label layoutX="102.0" layoutY="25.0" text="Search:" />
-   <Button layoutX="516.0" layoutY="21.0" onAction="#clearSearchField" mnemonicParsing="false" text="X" />
+   <Label layoutX="102.0" layoutY="25.0" text="Search:" textFill="WHITE" />
+   <Button layoutX="516.0" layoutY="21.0" mnemonicParsing="false" onAction="#clearSearchField" text="X" />
 </AnchorPane>

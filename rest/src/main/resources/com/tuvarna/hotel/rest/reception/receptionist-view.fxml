@@ -5,14 +5,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@reception.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.ReceptionistController">
-   <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@reception.css">
-      <Button mnemonicParsing="false" onAction="#switchToClients" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Create Client" />
-      <Button mnemonicParsing="false" onAction="#createReservation" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Create Reservation" />
-      <Button mnemonicParsing="false" onAction="#switchToReservations" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Reservations" />
-      <Button mnemonicParsing="false" onAction="#switchToClientList" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Client List" />
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="140.0" styleClass="sideButtons" text="Room Usage ()" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/reception-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.ReceptionistController">
+   <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@style/reception-view.css">
+      <children>
+         <AnchorPane prefHeight="400.0" prefWidth="138.0">
+            <children>
+               <Button layoutX="21.0" layoutY="30.0" mnemonicParsing="false" onAction="#switchToClients" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Create Client" />
+               <Button layoutX="21.0" layoutY="106.0" mnemonicParsing="false" onAction="#createReservation" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Create Reservation" />
+               <Button layoutX="21.0" layoutY="178.0" mnemonicParsing="false" onAction="#switchToReservations" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Reservations" />
+               <Button layoutX="21.0" layoutY="254.0" mnemonicParsing="false" onAction="#switchToClientList" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Client List" />
+               <Button layoutX="21.0" layoutY="326.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Room Usage ()" />
+            </children>
+         </AnchorPane>
+      </children>
    </VBox>
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutReceptionist" text="Log Out" />
-   <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0" />
+   <ListView fx:id="notificationList" layoutX="437.0" layoutY="27.0" prefHeight="129.0" prefWidth="148.0" />
 </AnchorPane>

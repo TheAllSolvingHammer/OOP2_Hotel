@@ -7,16 +7,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="445.0" prefWidth="666.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
-    <TableView fx:id="table" layoutX="14.0" layoutY="49.0"  prefHeight="347.0" prefWidth="637.0" AnchorPane.leftAnchor="14.0">
+<AnchorPane prefHeight="445.0" prefWidth="666.0" scaleShape="false" stylesheets="@style/admin-scene.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.hotel.HotelView">
+    <TableView fx:id="table" layoutX="14.0" layoutY="49.0" prefHeight="347.0" prefWidth="640.0" AnchorPane.leftAnchor="14.0">
       <columns>
           <TableColumn fx:id="name" prefWidth="272.0" text="Hotel Name" />
           <TableColumn fx:id="location" prefWidth="272.0" text="Location" />
-          <TableColumn fx:id="stars" prefWidth="92.0" text="Rating" />
+          <TableColumn fx:id="stars" prefWidth="94.79998779296875" text="Rating" />
       </columns>
     </TableView>
     <Button layoutX="545.0" layoutY="405.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
-   <TextField fx:id="searchBar" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="414.0" />
-   <Button layoutX="503.0" layoutY="14.0" onAction="#clearTextField" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="X" />
-   <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="57.0" text="Search:" />
+   <TextField fx:id="searchBar" layoutX="126.0" layoutY="14.0" prefHeight="25.0" prefWidth="414.0" />
+   <Button layoutX="545.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearTextField" prefHeight="25.0" prefWidth="25.0" text="X" />
+   <Label alignment="CENTER_RIGHT" layoutX="60.0" layoutY="14.0" prefHeight="25.0" prefWidth="57.0" text="Search:" textFill="WHITE" />
 </AnchorPane>

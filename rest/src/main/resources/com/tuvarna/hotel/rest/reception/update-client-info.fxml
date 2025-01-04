@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="383.0" prefWidth="594.0" scaleShape="false" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.queries.DisplayClientData">
+<AnchorPane prefHeight="383.0" prefWidth="594.0" scaleShape="false" stylesheets="@style/reception-display.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.queries.DisplayClientData">
 
    <Button layoutX="26.0" layoutY="332.0" mnemonicParsing="false" onAction="#switchToTable" prefHeight="26.0" prefWidth="107.0" text="Back" />
    <Button layoutX="472.0" layoutY="332.0" mnemonicParsing="false" onAction="#updateClient" prefHeight="26.0" prefWidth="107.0" text="Apply" />

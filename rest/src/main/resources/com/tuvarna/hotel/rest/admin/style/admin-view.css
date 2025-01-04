@@ -30,11 +30,11 @@
 }
 
 .button:hover{
-
+    -fx-background-color: #07f7f7 ;
 }
 
 .button:pressed{
-
+    -fx-background-color: #07f7f7 ;
 }
 
 .list-view{
