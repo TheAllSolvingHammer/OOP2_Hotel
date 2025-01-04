@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor()
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Reservation {
+
     @EqualsAndHashCode.Include
     private UUID id;
     private TypeReservation type;
@@ -25,4 +25,14 @@ public class Reservation {
     private String hotel;
     private String client;
     private List<Service> services;
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(id)
+                .append(", Room: ").append(room)
+                .append(" Hotel: ").append(hotel)
+                .append("\n");
+        return sb.toString();
+    }
 }

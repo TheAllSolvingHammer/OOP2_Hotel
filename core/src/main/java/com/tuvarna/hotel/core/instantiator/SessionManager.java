@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SessionManager {
+    public static Boolean flag=true;
     private static SessionManager instance;
     private UserEntity loggedInUser;
 
@@ -23,6 +24,7 @@ public class SessionManager {
     public static void clearSession() {
         if (instance != null) {
             instance.loggedInUser = null;
+            flag=true;
         }
     }
 }
