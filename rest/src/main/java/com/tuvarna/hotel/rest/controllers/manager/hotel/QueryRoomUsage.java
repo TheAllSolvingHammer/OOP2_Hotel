@@ -1,8 +1,6 @@
 package com.tuvarna.hotel.rest.controllers.manager.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelInput;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
@@ -11,7 +9,6 @@ import com.tuvarna.hotel.api.models.query.room.QueryRoomUsageInput;
 import com.tuvarna.hotel.api.models.query.room.QueryRoomUsageOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayManagerHotelProcess;
-import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.core.processes.QueryRoomUsageProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
@@ -64,7 +61,7 @@ public class QueryRoomUsage implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Owner");
+        stage.setTitle("Manager");
         stage.show();
     }
 

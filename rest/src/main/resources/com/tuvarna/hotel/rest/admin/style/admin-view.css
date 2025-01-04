@@ -37,7 +37,73 @@
     -fx-background-color: #07f7f7 ;
 }
 
-.list-view{
-    -fx-background-color: #a39f9f;
-    -fx-text-fill: #000000;
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}
+
+.list-view {
+    -fx-background-color: #074963;
+    -fx-padding: 10;
+    -fx-pref-width: 400px;
+    -fx-max-width: 400px;
+    -fx-min-width: 400px;
+}
+
+.list-cell:empty {
+    -fx-background-color: #074963;
+}
+
+.list-cell {
+    -fx-background-color: #ADD8E6;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-margin: 10 5;
+    -fx-alignment: center-left;
+    -fx-text-fill: #00008B;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);
+    -fx-wrap-text: true;
+    -fx-pref-width: 370px
+
+}
+
+.list-view:empty {
+    -fx-background-color: #074963;
+}
+
+.list-cell:empty{
+    -fx-background-color: #074963;
+}
+
+.list-view .scroll-bar {
+    -fx-opacity: 0;
+}
+
+.list-view:hover .scroll-bar {
+    -fx-opacity: 0;
+    -fx-transition: opacity 0.3s ease;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #87CEEB;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #87CEEB;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
 }

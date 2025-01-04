@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/admin-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/admin-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.AdminController">
    <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@style/admin-view.css">
       <AnchorPane prefHeight="400.0" prefWidth="124.0">
          <Button layoutX="20.0" layoutY="37.0" mnemonicParsing="false" onAction="#switchToOwners" prefHeight="59.0" prefWidth="120.0" styleClass="sideButtons" text="Owners" />
@@ -14,6 +14,6 @@
          <Button layoutX="20.0" layoutY="312.0" mnemonicParsing="false" onAction="#switchToServices" prefHeight="59.0" prefWidth="120.0" styleClass="sideButtons" text="Services" />
       </AnchorPane>
    </VBox>
-   <ListView fx:id="notificationList" layoutX="437.0" layoutY="27.0" prefHeight="129.0" prefWidth="148.0" stylesheets="@style/admin-view.css" />
+   <ListView fx:id="notificationList" layoutX="170.0" layoutY="32.0" prefHeight="323.0" prefWidth="148.0" stylesheets="@style/admin-view.css" />
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutAdmin" text="Log Out" />
 </AnchorPane>

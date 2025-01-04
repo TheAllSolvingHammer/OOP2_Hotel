@@ -49,15 +49,6 @@ public class ReceptionistController implements Initializable {
 
     }
 
-    @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/hello-view.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Navigation");
-        stage.show();
-    }
 
     @FXML
     protected void switchToClients(ActionEvent event) throws IOException {
@@ -88,6 +79,7 @@ public class ReceptionistController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Login");
         stage.show();
     }
 

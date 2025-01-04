@@ -1,6 +1,7 @@
 package com.tuvarna.hotel.persistence.entities;
 
 import com.tuvarna.hotel.persistence.contracts.EntityMarker;
+import com.tuvarna.hotel.persistence.enums.ReservationStatus;
 import com.tuvarna.hotel.persistence.enums.ReservationType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -46,6 +47,10 @@ public class ReservationEntity implements EntityMarker {
     @ManyToOne(targetEntity = UserEntity.class)
     @JoinColumn(name = "created_by", nullable = false)
     private UserEntity createdBy;
+
+    @Column(name = "status", nullable = true)
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

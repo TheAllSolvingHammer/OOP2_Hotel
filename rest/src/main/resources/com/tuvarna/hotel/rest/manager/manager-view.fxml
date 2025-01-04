@@ -16,5 +16,5 @@
       </AnchorPane>
    </VBox>
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutManager" text="Log Out" />
-   <ListView fx:id="notificationList" layoutX="437.0" layoutY="27.0" prefHeight="129.0" prefWidth="148.0" />
+   <ListView fx:id="notificationList" layoutX="177.0" layoutY="30.0" prefHeight="327.0" prefWidth="148.0" />
 </AnchorPane>

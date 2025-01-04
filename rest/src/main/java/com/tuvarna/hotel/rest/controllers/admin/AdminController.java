@@ -22,15 +22,6 @@ public class AdminController implements Initializable {
     private Parent root;
     private Scene scene;
 
-    @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/hello-view.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Navigation");
-        stage.show();
-    }
 
     @FXML
     protected void switchToHotelView(ActionEvent event) throws IOException {
@@ -81,6 +72,7 @@ public class AdminController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Login");
         stage.show();
     }
 
