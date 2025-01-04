@@ -27,7 +27,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManagerController implements Initializable {
-    public ListView<String> notificationList;
+    @FXML
+    private ListView<String> notificationList;
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -58,16 +59,6 @@ public class ManagerController implements Initializable {
     }
 
 
-    @FXML
-    protected void switchToRegistration(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/registration-scene.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Registration View");
-        stage.show();
-    }
-
 
     @FXML
     protected void switchToAllHotels(ActionEvent event) throws IOException {
@@ -81,7 +72,6 @@ public class ManagerController implements Initializable {
 
     @FXML
     public void logOutManager(ActionEvent event) throws IOException {
-
         SessionManager.clearSession();
         AlertManager.clearNotifications();
         root=FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/login/login-scene.fxml"));
@@ -94,6 +84,7 @@ public class ManagerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         notificationList.setItems(AlertManager.getAlertLog());
+        if(!SessionManager.flag) return;
         ExpiringReservationInput input = ExpiringReservationInput.builder()
                 .date(LocalDate.now())
                 .userID(SessionManager.getInstance().getLoggedInUser().getId())
@@ -105,13 +96,41 @@ public class ManagerController implements Initializable {
                     return null;
                 },
                 success -> {
-                    List<Reservation> reservationList = success.getReservations();
-                    for(Reservation r:reservationList){
-                        notificationList.getItems().add("Expiring reservation: "+r.toString());
-                    }
-                    AlertManager.showAlert(Alert.AlertType.WARNING,"Expiring reservations","Today's expiring reservations are: "+reservationList);
-                    return null;
+                        List<Reservation> reservationList = success.getReservations();
+                        for (Reservation r : reservationList) {
+                            notificationList.getItems().add("Expiring reservation: " + r.toString());
+                        }
+                        if(!reservationList.isEmpty()) {
+                            AlertManager.showAlert(Alert.AlertType.WARNING, "Expiring reservations", "Today's expiring reservations are: " + reservationList);
+                        }SessionManager.flag=false;
+                        return null;
                 }
         );
+    }
+
+    @FXML
+    public void queryReservation(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/query-hotel-receptionist.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservations of Receptionists");
+        stage.show();
+    }
+
+    @FXML
+    public void queryRoomUsage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/query-room-usage.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Room usage");
+        stage.show();
+    }
+
+
+    @FXML
+    public void queryRegistrations(ActionEvent event) throws IOException {
+
     }
 }

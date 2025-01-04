@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.manager.receptionists;
+package com.tuvarna.hotel.rest.controllers.manager.hotel;
 
 import com.tuvarna.hotel.api.enums.RoleType;
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;

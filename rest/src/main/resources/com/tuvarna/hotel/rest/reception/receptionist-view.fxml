@@ -14,7 +14,7 @@
                <Button layoutX="21.0" layoutY="106.0" mnemonicParsing="false" onAction="#createReservation" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Create Reservation" />
                <Button layoutX="21.0" layoutY="178.0" mnemonicParsing="false" onAction="#switchToReservations" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Reservations" />
                <Button layoutX="21.0" layoutY="254.0" mnemonicParsing="false" onAction="#switchToClientList" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Client List" />
-               <Button layoutX="21.0" layoutY="326.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Room Usage ()" />
+               <Button layoutX="21.0" layoutY="326.0" mnemonicParsing="false" onAction="#switchToRoomUsage" prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Room Usage" />
             </children>
          </AnchorPane>
       </children>

@@ -5,17 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/manager-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.manager.ManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/manager-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.manager.ManagerController">
    <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@style/manager-view.css">
       <AnchorPane prefHeight="401.0" prefWidth="138.0">
-         <Button layoutX="14.0" layoutY="119.0" mnemonicParsing="false" onAction="#switchToAllHotels"
-                 prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Hotels"/>
-         <Button layoutX="15.0" layoutY="28.0" mnemonicParsing="false" onAction="#createUser" prefHeight="63.0"
-                 prefWidth="140.0" styleClass="sideButtons" text="Add receptionist"/>
-         <Button layoutX="15.0" layoutY="212.0" mnemonicParsing="false" onAction="#switchToRegistration"
-                 prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Registrations"/>
-         <Button layoutX="15.0" layoutY="300.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="140.0"
-                 styleClass="sideButtons" text="()"/>
+         <Button layoutX="15.0" layoutY="92.0" mnemonicParsing="false" onAction="#switchToAllHotels" prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Hotels" />
+         <Button layoutX="15.0" layoutY="16.0" mnemonicParsing="false" onAction="#createUser" prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Add receptionist" />
+         <Button layoutX="15.0" layoutY="244.0" mnemonicParsing="false" onAction="#queryReservation" prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Reservation Query" />
+         <Button layoutX="15.0" layoutY="168.0" mnemonicParsing="false" onAction="#queryRoomUsage" prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Room Usage Query" />
+         <Button layoutX="15.0" layoutY="321.0" mnemonicParsing="false" onAction="#queryRegistrations" prefHeight="63.0" prefWidth="140.0" styleClass="sideButtons" text="Registrations" />
       </AnchorPane>
    </VBox>
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutManager" text="Log Out" />

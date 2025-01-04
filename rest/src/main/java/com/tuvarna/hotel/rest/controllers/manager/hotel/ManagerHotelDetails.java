@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.manager.receptionists;
+package com.tuvarna.hotel.rest.controllers.manager.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.receptionist.DisplayAllEmployeeInput;
@@ -58,7 +58,6 @@ public class ManagerHotelDetails {
                 .hotelID(hotel.getId())
                 .receptionistList(receptionists)
                 .build();
-        System.out.println(receptionists);
         Either<ErrorProcessor, UpdateReceptionistOfHotelOutput> result=updateHotelProcess.process(input);
         result.fold(
                 error -> {
@@ -95,7 +94,6 @@ public class ManagerHotelDetails {
                     return null;
                 },
                 success -> {
-                    System.out.println(success.getReceptionistList());
                     for (Receptionist m : receptionistList) {
                         if (success.getReceptionistList()
                                 .contains(m)) {
