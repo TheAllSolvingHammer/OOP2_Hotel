@@ -15,5 +15,5 @@ public interface HotelRepository<T extends EntityMarker,E extends UUID>  {
     List<UserEntity> findManagersWithHotels();
     List<HotelEntity> findAllHotelsWithUsers();
     List<HotelEntity> findAllByManager(UserEntity manager);
-    List<HotelEntity> findAllByEmployee(UserEntity user);
+    List<HotelEntity> findAllByUser(UserEntity user);
 }

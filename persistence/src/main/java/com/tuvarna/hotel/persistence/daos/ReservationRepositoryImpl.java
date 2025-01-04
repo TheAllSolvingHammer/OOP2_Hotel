@@ -135,4 +135,24 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
             session.close();
         }
     }
+
+    public List<ReservationEntity> findAllByHotelId(UUID hotelId) {
+        String hql = """
+        SELECT r
+        FROM ReservationEntity r
+        JOIN r.room rm
+        JOIN rm.hotel h
+        WHERE h.id = :hotelId
+    """;
+        Session session = HibernateUtil.openSession();
+        try {
+            Query<ReservationEntity> query = session.createQuery(hql, ReservationEntity.class);
+            query.setParameter("hotelId", hotelId);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching reservations by hotel", e);
+        } finally {
+            session.close();
+        }
+    }
 }
