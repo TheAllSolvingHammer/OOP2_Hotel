@@ -1,0 +1,43 @@
+.root{
+    -fx-background-size: 100% 100%;
+    -fx-background-color: #074963;
+}
+
+.button{
+    -fx-background-color: "white";
+    -fx-text-fill: #000000;
+}
+.sideButtons{
+    -fx-background-color: "white";
+    -fx-text-fill: #000000;
+    -fx-background-radius: 30 0 0 30;
+}
+
+.vbox{
+    -fx-background-color: #17749e;
+    -fx-spacing: 5;
+}
+
+
+.sideButtons:hover{
+    -fx-background-color: #07f7f7 ;
+    -fx-background-radius: 30 0 0 30;
+}
+
+.sideButtons:pressed{
+    -fx-background-color: #239c9c;
+    -fx-background-radius: 30 0 0 30;
+}
+
+.button:hover{
+    -fx-background-color: #07f7f7 ;
+}
+
+.button:pressed{
+    -fx-background-color: #07f7f7 ;
+}
+
+.list-view{
+    -fx-background-color: #a39f9f;
+    -fx-text-fill: #000000;
+}

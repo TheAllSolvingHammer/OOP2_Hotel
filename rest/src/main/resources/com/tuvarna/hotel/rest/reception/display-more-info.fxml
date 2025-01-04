@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.reservation.ReservationData">
+<AnchorPane prefHeight="400.0" prefWidth="421.0" stylesheets="@style/reception-display.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.reception.reservation.ReservationData">
     <Label layoutX="37.0" layoutY="26.0" text="Type" />
     <Label layoutX="37.0" layoutY="77.0" text="Start Date" />
     <Label layoutX="37.0" layoutY="126.0" text="End Date" />

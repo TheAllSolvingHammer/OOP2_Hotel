@@ -7,16 +7,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="452.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.service.ServicesView">
+<AnchorPane prefHeight="452.0" prefWidth="678.0" stylesheets="@style/admin-scene.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.service.ServicesView">
     <TableView fx:id="table" layoutX="39.0" layoutY="63.0" prefHeight="330.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="name" prefWidth="395.0" text="Name" />
-            <TableColumn fx:id="price" prefWidth="204.0" text="Price" />
+            <TableColumn fx:id="name" prefWidth="361.5999336242676" text="Name" />
+            <TableColumn fx:id="price" prefWidth="237.60003662109375" text="Price" />
         </columns>
     </TableView>
-    <Button layoutX="537.0" layoutY="406.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
-   <Label layoutX="94.0" layoutY="27.0" text="Search:" />
+    <Button layoutX="556.0" layoutY="406.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+   <Label layoutX="94.0" layoutY="27.0" text="Search:" textFill="WHITE" />
    <TextField fx:id="searchBar" layoutX="140.0" layoutY="23.0" prefHeight="25.0" prefWidth="359.0" />
-   <Button layoutX="512.0" layoutY="23.0" onAction="#clearTextField" mnemonicParsing="false" text="X" />
+   <Button layoutX="512.0" layoutY="23.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
    <Button layoutX="552.0" layoutY="23.0" mnemonicParsing="false" onAction="#createNewService" text="Add service" />
 </AnchorPane>

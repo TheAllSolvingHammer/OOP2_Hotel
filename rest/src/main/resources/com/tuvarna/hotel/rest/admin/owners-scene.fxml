@@ -7,17 +7,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="463.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.owner.OwnerView">
-    <TableView fx:id="table" layoutX="7.0" layoutY="45.0" onMouseClicked="#getOwnerFullInformation" prefHeight="363.0" prefWidth="660.0">
+<AnchorPane prefHeight="463.0" prefWidth="676.0" stylesheets="@style/admin-scene.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.owner.OwnerView">
+    <TableView fx:id="table" layoutX="36.0" layoutY="54.0" onMouseClicked="#getOwnerFullInformation" prefHeight="354.0" prefWidth="612.0">
         <columns>
-            <TableColumn fx:id="firstName" prefWidth="230.0" text="First Name" />
-            <TableColumn fx:id="lastName" minWidth="8.800048828125" prefWidth="270.0" text="Last Name" />
-            <TableColumn fx:id="email" prefWidth="159.0" text="E-mail" />
+            <TableColumn fx:id="firstName" prefWidth="185.9999771118164" text="First Name" />
+            <TableColumn fx:id="lastName" minWidth="8.800048828125" prefWidth="241.20001220703125" text="Last Name" />
+            <TableColumn fx:id="email" prefWidth="183.19998168945312" text="E-mail" />
         </columns>
     </TableView>
-    <Button layoutX="560.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
-    <TextField fx:id="searchBar" layoutX="63.0" layoutY="14.0" prefHeight="25.0" prefWidth="459.0" />
-    <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
-    <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="41.0" text="Search:" />
-    <Button layoutX="570.0" layoutY="14.0" mnemonicParsing="false" onAction="#addOwners" prefHeight="25.0" prefWidth="96.0" text="Add Owner" />
+    <Button layoutX="554.0" layoutY="423.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
+    <TextField fx:id="searchBar" layoutX="173.0" layoutY="14.0" prefHeight="25.0" prefWidth="330.0" />
+    <Button layoutX="512.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
+    <Label alignment="CENTER_RIGHT" layoutX="117.0" layoutY="14.0" prefHeight="25.0" prefWidth="41.0" text="Search:" textFill="WHITE" />
+    <Button layoutX="549.0" layoutY="14.0" mnemonicParsing="false" onAction="#addOwners" prefHeight="25.0" prefWidth="84.0" text="Add Owner" />
 </AnchorPane>
