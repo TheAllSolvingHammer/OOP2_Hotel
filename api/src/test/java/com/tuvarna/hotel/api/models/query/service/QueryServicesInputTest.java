@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.api.models.query.reservation;
+package com.tuvarna.hotel.api.models.query.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

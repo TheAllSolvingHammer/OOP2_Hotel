@@ -58,6 +58,7 @@ public class LoginController  {
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 scene=new Scene(root);
                 stage.setScene(scene);
+                stage.setTitle(success.getRole().name().substring(0, 1).toUpperCase() + success.getRole().name().substring(1).toLowerCase());
                 stage.show();
             } catch (IOException | IllegalAccessException e) {
                 throw new RuntimeException(e);

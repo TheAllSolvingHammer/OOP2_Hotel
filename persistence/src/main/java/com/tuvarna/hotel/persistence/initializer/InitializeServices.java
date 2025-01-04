@@ -3,14 +3,19 @@ package com.tuvarna.hotel.persistence.initializer;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.persistence.daos.ServiceRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.ServiceEntity;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
 public class InitializeServices {
+    private static final Logger log=Logger.getLogger(InitializeServices.class);
+    private final ServiceRepositoryImpl serviceRepository;
 
-    private final ServiceRepositoryImpl serviceRepository= SingletonManager.getInstance(ServiceRepositoryImpl.class);
+    public InitializeServices() {
+        serviceRepository = SingletonManager.getInstance(ServiceRepositoryImpl.class);
+    }
 
     public void initializeData() {
         if (hasExistingServices()) {
@@ -21,8 +26,8 @@ public class InitializeServices {
         for (ServiceEntity service : defaultServices) {
             serviceRepository.save(service);
         }
+        log.info("Adding additional services");
 
-        System.out.println("Default services added successfully.");
     }
 
     private boolean hasExistingServices() {

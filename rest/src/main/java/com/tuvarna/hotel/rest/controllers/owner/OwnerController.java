@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class OwnerController implements Initializable {
-    private static Boolean flag= true;
     @FXML
     private ListView<String> notificationList;
     private Stage stage;
@@ -39,18 +38,6 @@ public class OwnerController implements Initializable {
     public OwnerController() {
         expiringReservationProcess = SingletonManager.getInstance(ExpiringReservationProcess.class);
     }
-
-
-    @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/hello-view.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Navigation");
-        stage.show();
-    }
-
 
     @FXML
     protected void switchToHotels(ActionEvent event) throws IOException {
@@ -108,6 +95,7 @@ public class OwnerController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Login");
         stage.show();
     }
 

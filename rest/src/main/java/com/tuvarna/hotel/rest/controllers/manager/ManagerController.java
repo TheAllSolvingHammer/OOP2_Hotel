@@ -49,18 +49,6 @@ public class ManagerController implements Initializable {
     }
 
     @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/hello-view.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Navigation");
-        stage.show();
-    }
-
-
-
-    @FXML
     protected void switchToAllHotels(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/show-all-hotels.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -78,6 +66,7 @@ public class ManagerController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Login");
         stage.show();
     }
 
