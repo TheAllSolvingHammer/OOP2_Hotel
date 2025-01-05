@@ -37,9 +37,8 @@ public class CreateReservationProcessTest {
     private CreateReservationProcess createReservationProcess;
 
     @Test
-    public void testProcess_validInput_returnsCreateReservationOutput() throws Exception {
+    public void test() throws Exception {
         try (MockedStatic<SingletonManager> singletonManagerMock = mockStatic(SingletonManager.class)) {
-            // Mock SingletonManager to return dependencies
             singletonManagerMock.when(() -> SingletonManager.getInstance(RoomRepositoryImpl.class)).thenReturn(roomRepositoryMock);
             singletonManagerMock.when(() -> SingletonManager.getInstance(ReservationRepositoryImpl.class)).thenReturn(reservationRepositoryMock);
             singletonManagerMock.when(() -> SingletonManager.getInstance(ClientRepositoryImpl.class)).thenReturn(clientRepositoryMock);
@@ -47,4 +46,6 @@ public class CreateReservationProcessTest {
             singletonManagerMock.when(() -> SingletonManager.getInstance(ConvertServicesToEntity.class)).thenReturn(converterMock);
 
 
-        }}}
+        }
+    }
+}

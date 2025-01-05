@@ -1,32 +1,28 @@
 package com.tuvarna.hotel.core.processes;
 
+import com.tuvarna.hotel.core.converters.ConvertServicesToEntity;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
-import com.tuvarna.hotel.persistence.daos.HotelRepositoryImpl;
-import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
+import com.tuvarna.hotel.persistence.daos.*;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mockStatic;
 
-@ExtendWith(MockitoExtension.class)
-public class CreateHotelProcessTest {
+class CreateRoomProcessTest {
+    @Mock
+    private RoomRepositoryImpl roomRepositoryMock;
 
     @Mock
     private HotelRepositoryImpl hotelRepositoryMock;
 
-    @Mock
-    private UserRepositoryImpl userRepositoryMock;
-
-
     @Test
     public void test() throws Exception {
         try (MockedStatic<SingletonManager> singletonManagerMock = mockStatic(SingletonManager.class)) {
+            singletonManagerMock.when(() -> SingletonManager.getInstance(RoomRepositoryImpl.class)).thenReturn(roomRepositoryMock);
             singletonManagerMock.when(() -> SingletonManager.getInstance(HotelRepositoryImpl.class)).thenReturn(hotelRepositoryMock);
-            singletonManagerMock.when(() -> SingletonManager.getInstance(UserRepositoryImpl.class)).thenReturn(userRepositoryMock);
+
         }
     }
-
-    }
+}
