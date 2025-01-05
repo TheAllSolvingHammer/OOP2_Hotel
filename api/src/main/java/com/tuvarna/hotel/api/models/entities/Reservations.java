@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor()
 @Builder
 @AllArgsConstructor
-public class ReceptionistDTO {
+public class Reservations {
     private UUID reservationID;
     private String receptionistName;
 }

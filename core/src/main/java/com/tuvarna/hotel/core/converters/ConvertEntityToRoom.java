@@ -17,7 +17,7 @@ public class ConvertEntityToRoom implements BaseConverter<List<RoomEntity>,List<
                 .roomNumber(roomEntity.getRoomNumber())
                 .price(roomEntity.getPrice())
                 .price(roomEntity.getPrice())
-                .roomType(TypeRoom.getByCode(roomEntity.getType().name())) //todo use filter and throw exception
+                .roomType(TypeRoom.getByCode(roomEntity.getType().name()))
                 .build()).toList();
     }
 }
