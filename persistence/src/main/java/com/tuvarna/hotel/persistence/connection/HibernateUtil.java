@@ -13,8 +13,9 @@ public class HibernateUtil {
     static {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             log.error("Hibernate error encountered: "+e.getMessage());
+            System.exit(0);
         }
     }
 

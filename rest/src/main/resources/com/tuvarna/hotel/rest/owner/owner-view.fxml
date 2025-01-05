@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/owner-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.OwnerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/owner-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.OwnerController">
    <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@style/owner-view.css">
       <AnchorPane prefHeight="401.0" prefWidth="138.0">
          <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" onAction="#switchToHotels" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Hotel Infomation" />
@@ -14,9 +14,9 @@
          <Button layoutX="17.0" layoutY="176.0" mnemonicParsing="false" onAction="#queryReceptionists" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Reservation Query" />
          <Button layoutX="17.0" layoutY="234.0" mnemonicParsing="false" onAction="#queryReservations" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Service Usage Query" />
          <Button layoutX="17.0" layoutY="289.0" mnemonicParsing="false" onAction="#queryRoomsUsage" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Room usage" />
-         <Button layoutX="17.0" layoutY="345.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Query 4" />
+         <Button layoutX="17.0" layoutY="345.0" mnemonicParsing="false" onAction="#queryReservationsOwner" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Reservation Query" />
       </AnchorPane>
    </VBox>
-   <ListView fx:id="notificationList" layoutX="176.0" layoutY="25.0" prefHeight="317.0" prefWidth="148.0" />
-   <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutOwner" text="Log Out" />
+   <ListView fx:id="notificationList" layoutX="176.0" layoutY="25.0" prefHeight="312.0" prefWidth="148.0" />
+   <Button layoutX="480.0" layoutY="342.0" mnemonicParsing="false" onAction="#logOutOwner" prefHeight="40.0" prefWidth="105.0" styleClass="logout-button" stylesheets="@style/owner-view.css" text="Log Out" />
 </AnchorPane>

@@ -1,6 +1,6 @@
 package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
-import com.tuvarna.hotel.api.models.entities.ReceptionistDTO;
+import com.tuvarna.hotel.api.models.entities.Reservations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,14 +22,14 @@ public class QueryReceptionistTable  {
     @FXML
     private TextField searchBar;
     @FXML
-    private TableView<ReceptionistDTO> table;
+    private TableView<Reservations> table;
     @FXML
-    private TableColumn<ReceptionistDTO, UUID> reservation;
+    private TableColumn<Reservations, UUID> reservation;
     @FXML
-    private TableColumn<ReceptionistDTO,String> receptionist;
+    private TableColumn<Reservations,String> receptionist;
     @Setter
-    private List<ReceptionistDTO> receptionistDTOList;
-    private ObservableList<ReceptionistDTO> data;
+    private List<Reservations> reservationsList;
+
     public void handleBackButton(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -38,25 +38,23 @@ public class QueryReceptionistTable  {
     public void display(){
         reservation.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         receptionist.setCellValueFactory(new PropertyValueFactory<>("receptionistName"));
-        data =FXCollections.observableArrayList(receptionistDTOList);
+        ObservableList<Reservations> data = FXCollections.observableArrayList(reservationsList);
         table.setItems(data);
         table.refresh();
 
-        FilteredList<ReceptionistDTO> filteredData=new FilteredList<>(data, b->true);
-        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(receptionistDTO -> {
-                if(newValue.isBlank() || newValue.isEmpty() || newValue==null){
-                    return true;
-                }
+        FilteredList<Reservations> filteredData=new FilteredList<>(data, b->true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(receptionistDTO -> {
+            if(newValue.isBlank() || newValue.isEmpty()){
+                return true;
+            }
 
-                String searchKeyword=newValue.toLowerCase();
+            String searchKeyword=newValue.toLowerCase();
 
-                return receptionistDTO.getReceptionistName().toLowerCase().contains(searchKeyword);
+            return receptionistDTO.getReceptionistName().toLowerCase().contains(searchKeyword);
 
-            });
-        });
+        }));
 
-        SortedList<ReceptionistDTO> sortedList=new SortedList<>(filteredData);
+        SortedList<Reservations> sortedList=new SortedList<>(filteredData);
         sortedList.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedList);
     }

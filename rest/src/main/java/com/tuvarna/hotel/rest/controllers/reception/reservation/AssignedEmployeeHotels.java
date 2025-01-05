@@ -44,9 +44,6 @@ public class AssignedEmployeeHotels implements Initializable {
     private TableColumn<Hotel, String> location;
     @FXML
     private TableColumn<Hotel,Integer> stars;
-    private Stage stage;
-    private Parent root;
-    private Scene scene;
 
     private ObservableList<Hotel> data;
 
@@ -56,9 +53,9 @@ public class AssignedEmployeeHotels implements Initializable {
 
     @FXML
     protected void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -133,7 +130,7 @@ public class AssignedEmployeeHotels implements Initializable {
         controller.display();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle("Hotel Information");
+        stage.setTitle("Reservation information");
         stage.setOnCloseRequest(windowEvent -> display());
         stage.setOnHidden(windowEvent -> display());
         stage.show();

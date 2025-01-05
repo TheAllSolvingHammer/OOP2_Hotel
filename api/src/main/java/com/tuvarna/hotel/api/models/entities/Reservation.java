@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.api.models.entities;
 
+import com.tuvarna.hotel.api.enums.StatusReservation;
 import com.tuvarna.hotel.api.enums.TypeReservation;
 import lombok.*;
 
@@ -25,14 +26,13 @@ public class Reservation {
     private String hotel;
     private String client;
     private List<Service> services;
+    private StatusReservation status;
 
     @Override
     public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(id)
-                .append(", Room: ").append(room)
-                .append(" Hotel: ").append(hotel)
-                .append("\n");
-        return sb.toString();
+        return "ID: " + id +
+                ", Room: " + room +
+                " Hotel: " + hotel +
+                "\n";
     }
 }

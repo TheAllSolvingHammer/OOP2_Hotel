@@ -4,7 +4,7 @@ import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelInput;
 import com.tuvarna.hotel.api.models.display.manager.hotel.DisplayManagerHotelOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
-import com.tuvarna.hotel.api.models.entities.ReceptionistDTO;
+import com.tuvarna.hotel.api.models.entities.Reservations;
 import com.tuvarna.hotel.api.models.query.receptionist.information.QueryReceptionistInput;
 import com.tuvarna.hotel.api.models.query.receptionist.information.QueryReceptionistOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
@@ -41,26 +41,23 @@ public class QueryReceptionist implements Initializable {
     private DatePicker endDate;
     @FXML
     private ComboBox<Hotel> hotels;
-    private Stage stage;
-    private Parent root;
-    private Scene scene;
     private Boolean flag;
     private final DisplayManagerHotelProcess displayHotelProcess;
     private final QueryReceptionistProcess queryReceptionistProcess;
     private ObservableList<Hotel> data;
-    private List<ReceptionistDTO> receptionistDTOS;
+    private List<Reservations> reservations;
 
     public QueryReceptionist() {
         flag = false;
         displayHotelProcess = SingletonManager.getInstance(DisplayManagerHotelProcess.class);
         queryReceptionistProcess = SingletonManager.getInstance(QueryReceptionistProcess.class);
-        receptionistDTOS = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/manager-view.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/manager-view.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Manager");
         stage.show();
@@ -94,7 +91,7 @@ public class QueryReceptionist implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/manager/query-more-receptionist.fxml"));
         Parent root = loader.load();
         QueryReceptionistTable controller = loader.getController();
-        controller.setReceptionistDTOList(receptionistDTOS);
+        controller.setReservationsList(reservations);
         controller.display();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -118,7 +115,7 @@ public class QueryReceptionist implements Initializable {
               return null;
           },
           success->{
-              receptionistDTOS=success.getReceptionistDTOS();
+              reservations =success.getReservations();
               flag=true;
               return null;
           }

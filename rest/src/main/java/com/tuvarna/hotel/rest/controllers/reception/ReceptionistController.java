@@ -62,11 +62,11 @@ public class ReceptionistController implements Initializable {
 
     @FXML
     protected void switchToReservations(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/reservations-scene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/hotel-scene.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Reservations View");
+        stage.setTitle("Hotels view");
         stage.show();
     }
 
@@ -126,6 +126,15 @@ public class ReceptionistController implements Initializable {
         scene=new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Room usage view");
+        stage.show();
+    }
+
+    public void queryReservations(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/query-reservations.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservations Query");
         stage.show();
     }
 }

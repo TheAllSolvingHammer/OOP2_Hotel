@@ -1,7 +1,7 @@
 package com.tuvarna.hotel.api.models.query.receptionist.information;
 
 import com.tuvarna.hotel.api.base.OperationOutput;
-import com.tuvarna.hotel.api.models.entities.ReceptionistDTO;
+import com.tuvarna.hotel.api.models.entities.Reservations;
 import lombok.*;
 
 import java.util.List;
@@ -13,5 +13,5 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class QueryReceptionistOutput implements OperationOutput {
-    private List<ReceptionistDTO> receptionistDTOS;
+    private List<Reservations> reservations;
 }

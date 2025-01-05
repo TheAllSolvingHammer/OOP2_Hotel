@@ -54,7 +54,7 @@ public class ManagerController implements Initializable {
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Receptionists View");
+        stage.setTitle("Hotels View");
         stage.show();
     }
 
@@ -120,6 +120,12 @@ public class ManagerController implements Initializable {
 
     @FXML
     public void queryRegistrations(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/query-reservations.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservations");
+        stage.show();
 
     }
 }

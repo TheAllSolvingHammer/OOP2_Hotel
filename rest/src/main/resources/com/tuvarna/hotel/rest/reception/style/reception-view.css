@@ -38,8 +38,24 @@
     -fx-background-color: #07f7f7 ;
 }
 
-.list-view:empty {
-    -fx-background-color: #074963;
+.logout-button {
+    -fx-background-color: rgba(255, 87, 34, 0.7);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 15;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: rgba(255, 87, 34, 0.9);
+}
+
+.logout-button:pressed {
+    -fx-background-color: rgba(183, 28, 28, 0.9);
 }
 
 .list-view .scroll-bar:vertical,
@@ -60,6 +76,10 @@
     -fx-min-width: 400px;
 }
 
+.list-cell:empty {
+    -fx-background-color: #074963;
+}
+
 .list-cell {
     -fx-background-color: #ADD8E6;
     -fx-background-radius: 10;
@@ -74,9 +94,12 @@
 
 }
 
+.list-view:empty {
+    -fx-background-color: #074963;
+}
 
-.list-view:empty .list-cell {
-    -fx-background-color: transparent;
+.list-cell:empty{
+    -fx-background-color: #074963;
 }
 
 .list-view .scroll-bar {

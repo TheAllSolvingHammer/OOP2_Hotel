@@ -17,7 +17,6 @@ public class Instantiation {
         SingletonManager.getInstance(ClientRepositoryImpl.class);
         SingletonManager.getInstance(RoomRepositoryImpl.class);
         SingletonManager.getInstance(ReservationRepositoryImpl.class);
-        //todo add rest
         //converters
         SingletonManager.getInstance(ConvertEntityToHotel.class);
         SingletonManager.getInstance(ConvertUsersToManager.class);
@@ -27,6 +26,7 @@ public class Instantiation {
         SingletonManager.getInstance(ConvertEntityToRoom.class);
         SingletonManager.getInstance(ConvertUsersToReceptionist.class);
         SingletonManager.getInstance(ConvertEntityToClient.class);
+        SingletonManager.getInstance(ConvertEntityToReservation.class);
         //services
         SingletonManager.getInstance(CreateUserProcess.class);
         SingletonManager.getInstance(DisplayHotelProcess.class);
@@ -53,7 +53,10 @@ public class Instantiation {
         SingletonManager.getInstance(UpdateClientProcess.class);
         SingletonManager.getInstance(QueryServicesProcess.class);
         SingletonManager.getInstance(ExpiringReservationProcess.class);
-
+        SingletonManager.getInstance(QueryReservationsProcess.class);
+        SingletonManager.getInstance(DisplayAllReservationsHotelProcess.class);
+        SingletonManager.getInstance(UpdateReservationProcess.class);
+        SingletonManager.getInstance(QueryRoomUsageProcess.class);
 
     }
 }
