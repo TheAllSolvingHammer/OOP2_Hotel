@@ -24,7 +24,6 @@ public class HotelEntity implements EntityMarker {
     @Column(name="hotel_name",nullable = false)
     private String name;
 
-    //todo make the check if the address is really existing
     @Column(name="location",nullable = false)
     private String location;
 

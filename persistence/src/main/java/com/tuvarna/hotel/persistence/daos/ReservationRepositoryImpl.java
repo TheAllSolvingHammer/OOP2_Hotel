@@ -87,8 +87,8 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
         JOIN r.createdBy u
         JOIN r.room rm
         JOIN rm.hotel h
-        WHERE h.id = :hotelId 
-          AND r.startDate >= :startDate 
+        WHERE h.id = :hotelId
+          AND r.startDate >= :startDate
           AND r.endDate <= :endDate
         ORDER BY u.lastName, u.firstName
     """;
@@ -136,6 +136,32 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
         }
     }
 
+    public List<ReservationEntity> getReservationsByHotelAndDate(UUID hotelId, LocalDate startDate, LocalDate endDate) {
+        String hql = """
+        SELECT r
+        FROM ReservationEntity r
+        JOIN r.room rm
+        JOIN rm.hotel h
+        WHERE h.id = :hotelId
+          AND (r.startDate >= :startDate)
+          AND (r.endDate <= :endDate)
+    """;
+        Session session = HibernateUtil.openSession();
+        try {
+            Query<ReservationEntity> query = session.createQuery(hql, ReservationEntity.class);
+            query.setParameter("hotelId", hotelId);
+            query.setParameter("startDate", startDate);
+            query.setParameter("endDate", endDate);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching reservations by hotel and date range", e);
+        } finally {
+            session.close();
+        }
+
+    }
+
+    @Override
     public List<ReservationEntity> findAllByHotelId(UUID hotelId) {
         String hql = """
         SELECT r
@@ -155,4 +181,5 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
             session.close();
         }
     }
+
 }

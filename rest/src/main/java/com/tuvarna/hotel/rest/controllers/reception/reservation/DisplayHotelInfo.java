@@ -32,51 +32,64 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AssignedEmployeeHotels implements Initializable {
-    private final GetAllHotelsEmployeeProcess getAllHotelsProcess;
-    @FXML
-    private TextField searchBar;
+public class DisplayHotelInfo implements Initializable {
+    public TextField searchBar;
     @FXML
     private TableView<Hotel> table;
     @FXML
-    private TableColumn<Hotel,String> name;
+    private TableColumn<Hotel, String> name;
     @FXML
     private TableColumn<Hotel, String> location;
     @FXML
-    private TableColumn<Hotel,Integer> stars;
+    private TableColumn<Hotel, Integer> stars;
+    private final GetAllHotelsEmployeeProcess displayHotelProcess;
 
     private ObservableList<Hotel> data;
 
-    public AssignedEmployeeHotels() {
-        getAllHotelsProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
+    public DisplayHotelInfo() {
+        displayHotelProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
     }
 
-    @FXML
-    protected void switchToBeginning(ActionEvent event) throws IOException {
+    public void displayHotel(MouseEvent mouseEvent) throws IOException {
+        if(mouseEvent.getClickCount()==2) {
+            Hotel hotel = table.getSelectionModel().getSelectedItem();
+            if(hotel==null ) return;
+            showMoreHotelData(hotel);
+        }
+
+    }
+
+    private void showMoreHotelData(Hotel hotel) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-reservations.fxml"));
+        Parent root = loader.load();
+        DisplayReservationsHotel controller = loader.getController();
+        controller.setHotel(hotel);
+        controller.display();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Reservations");
+        stage.setOnCloseRequest(windowEvent -> display());
+        stage.setOnHidden(windowEvent -> display());
+        stage.show();
+
+    }
+
+
+    public void switchToBeginning(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Receptionist");
         stage.show();
     }
 
-
-    public void clearTextField(ActionEvent actionEvent) {
-        searchBar.clear();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        location.setCellValueFactory(new PropertyValueFactory<>("location"));
-        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
-        display();
-    }
     private void display(){
-        GetAllHotelsEmployeeInput input = GetAllHotelsEmployeeInput.builder()
+
+        GetAllHotelsEmployeeInput hotelsInput = GetAllHotelsEmployeeInput.builder()
                 .id(SessionManager.getInstance().getLoggedInUser().getId())
                 .build();
-        Either<ErrorProcessor, GetAllHotelsEmployeeOutput> result = getAllHotelsProcess.process(input);
+        Either<ErrorProcessor, GetAllHotelsEmployeeOutput> result= displayHotelProcess.process(hotelsInput);
         result.fold(
                 error -> {
                     AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
@@ -87,10 +100,17 @@ public class AssignedEmployeeHotels implements Initializable {
                     table.setItems(data);
                     table.refresh();
                     return null;
-                }
-        );
-        table.setItems(data);
+                });
 
+        table.setItems(data);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        location.setCellValueFactory(new PropertyValueFactory<>("location"));
+        stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+        display();
         FilteredList<Hotel> filteredData=new FilteredList<>(data, b->true);
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(hotel -> {
             if(newValue.isBlank() || newValue.isEmpty()){
@@ -111,28 +131,9 @@ public class AssignedEmployeeHotels implements Initializable {
         SortedList<Hotel> sortedList=new SortedList<>(filteredData);
         sortedList.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedList);
-
     }
 
-    public void openHotelReservation(MouseEvent mouseEvent) throws IOException {
-        if(mouseEvent.getClickCount()==2) {
-            Hotel hotel = table.getSelectionModel().getSelectedItem();
-            if(hotel==null) return;
-            showMoreHotelData(hotel);
-        }
-    }
-
-    private void showMoreHotelData(Hotel hotel) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/display-more-info.fxml"));
-        Parent root = loader.load();
-        ReservationData controller = loader.getController();
-        controller.setHotel(hotel);
-        controller.display();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Reservation information");
-        stage.setOnCloseRequest(windowEvent -> display());
-        stage.setOnHidden(windowEvent -> display());
-        stage.show();
+    public void clearTextField(ActionEvent event) {
+        searchBar.clear();
     }
 }

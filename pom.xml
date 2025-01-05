@@ -6,7 +6,7 @@
 
     <groupId>com.tuvarna.hotel</groupId>
     <artifactId>hotel</artifactId>
-    <version>${revision}</version>
+    <version>1.0-SNAPSHOT</version>
     <name>OOP Project Part 2</name>
 
     <properties>
@@ -41,11 +41,11 @@
             <artifactId>javafx-media</artifactId>
             <version>21</version>
         </dependency>
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>11.1.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.controlsfx</groupId>-->
+<!--            <artifactId>controlsfx</artifactId>-->
+<!--            <version>11.1.2</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>

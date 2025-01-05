@@ -38,7 +38,7 @@
     -fx-background-color: #07f7f7 ;
 }
 
-.list-view:empty {
+list-cell:empty {
     -fx-background-color: #074963;
 }
 
@@ -72,11 +72,6 @@
     -fx-wrap-text: true;
     -fx-pref-width: 370px
 
-}
-
-
-.list-view:empty .list-cell {
-    -fx-background-color: transparent;
 }
 
 .list-view .scroll-bar {

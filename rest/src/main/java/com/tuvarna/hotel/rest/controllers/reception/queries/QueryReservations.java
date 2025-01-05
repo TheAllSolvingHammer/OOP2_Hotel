@@ -1,15 +1,15 @@
-package com.tuvarna.hotel.rest.controllers.owner.hotel;
+package com.tuvarna.hotel.rest.controllers.reception.queries;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
-import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
-import com.tuvarna.hotel.api.models.entities.Reservations;
-import com.tuvarna.hotel.api.models.query.receptionist.information.QueryReceptionistInput;
-import com.tuvarna.hotel.api.models.query.receptionist.information.QueryReceptionistOutput;
+import com.tuvarna.hotel.api.models.entities.Reservation;
+import com.tuvarna.hotel.api.models.get.receptionist.hotels.GetAllHotelsEmployeeInput;
+import com.tuvarna.hotel.api.models.get.receptionist.hotels.GetAllHotelsEmployeeOutput;
+import com.tuvarna.hotel.api.models.query.reservation.QueryReservationInput;
+import com.tuvarna.hotel.api.models.query.reservation.QueryReservationOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
-import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
-import com.tuvarna.hotel.core.processes.QueryReceptionistProcess;
+import com.tuvarna.hotel.core.processes.GetAllHotelsEmployeeProcess;
+import com.tuvarna.hotel.core.processes.QueryReservationsProcess;
 import com.tuvarna.hotel.domain.singleton.SingletonManager;
 import com.tuvarna.hotel.rest.alert.AlertManager;
 import io.vavr.control.Either;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QueryReceptionist implements Initializable {
+public class QueryReservations implements Initializable {
 
     @FXML
     private DatePicker startDate;
@@ -42,34 +42,34 @@ public class QueryReceptionist implements Initializable {
     @FXML
     private ComboBox<Hotel> hotels;
     private Boolean flag;
-    private final DisplayOwnerHotelProcess displayHotelProcess;
-    private final QueryReceptionistProcess queryReceptionistProcess;
+    private final GetAllHotelsEmployeeProcess displayHotelProcess;
+    private final QueryReservationsProcess queryReservationsProcess;
     private ObservableList<Hotel> data;
-    private List<Reservations> reservations;
+    private List<Reservation> reservations;
 
-    public QueryReceptionist() {
+    public QueryReservations() {
         flag = false;
-        displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
-        queryReceptionistProcess = SingletonManager.getInstance(QueryReceptionistProcess.class);
+        displayHotelProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
+        queryReservationsProcess = SingletonManager.getInstance(QueryReservationsProcess.class);
         reservations = new ArrayList<>();
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Owner");
+        stage.setTitle("Receptionist");
         stage.show();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         flag=false;
-       DisplayHotelsInput input = DisplayHotelsInput.builder()
+       GetAllHotelsEmployeeInput input = GetAllHotelsEmployeeInput.builder()
                .id(SessionManager.getInstance().getLoggedInUser().getId())
                .build();
-        Either<ErrorProcessor, DisplayHotelsOutput> result= displayHotelProcess.process(input);
+        Either<ErrorProcessor, GetAllHotelsEmployeeOutput> result= displayHotelProcess.process(input);
         result.fold(
                 error -> {
                     AlertManager.showAlert(Alert.AlertType.ERROR,"Error in displaying hotels",error.getMessage());
@@ -88,9 +88,9 @@ public class QueryReceptionist implements Initializable {
         if(!flag){
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-receptionist.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/query-more-reservations.fxml"));
         Parent root = loader.load();
-        QueryReceptionistTable controller = loader.getController();
+        QueryReservationsTable controller = loader.getController();
         controller.setReservationsList(reservations);
         controller.display();
         Stage stage = new Stage();
@@ -100,12 +100,12 @@ public class QueryReceptionist implements Initializable {
     }
 
     private void getQueryResult(){
-        QueryReceptionistInput input = QueryReceptionistInput.builder()
+        QueryReservationInput input = QueryReservationInput.builder()
                 .startDate(startDate.getValue())
                 .endDate(endDate.getValue())
                 .hotelId(hotels.getValue().getId())
                 .build();
-        Either<ErrorProcessor, QueryReceptionistOutput> result=queryReceptionistProcess.process(input);
+        Either<ErrorProcessor, QueryReservationOutput> result=queryReservationsProcess.process(input);
         result.fold(
           error->{
               AlertManager.showAlert(Alert.AlertType.ERROR,"Error in receptionist reservation query", error.getMessage());
