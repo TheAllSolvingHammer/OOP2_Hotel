@@ -100,6 +100,9 @@ public class QueryReceptionist implements Initializable {
     }
 
     private void getQueryResult(){
+        if(hotels.getValue()==null){
+            return;
+        }
         QueryReceptionistInput input = QueryReceptionistInput.builder()
                 .startDate(startDate.getValue())
                 .endDate(endDate.getValue())

@@ -7,6 +7,7 @@ import com.tuvarna.hotel.persistence.dtos.RoomUsageDTO;
 import com.tuvarna.hotel.persistence.dtos.ServiceUsageDTO;
 import com.tuvarna.hotel.persistence.entities.ReservationEntity;
 import com.tuvarna.hotel.persistence.entities.RoomEntity;
+import com.tuvarna.hotel.persistence.enums.ReservationStatus;
 import com.tuvarna.hotel.persistence.repositories.ReservationRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -27,15 +28,17 @@ public class ReservationRepositoryImpl extends BaseRepositoryImpl<ReservationEnt
         Session session = HibernateUtil.openSession();
         try {
             String hql = """
-            SELECT COUNT(r)
-            FROM ReservationEntity r
-            WHERE r.room = :room
-            AND (:startDate BETWEEN r.startDate AND r.endDate
-                 OR :endDate BETWEEN r.startDate AND r.endDate
-                 OR r.startDate BETWEEN :startDate AND :endDate)
-            """;
+        SELECT COUNT(r)
+        FROM ReservationEntity r
+        WHERE r.room = :room
+          AND r.status = :status
+          AND (:startDate BETWEEN r.startDate AND r.endDate
+               OR :endDate BETWEEN r.startDate AND r.endDate
+               OR r.startDate BETWEEN :startDate AND :endDate)
+        """;
             Query<Long> query = session.createQuery(hql, Long.class);
             query.setParameter("room", room);
+            query.setParameter("status", ReservationStatus.CONFIRMED);
             query.setParameter("startDate", startDate);
             query.setParameter("endDate", endDate);
             return query.uniqueResult() == 0;

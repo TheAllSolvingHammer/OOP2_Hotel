@@ -13,7 +13,6 @@
     -fx-spacing: 5;
 }
 
-
 .sideButtons:hover{
     -fx-background-color: #07f7f7 ;
     -fx-background-radius: 30 0 0 30;

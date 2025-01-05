@@ -63,16 +63,16 @@
     -fx-max-height: 0;
 }
 
-.list-cell:empty {
-    -fx-background-color: #074963;
-}
-
 .list-view {
     -fx-background-color: #074963;
     -fx-padding: 10;
     -fx-pref-width: 400px;
     -fx-max-width: 400px;
     -fx-min-width: 400px;
+}
+
+.list-cell:empty {
+    -fx-background-color: #074963;
 }
 
 .list-cell {
@@ -93,8 +93,8 @@
     -fx-background-color: #074963;
 }
 
-.list-view:empty .list-cell {
-    -fx-background-color: transparent;
+.list-cell:empty{
+    -fx-background-color: #074963;
 }
 
 .list-view .scroll-bar {

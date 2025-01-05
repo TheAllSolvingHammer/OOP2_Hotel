@@ -20,6 +20,7 @@ import com.tuvarna.hotel.persistence.daos.RoomRepositoryImpl;
 import com.tuvarna.hotel.persistence.daos.UserRepositoryImpl;
 import com.tuvarna.hotel.persistence.entities.*;
 import com.tuvarna.hotel.persistence.enums.ClientRating;
+import com.tuvarna.hotel.persistence.enums.ReservationStatus;
 import com.tuvarna.hotel.persistence.enums.ReservationType;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -76,6 +77,7 @@ public class CreateReservationProcess extends BaseProcessor implements CreateRes
                             .room(room)
                             .services(serviceEntities)
                             .createdBy(user)
+                            .status(ReservationStatus.CONFIRMED)
                             .build();
                     reservationRepository.save(reservation);
                 CreateReservationOutput result= CreateReservationOutput.builder()
