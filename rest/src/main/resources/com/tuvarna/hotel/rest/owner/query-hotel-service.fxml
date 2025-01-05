@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="282.0" prefWidth="441.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.QueryHotelAndServices">
+<AnchorPane prefHeight="282.0" prefWidth="441.0" stylesheets="@style/owner-add.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.QueryHotelAndServices">
    <children>
       <Button layoutX="56.0" layoutY="214.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
       <Label alignment="CENTER_RIGHT" layoutX="91.0" layoutY="61.0" prefHeight="25.0" prefWidth="72.0" text="Start date" />

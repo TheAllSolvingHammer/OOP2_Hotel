@@ -20,6 +20,6 @@
                  prefHeight="54.0" prefWidth="125.0" styleClass="sideButtons" text="Room Usage"/>
       </AnchorPane>
    </VBox>
-   <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutReceptionist" text="Log Out" />
+   <Button layoutX="480.0" layoutY="342.0" mnemonicParsing="false" onAction="#logOutReceptionist" prefHeight="40.0" prefWidth="105.0" styleClass="logout-button" stylesheets="@style/reception-view.css" text="Log Out" />
    <ListView fx:id="notificationList" layoutX="185.0" layoutY="23.0" prefHeight="311.0" prefWidth="400.0" />
 </AnchorPane>

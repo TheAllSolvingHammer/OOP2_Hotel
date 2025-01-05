@@ -17,7 +17,7 @@
     </TableView>
     <Button layoutX="554.0" layoutY="423.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
     <TextField fx:id="searchBar" layoutX="173.0" layoutY="14.0" prefHeight="25.0" prefWidth="330.0" />
-    <Button layoutX="512.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
+    <Button layoutX="510.0" layoutY="12.0" mnemonicParsing="false" onAction="#clearTextField" prefHeight="25.0" prefWidth="22.0" styleClass="x-button" text="X" />
     <Label alignment="CENTER_RIGHT" layoutX="117.0" layoutY="14.0" prefHeight="25.0" prefWidth="41.0" text="Search:" textFill="WHITE" />
     <Button layoutX="549.0" layoutY="14.0" mnemonicParsing="false" onAction="#addOwners" prefHeight="25.0" prefWidth="84.0" text="Add Owner" />
 </AnchorPane>
