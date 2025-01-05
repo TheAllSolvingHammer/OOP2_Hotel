@@ -23,5 +23,5 @@
    </TableView>
    <Label layoutX="253.0" layoutY="20.0" prefHeight="26.0" prefWidth="50.0" text="Search:" textFill="WHITE" />
    <TextField fx:id="searchBar" layoutX="303.0" layoutY="21.0" prefHeight="25.0" prefWidth="336.0" />
-   <Button layoutX="656.0" layoutY="21.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
+   <Button layoutX="656.0" layoutY="21.0" mnemonicParsing="false" onAction="#clearTextField" styleClass="x-button" text="X" />
 </AnchorPane>

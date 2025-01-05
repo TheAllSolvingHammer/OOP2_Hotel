@@ -6,6 +6,7 @@ import com.tuvarna.hotel.domain.singleton.Singleton;
 import com.tuvarna.hotel.persistence.entities.ClientEntity;
 
 import java.util.List;
+
 @Singleton
 public class ConvertEntityToClient implements BaseConverter<List<ClientEntity>,List<Client>> {
     @Override

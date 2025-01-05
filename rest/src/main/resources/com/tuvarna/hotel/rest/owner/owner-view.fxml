@@ -14,7 +14,7 @@
          <Button layoutX="17.0" layoutY="176.0" mnemonicParsing="false" onAction="#queryReceptionists" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Reservation Query" />
          <Button layoutX="17.0" layoutY="234.0" mnemonicParsing="false" onAction="#queryReservations" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Service Usage Query" />
          <Button layoutX="17.0" layoutY="289.0" mnemonicParsing="false" onAction="#queryRoomsUsage" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Room usage" />
-         <Button layoutX="17.0" layoutY="345.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Query 4" />
+         <Button layoutX="17.0" layoutY="345.0" mnemonicParsing="false" onAction="#queryReservationsOwner" prefHeight="48.0" prefWidth="132.0" styleClass="sideButtons" text="Reservation Query" />
       </AnchorPane>
    </VBox>
    <ListView fx:id="notificationList" layoutX="176.0" layoutY="25.0" prefHeight="312.0" prefWidth="148.0" />

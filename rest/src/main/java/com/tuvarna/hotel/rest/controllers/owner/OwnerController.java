@@ -134,4 +134,13 @@ public class OwnerController implements Initializable {
         stage.setTitle("Room usage ");
         stage.show();
     }
+
+    public void queryReservationsOwner(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-reservations.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Reservation query ");
+        stage.show();
+    }
 }

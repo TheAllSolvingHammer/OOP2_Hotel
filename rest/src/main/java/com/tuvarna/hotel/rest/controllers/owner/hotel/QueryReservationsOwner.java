@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.reception.queries;
+package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
 import com.tuvarna.hotel.api.exceptions.ErrorProcessor;
 import com.tuvarna.hotel.api.models.entities.Hotel;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QueryReservations implements Initializable {
+public class QueryReservationsOwner implements Initializable {
 
     @FXML
     private DatePicker startDate;
@@ -47,7 +47,7 @@ public class QueryReservations implements Initializable {
     private ObservableList<Hotel> data;
     private List<Reservation> reservations;
 
-    public QueryReservations() {
+    public QueryReservationsOwner() {
         flag = false;
         displayHotelProcess = SingletonManager.getInstance(GetAllHotelsEmployeeProcess.class);
         queryReservationsProcess = SingletonManager.getInstance(QueryReservationsProcess.class);
@@ -55,7 +55,7 @@ public class QueryReservations implements Initializable {
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/manager-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/owner/owner-view.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -88,9 +88,9 @@ public class QueryReservations implements Initializable {
         if(!flag){
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/query-more-reservations.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-reservations.fxml"));
         Parent root = loader.load();
-        QueryReservationsTable controller = loader.getController();
+        QueryReservationsOwnerTable controller = loader.getController();
         controller.setReservationsList(reservations);
         controller.display();
         Stage stage = new Stage();
@@ -111,7 +111,7 @@ public class QueryReservations implements Initializable {
         Either<ErrorProcessor, QueryReservationOutput> result=queryReservationsProcess.process(input);
         result.fold(
           error->{
-              AlertManager.showAlert(Alert.AlertType.ERROR,"Error in receptionist reservation query", error.getMessage());
+              AlertManager.showAlert(Alert.AlertType.ERROR,"Error in owner reservation query", error.getMessage());
               return null;
           },
           success->{

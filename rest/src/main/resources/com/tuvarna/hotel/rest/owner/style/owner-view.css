@@ -53,10 +53,6 @@
     -fx-background-color: rgba(183, 28, 28, 0.9);
 }
 
-.list-view:empty {
-    -fx-background-color: #074963;
-}
-
 .list-view .scroll-bar:vertical,
 .list-view .scroll-bar:horizontal {
     -fx-pref-width: 0;
@@ -75,6 +71,10 @@
     -fx-min-width: 400px;
 }
 
+.list-cell:empty {
+    -fx-background-color: #074963;
+}
+
 .list-cell {
     -fx-background-color: #ADD8E6;
     -fx-background-radius: 10;
@@ -89,9 +89,12 @@
 
 }
 
+.list-view:empty {
+    -fx-background-color: #074963;
+}
 
-.list-view:empty .list-cell {
-    -fx-background-color: transparent;
+.list-cell:empty{
+    -fx-background-color: #074963;
 }
 
 .list-view .scroll-bar {
