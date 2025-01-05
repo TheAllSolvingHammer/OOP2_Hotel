@@ -49,4 +49,5 @@ public class ClientInformationProcess extends BaseProcessor implements ClientInf
     private List<ClientEntity> getClients(ClientInformationInput input) {
         return clientRepository.getAll();
     }
+
 }
