@@ -22,5 +22,5 @@
     <Button layoutX="795.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
     <Label layoutX="239.0" layoutY="28.0" text="Search:" textFill="WHITE" />
     <TextField fx:id="searchBar" layoutX="286.0" layoutY="24.0" prefHeight="25.0" prefWidth="359.0" />
-    <Button layoutX="652.0" layoutY="24.0" mnemonicParsing="false" onAction="#clearTextField" text="X" />
+    <Button layoutX="652.0" layoutY="24.0" mnemonicParsing="false" onAction="#clearTextField" styleClass="x-button" text="X" />
 </AnchorPane>

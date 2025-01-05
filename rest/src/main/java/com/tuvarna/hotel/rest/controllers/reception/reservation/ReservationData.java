@@ -64,8 +64,6 @@ public class ReservationData implements Initializable {
 
     private ObservableList<Room> data;
 
-    private ObservableList<Room> data;
-
     public ReservationData() {
         checkComboBox=new CheckComboBox<>();
         clientInformationProcess = SingletonManager.getInstance(ClientInformationProcess.class);

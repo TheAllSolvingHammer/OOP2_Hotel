@@ -14,3 +14,19 @@
 .button:pressed{
     -fx-background-color: #07f7f7 ;
 }
+
+.x-button {
+    -fx-background-color: rgba(255, 87, 34, 0.7);
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+}
+
+.x-button:hover {
+    -fx-background-color: rgba(255, 87, 34, 0.9);
+}
+
+.x-button:pressed {
+    -fx-background-color: rgba(183, 28, 28, 0.9);
+}
