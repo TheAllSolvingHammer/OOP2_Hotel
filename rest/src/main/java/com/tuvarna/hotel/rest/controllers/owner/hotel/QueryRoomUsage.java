@@ -87,6 +87,9 @@ public class QueryRoomUsage implements Initializable {
     }
 
     private void getQueryResult(){
+        if(hotels.getValue()==null){
+            return;
+        }
         QueryRoomUsageInput input = QueryRoomUsageInput.builder()
                 .startDate(startDate.getValue())
                 .endDate(endDate.getValue())

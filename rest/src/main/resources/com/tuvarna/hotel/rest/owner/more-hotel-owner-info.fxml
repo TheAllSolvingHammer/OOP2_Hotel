@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.HotelOwnerData">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" scaleShape="false" stylesheets="@style/owner-add.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.HotelOwnerData">
 
     <Button layoutX="22.0" layoutY="351.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="26.0" prefWidth="107.0" text="Back" />
    <Label alignment="CENTER_RIGHT" layoutX="24.0" layoutY="71.0" prefHeight="38.0" prefWidth="107.0" text="Name:" />

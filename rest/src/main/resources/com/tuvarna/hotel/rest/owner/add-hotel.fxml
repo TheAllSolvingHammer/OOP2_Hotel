@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="424.0" scaleShape="false" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.HotelAdd">
+<AnchorPane prefHeight="300.0" prefWidth="424.0" scaleShape="false" stylesheets="@style/owner-add.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.owner.hotel.HotelAdd">
 
     <Button layoutX="23.0" layoutY="257.0" mnemonicParsing="false" onAction="#switchToBeginning" prefHeight="26.0" prefWidth="107.0" text="Back" />
    <Label layoutX="76.0" layoutY="72.0" prefHeight="38.0" prefWidth="107.0" text="Name:" />

@@ -5,8 +5,8 @@ import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsInput;
 import com.tuvarna.hotel.api.models.display.hotel.DisplayHotelsOutput;
 import com.tuvarna.hotel.api.models.entities.Hotel;
 import com.tuvarna.hotel.api.models.entities.ServicesDTO;
-import com.tuvarna.hotel.api.models.query.reservation.QueryServicesInput;
-import com.tuvarna.hotel.api.models.query.reservation.QueryServicesOutput;
+import com.tuvarna.hotel.api.models.query.service.QueryServicesInput;
+import com.tuvarna.hotel.api.models.query.service.QueryServicesOutput;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.core.processes.DisplayOwnerHotelProcess;
 import com.tuvarna.hotel.core.processes.QueryServicesProcess;
@@ -61,7 +61,7 @@ public class QueryHotelAndServices implements Initializable {
         if(!flag){
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-reservation-service.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-service.fxml"));
         Parent root = loader.load();
         QueryHotelAndServiceTable controller = loader.getController();
         controller.setServicesDTOS(serviceUsageDTOS);
@@ -102,6 +102,9 @@ public class QueryHotelAndServices implements Initializable {
 
     }
     private void getQueryResult(){
+        if(hotels.getValue()==null){
+            return;
+        }
         QueryServicesInput input = QueryServicesInput.builder()
                 .startDate(startDate.getValue())
                 .endDate(endDate.getValue())

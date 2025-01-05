@@ -39,7 +39,7 @@ public class GetAllHotelsEmployeeProcess extends BaseProcessor implements GetAll
         return validateInput(input).flatMap(validInput -> Try.of(()->{
                     log.info("Started getting all employee's assigned hotels, input: "+input);
                     UserEntity user =checkUser(input.getId());
-                    List<HotelEntity> hotelEntities = hotelRepository.findAllByEmployee(user);
+                    List<HotelEntity> hotelEntities = hotelRepository.findAllByUser(user);
                     List<Hotel> hotels = converter.convert(hotelEntities);
                     GetAllHotelsEmployeeOutput result = GetAllHotelsEmployeeOutput.builder()
                             .hotelList(hotels)

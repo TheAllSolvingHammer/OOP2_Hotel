@@ -5,13 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@admin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.AdminController">
-   <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@admin.css">
-      <Button mnemonicParsing="false" onAction="#switchToOwners" prefHeight="58.0" prefWidth="138.0" styleClass="sideButtons" text="Owners" />
-      <Button mnemonicParsing="false" onAction="#switchToHotelView" prefHeight="62.0" prefWidth="138.0" styleClass="sideButtons" text="Hotels" />
-      <Button mnemonicParsing="false" onAction="#switchToManagers" prefHeight="60.0" prefWidth="138.0" styleClass="sideButtons" text="Managers" />
-      <Button mnemonicParsing="false" onAction="#switchToServices" prefHeight="66.0" prefWidth="138.0" styleClass="sideButtons" text="Services" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@style/admin-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuvarna.hotel.rest.controllers.admin.AdminController">
+   <VBox prefHeight="400.0" prefWidth="138.0" styleClass="vbox" stylesheets="@style/admin-view.css">
+      <AnchorPane prefHeight="400.0" prefWidth="124.0">
+         <Button layoutX="20.0" layoutY="37.0" mnemonicParsing="false" onAction="#switchToOwners" prefHeight="59.0" prefWidth="120.0" styleClass="sideButtons" text="Owners" />
+         <Button layoutX="20.0" layoutY="129.0" mnemonicParsing="false" onAction="#switchToManagers" prefHeight="59.0" prefWidth="120.0" styleClass="sideButtons" text="Managers" />
+         <Button layoutX="20.0" layoutY="223.0" mnemonicParsing="false" onAction="#switchToHotelView" prefHeight="59.0" prefWidth="120.0" styleClass="sideButtons" text="Hotels" />
+         <Button layoutX="20.0" layoutY="312.0" mnemonicParsing="false" onAction="#switchToServices" prefHeight="59.0" prefWidth="120.0" styleClass="sideButtons" text="Services" />
+      </AnchorPane>
    </VBox>
-   <ListView fx:id="notificationList" layoutX="379.0" layoutY="17.0" prefHeight="307.0" prefWidth="200.0" stylesheets="@admin.css" />
+   <ListView fx:id="notificationList" layoutX="170.0" layoutY="32.0" prefHeight="323.0" prefWidth="148.0" stylesheets="@style/admin-view.css" />
    <Button layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#logOutAdmin" text="Log Out" />
 </AnchorPane>

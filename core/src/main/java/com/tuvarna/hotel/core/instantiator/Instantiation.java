@@ -52,6 +52,7 @@ public class Instantiation {
         SingletonManager.getInstance(QueryReceptionistProcess.class);
         SingletonManager.getInstance(UpdateClientProcess.class);
         SingletonManager.getInstance(QueryServicesProcess.class);
+        SingletonManager.getInstance(ExpiringReservationProcess.class);
 
 
     }

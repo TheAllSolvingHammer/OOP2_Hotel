@@ -1,0 +1,16 @@
+.root{
+    -fx-background-size: 100% 100%;
+    -fx-background-color: #074963;
+}
+
+.button:hover{
+    -fx-background-color: #07f7f7 ;
+}
+
+.button:pressed{
+    -fx-background-color: #07f7f7 ;
+}
+
+.label{
+    -fx-text-fill: #ffffff;
+}
