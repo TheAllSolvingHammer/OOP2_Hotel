@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import java.util.UUID;
+
 class ManagerControllerTest extends ApplicationTest {
     private ManagerController controller;
 
@@ -30,7 +32,7 @@ class ManagerControllerTest extends ApplicationTest {
     static void setUp() throws Exception {
         HibernateUtil.openSession();
         Instantiation.loadInstances();
-        SessionManager.getInstance().setLoggedInUser(UserEntity.builder().build());
+        SessionManager.getInstance().setLoggedInUser(UserEntity.builder().id(UUID.fromString("576d5c6e-2b17-46c1-a25c-e928630e9f46")).build());
         FxToolkit.registerPrimaryStage();
     }
 
