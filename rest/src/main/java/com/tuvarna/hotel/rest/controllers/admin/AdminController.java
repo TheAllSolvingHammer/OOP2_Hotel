@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 public class AdminController implements Initializable {
     public ListView<String> notificationList;
     private Stage stage;
-    private Parent root;
+    Parent root;
     private Scene scene;
 
 
