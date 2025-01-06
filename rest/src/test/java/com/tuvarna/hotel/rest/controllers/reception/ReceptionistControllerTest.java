@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.owner.hotel;
+package com.tuvarna.hotel.rest.controllers.reception;
 
 import com.tuvarna.hotel.core.instantiator.Instantiation;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
@@ -16,11 +16,11 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import java.util.UUID;
 
-class QueryHotelAndServicesTest extends ApplicationTest {
-    private QueryHotelAndServices controller;
+class ReceptionistControllerTest extends ApplicationTest {
+    private ReceptionistController controller;
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-hotel-service.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
         stage.setScene(new Scene(root));
@@ -32,7 +32,7 @@ class QueryHotelAndServicesTest extends ApplicationTest {
         HibernateUtil.openSession();
         Instantiation.loadInstances();
         FxToolkit.registerPrimaryStage();
-        SessionManager.getInstance().setLoggedInUser(UserEntity.builder().id(UUID.fromString("f289fcf3-d52d-499f-857f-f705bdae28e7")).build());
+        SessionManager.getInstance().setLoggedInUser(UserEntity.builder().id(UUID.fromString("6cec067b-df20-4949-847a-f6fbff96f47c")).build());
     }
 
     @Test
@@ -44,6 +44,6 @@ class QueryHotelAndServicesTest extends ApplicationTest {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        Thread.sleep(1000);
+        Thread.sleep(100);
     }
 }

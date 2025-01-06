@@ -1,4 +1,4 @@
-package com.tuvarna.hotel.rest.controllers.owner.hotel;
+package com.tuvarna.hotel.rest.controllers.reception.queries;
 
 import com.tuvarna.hotel.api.enums.TypeRoom;
 import com.tuvarna.hotel.api.models.entities.RoomQueryDTO;
@@ -16,17 +16,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-class QueryRoomUsageTableTest extends ApplicationTest {
-    private QueryRoomUsageTable controller;
+class QueryRoomUsageReceptionTableTest extends ApplicationTest {
+    private QueryRoomUsageReceptionTable controller;
     private List<RoomQueryDTO> roomQueryDTOS;
-    public QueryRoomUsageTableTest() {
-        roomQueryDTOS= new ArrayList<>();
-    }
+
 
     @Override
     public void start(Stage stage) throws Exception {
         testArrayList();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-room-usage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/reception/query-more-room-usage.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
         controller.setRoomQueryDTOS(roomQueryDTOS);
@@ -72,4 +70,5 @@ class QueryRoomUsageTableTest extends ApplicationTest {
         }
         Thread.sleep(1000);
     }
+
 }
