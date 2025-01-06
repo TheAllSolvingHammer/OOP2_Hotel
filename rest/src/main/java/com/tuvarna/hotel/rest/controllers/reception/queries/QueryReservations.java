@@ -55,7 +55,7 @@ public class QueryReservations implements Initializable {
     }
 
     public void switchToBeginning(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/manager/manager-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/tuvarna/hotel/rest/reception/receptionist-view.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

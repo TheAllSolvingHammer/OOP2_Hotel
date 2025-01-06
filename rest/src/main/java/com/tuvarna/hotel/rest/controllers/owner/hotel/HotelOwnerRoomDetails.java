@@ -123,6 +123,7 @@ public class HotelOwnerRoomDetails implements Initializable{
                     ObservableList<Room> data = FXCollections.observableArrayList(roomList);
                     listView.setItems(data);
                     listView.refresh();
+                    clearFields();
                     return null;
                 }
         );
@@ -133,5 +134,12 @@ public class HotelOwnerRoomDetails implements Initializable{
         ObservableList<TypeRoom> data = FXCollections.observableArrayList(TypeRoom.getMap().values());
         typeCombo.setItems(data);
         typeCombo.getSelectionModel().select(0);
+    }
+
+    public void clearFields(){
+        number.clear();
+        price.clear();
+        floor.clear();
+        typeCombo.getSelectionModel().clearSelection();
     }
 }
