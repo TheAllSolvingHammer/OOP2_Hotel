@@ -11,7 +11,6 @@ import java.util.UUID;
 public interface HotelRepository<T extends EntityMarker,E extends UUID>  {
     Optional<HotelEntity> findHotelById(UUID id);
     List<HotelEntity> findAllByOwner(UserEntity owner);
-
     List<UserEntity> findManagersWithHotels();
     List<HotelEntity> findAllHotelsWithUsers();
     List<HotelEntity> findAllByManager(UserEntity manager);

@@ -52,6 +52,7 @@ public class DisplaySingleReservation {
         type.setText(reservation.getType().name());
         price.setText(reservation.getPrice().toString());
         room.setText(reservation.getRoom());
+        hotel.setText(reservation.getHotel());
         client.setText(reservation.getClient());
         ObservableList<Service> data =FXCollections.observableArrayList(reservation.getServices());
         services.setItems(data);
