@@ -1,5 +1,6 @@
 package com.tuvarna.hotel.rest.controllers.owner.hotel;
 
+import com.tuvarna.hotel.api.models.entities.ServicesDTO;
 import com.tuvarna.hotel.core.instantiator.Instantiation;
 import com.tuvarna.hotel.core.instantiator.SessionManager;
 import com.tuvarna.hotel.persistence.connection.HibernateUtil;
@@ -14,15 +15,22 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-class QueryHotelAndServicesTest extends ApplicationTest {
-    private QueryHotelAndServices controller;
+class QueryHotelAndServiceTableTest extends ApplicationTest {
+    private QueryHotelAndServiceTable controller;
+    private List<ServicesDTO> servicesDTOS;
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-hotel-service.fxml"));
+        testInputService();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-service.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
+        controller.setServicesDTOS(servicesDTOS);
+        controller.display();
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -33,6 +41,21 @@ class QueryHotelAndServicesTest extends ApplicationTest {
         Instantiation.loadInstances();
         FxToolkit.registerPrimaryStage();
         SessionManager.getInstance().setLoggedInUser(UserEntity.builder().id(UUID.fromString("f289fcf3-d52d-499f-857f-f705bdae28e7")).build());
+    }
+
+    @Test
+    void testInputService(){
+        servicesDTOS = new ArrayList<>();
+        servicesDTOS.add(ServicesDTO.builder()
+                        .totalRevenue(BigDecimal.valueOf(1201))
+                        .serviceName("Spa")
+                        .usageCount(20L)
+                .build());
+        servicesDTOS.add(ServicesDTO.builder()
+                .totalRevenue(BigDecimal.valueOf(120))
+                .serviceName("Parking")
+                .usageCount(12L)
+                .build());
     }
 
     @Test

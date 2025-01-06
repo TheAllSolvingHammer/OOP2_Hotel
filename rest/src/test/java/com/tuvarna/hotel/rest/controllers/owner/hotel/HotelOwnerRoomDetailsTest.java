@@ -16,11 +16,11 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import java.util.UUID;
 
-class QueryHotelAndServicesTest extends ApplicationTest {
-    private QueryHotelAndServices controller;
+class HotelOwnerRoomDetailsTest extends ApplicationTest {
+    private HotelOwnerRoomDetails controller;
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-hotel-service.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/more-hotel-owner-rooms.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
         stage.setScene(new Scene(root));
@@ -46,4 +46,5 @@ class QueryHotelAndServicesTest extends ApplicationTest {
         }
         Thread.sleep(1000);
     }
+
 }
