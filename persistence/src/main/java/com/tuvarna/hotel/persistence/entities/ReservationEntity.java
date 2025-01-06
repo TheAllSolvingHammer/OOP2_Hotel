@@ -48,7 +48,7 @@ public class ReservationEntity implements EntityMarker {
     @JoinColumn(name = "created_by", nullable = false)
     private UserEntity createdBy;
 
-    @Column(name = "status", nullable = true)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
