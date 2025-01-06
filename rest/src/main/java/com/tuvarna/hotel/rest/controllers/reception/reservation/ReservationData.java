@@ -61,9 +61,6 @@ public class ReservationData implements Initializable {
     private final ClientInformationProcess clientInformationProcess;
     private final GetRoomsPerHotelProcess getRoomsPerHotelProcess;
     private final CreateReservationProcess createReservationProcess;
-
-    private ObservableList<Room> data;
-
     private ObservableList<Room> data;
 
     public ReservationData() {
