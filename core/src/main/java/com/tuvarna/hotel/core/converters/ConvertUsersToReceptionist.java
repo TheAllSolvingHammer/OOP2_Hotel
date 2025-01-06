@@ -8,6 +8,8 @@ import com.tuvarna.hotel.persistence.entities.UserEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 @Singleton
 public class ConvertUsersToReceptionist implements BaseConverter<List<UserEntity>, List<Receptionist>>{
     @Override

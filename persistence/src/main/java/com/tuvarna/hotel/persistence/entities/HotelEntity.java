@@ -47,14 +47,4 @@ public class HotelEntity implements EntityMarker {
     )
     private List<UserEntity> userList;
 
-//    @ToString.Exclude
-//    @OneToMany(fetch=FetchType.EAGER)
-//    private List<RoomEntity> roomList;
-
-
-
-
-
-
-
 }

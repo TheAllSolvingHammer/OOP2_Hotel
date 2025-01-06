@@ -1,7 +1,5 @@
 package com.tuvarna.hotel.core.converters;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.tuvarna.hotel.api.enums.RatingClient;
 import com.tuvarna.hotel.api.models.entities.Client;
 import com.tuvarna.hotel.persistence.entities.ClientEntity;
@@ -11,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ConvertEntityToClientTest {
@@ -62,4 +62,5 @@ public class ConvertEntityToClientTest {
         assertNotNull(clientList);
         assertTrue(clientList.isEmpty());
     }
+
 }

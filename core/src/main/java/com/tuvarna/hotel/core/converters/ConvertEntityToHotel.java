@@ -34,4 +34,5 @@ public class ConvertEntityToHotel implements BaseConverter<List<HotelEntity>,Lis
                 )
                 .collect(Collectors.toList());
     }
+
 }

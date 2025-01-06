@@ -27,8 +27,5 @@ public class ConvertUsersToManager implements BaseConverter<List<UserEntity>, Li
                                         .stars(hotelEntity.getRating())
                                         .build()).toList())
                         .build()).toList();
-
-
-
     }
 }

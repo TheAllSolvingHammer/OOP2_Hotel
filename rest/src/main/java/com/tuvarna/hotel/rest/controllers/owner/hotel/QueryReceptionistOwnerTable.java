@@ -18,7 +18,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.UUID;
 
-public class QueryReceptionistTable  {
+public class QueryReceptionistOwnerTable {
     @FXML
     private TextField searchBar;
     @FXML

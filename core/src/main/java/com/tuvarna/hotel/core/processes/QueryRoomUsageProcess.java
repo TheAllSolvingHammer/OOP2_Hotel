@@ -25,9 +25,15 @@ import java.util.UUID;
 
 @Singleton
 public class QueryRoomUsageProcess extends BaseProcessor implements QueryRoomUsageOperation {
-    private final ReservationRepositoryImpl reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
-    private final HotelRepositoryImpl hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+    private final ReservationRepositoryImpl reservationRepository;
+    private final HotelRepositoryImpl hotelRepository;
     private static final Logger log = Logger.getLogger(QueryRoomUsageProcess.class);
+
+    public QueryRoomUsageProcess() {
+        reservationRepository = SingletonManager.getInstance(ReservationRepositoryImpl.class);
+        hotelRepository = SingletonManager.getInstance(HotelRepositoryImpl.class);
+    }
+
     @Override
     public Either<ErrorProcessor, QueryRoomUsageOutput> process(QueryRoomUsageInput input) {
         return validateInput(input).flatMap(validInput -> Try.of(() -> {

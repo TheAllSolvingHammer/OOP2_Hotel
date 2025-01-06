@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QueryReceptionist implements Initializable {
+public class QueryReceptionistOwner implements Initializable {
 
     @FXML
     private DatePicker startDate;
@@ -47,7 +47,7 @@ public class QueryReceptionist implements Initializable {
     private ObservableList<Hotel> data;
     private List<Reservations> reservations;
 
-    public QueryReceptionist() {
+    public QueryReceptionistOwner() {
         flag = false;
         displayHotelProcess = SingletonManager.getInstance(DisplayOwnerHotelProcess.class);
         queryReceptionistProcess = SingletonManager.getInstance(QueryReceptionistProcess.class);
@@ -90,7 +90,7 @@ public class QueryReceptionist implements Initializable {
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuvarna/hotel/rest/owner/query-more-receptionist.fxml"));
         Parent root = loader.load();
-        QueryReceptionistTable controller = loader.getController();
+        QueryReceptionistOwnerTable controller = loader.getController();
         controller.setReservationsList(reservations);
         controller.display();
         Stage stage = new Stage();
