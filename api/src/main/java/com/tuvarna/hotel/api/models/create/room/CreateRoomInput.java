@@ -20,7 +20,9 @@ public class CreateRoomInput implements OperationInput {
     @NotEmpty(message = "Room number can not be empty")
     @NotNull(message = "Room number can not be null")
     private String roomNumber;
+    @NotNull(message = "Price is empty")
     private BigDecimal price;
+    @NotNull(message = "Type is empty")
     private TypeRoom type;
     private UUID hotelID;
 }
